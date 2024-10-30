@@ -181,4 +181,21 @@ export const expandedPlayerStyles = StyleSheet.create({
         aspectRatio: 2 / 3,
         borderRadius: 4,
     },
+    sliderContainer: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 6,
+        // paddingHorizontal: 16,
+        justifyContent: 'center',
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    slider: {
+        width: '100%',
+    },
+    sliderInner: {
+        backgroundColor: '#ffffff6d',
+        borderWidth: 0,
+    },
 });

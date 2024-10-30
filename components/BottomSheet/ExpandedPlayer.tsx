@@ -8,6 +8,8 @@ import { useEffect, useState, useRef } from 'react';
 import { expandedPlayerStyles as styles } from '@/styles/expanded-player';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import movies from '@/data/movies.json';
+import { Slider } from 'react-native-awesome-slider';
+import { useSharedValue } from 'react-native-reanimated';
 
 interface MovieData {
     id?: string;
@@ -26,11 +28,40 @@ interface ExpandedPlayerProps {
     movieData: MovieData;
 }
 
+interface PlaybackStatus {
+    isLoaded: boolean;
+    positionMillis: number;
+    durationMillis: number;
+}
+
+interface VideoRef {
+    setOnPlaybackStatusUpdate: (callback: (status: PlaybackStatus) => void) => void;
+    setPositionAsync: (position: number) => void;
+}
+
 export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerProps) {
     const ScrollComponentToUse = scrollComponent || ScrollView;
     const insets = useSafeAreaInsets();
-    const videoRef = useRef(null);
+    const videoRef = useRef<Video | null>(null);
     const [isMuted, setIsMuted] = useState(true);
+    const progress = useSharedValue(0);
+    const min = useSharedValue(0);
+    const max = useSharedValue(100);
+    const [duration, setDuration] = useState(0);
+
+    const onPlaybackStatusUpdate = (status: PlaybackStatus) => {
+        if (status.isLoaded) {
+            progress.value = status.positionMillis;
+            setDuration(status.durationMillis);
+            max.value = status.durationMillis;
+        }
+    };
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+        }
+    }, []);
 
     return (
         <LinearGradient
@@ -67,6 +98,29 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                             color="white"
                         />
                     </Pressable>
+                </View>
+                <View style={styles.sliderContainer}>
+                    <Slider
+                        style={styles.slider}
+                        progress={progress}
+                        minimumValue={min}
+                        maximumValue={max}
+                        onValueChange={(value) => {
+                            if (videoRef.current) {
+                                videoRef.current.setPositionAsync(value);
+                            }
+                        }}
+                        theme={{
+                            minimumTrackTintColor: '#db0000',
+                            // maximumTrackTintColor: 'rgba(255, 255, 255, 0.795)',
+                            bubbleBackgroundColor: '#db0000',
+                        }}
+                        thumbWidth={5}
+                        sliderHeight={5}
+                        containerStyle={styles.sliderInner}
+                        disableTrackFollow={false}
+                        disableTapEvent={false}
+                    />
                 </View>
             </View>
 
