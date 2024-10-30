@@ -13,7 +13,7 @@ import Animated, {
     runOnJS,
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { songs } from '@/data/movies.json';
+import { movies } from '@/data/movies.json';
 import * as Haptics from 'expo-haptics';
 
 const SCALE_FACTOR = 0.83;
@@ -38,7 +38,7 @@ export default function MusicScreen() {
     const isScrolling = useSharedValue(false);
 
     const numericId = typeof id === 'string' ? parseInt(id, 10) : Array.isArray(id) ? parseInt(id[0], 10) : 0;
-    const song = songs.find(s => s.id === numericId) || songs[0];
+    const movie = movies.find(s => s.id === numericId) || movies[0];
 
     const handleHapticFeedback = useCallback(() => {
         try {

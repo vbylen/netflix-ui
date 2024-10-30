@@ -37,7 +37,7 @@ function AnimatedStack() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
-            name="music/[id]"
+            name="movie/[id]"
             options={{
               presentation: 'transparentModal',
               headerShown: false,
