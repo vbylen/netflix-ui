@@ -1,37 +1,21 @@
 import React from 'react';
-import { Text, Image, View, Pressable, FlatList, ScrollView } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '@/styles/index';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BlurView } from 'expo-blur';
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   interpolate,
-  withSpring,
 } from 'react-native-reanimated';
-import { DeviceMotion } from 'expo-sensors';
-
-interface Movie {
-  id: string;
-  imageUrl: string;
-  // add other movie properties as needed
-}
-
-interface MovieRow {
-  rowTitle: string;
-  movies: Movie[];
-}
-
-interface MoviesData {
-  movies: MovieRow[];
-}
-
+import { styles } from '@/styles';
+import { AnimatedHeader } from '@/components/Header/AnimatedHeader';
+import { FeaturedContent } from '@/components/FeaturedContent/FeaturedContent';
+import { MovieList } from '@/components/MovieList/MovieList';
+import { useDeviceMotion } from '@/hooks/useDeviceMotion';
 import movieData from '../../data/movies.json';
+import { MoviesData } from '@/types/movie';
 
 const FEATURED_MOVIE = {
   id: 'dont-move',
@@ -40,87 +24,25 @@ const FEATURED_MOVIE = {
   categories: ['Ominous', 'Chilling', 'Thriller', 'Serial Killer']
 };
 
-// Add type for DeviceMotion data
-type DeviceMotionData = {
-  rotation: {
-    alpha: number;
-    beta: number;
-    gamma: number;
-  };
-};
-
-const renderContentItem = ({ item, router }: { item: Movie; router: any }) => (
-  <Pressable
-    onPress={() => router.push({
-      pathname: '/movie/[id]',
-      params: { id: item.id }
-    })}
-    style={styles.contentItem}
-  >
-    <Image source={{ uri: item.imageUrl }} style={styles.thumbnail} />
-  </Pressable>
-);
-
-const renderMovieRow = ({ rowTitle, movies }: MovieRow, router: any) => (
-  <View key={rowTitle} style={styles.movieRow}>
-    <Text style={styles.sectionTitle}>{rowTitle}</Text>
-    <FlatList
-      horizontal
-      data={movies}
-      renderItem={(props) => renderContentItem({ ...props, router })}
-      keyExtractor={item => item.id}
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.contentList}
-    />
-  </View>
-);
-
 export default function HomeScreen() {
-  const router = useRouter();
   const { movies } = movieData as MoviesData;
   const insets = useSafeAreaInsets();
+  const { tiltX, tiltY } = useDeviceMotion();
 
   const scrollY = useSharedValue(0);
-
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
       scrollY.value = event.contentOffset.y;
     },
   });
 
-  const headerAnimatedStyle = useAnimatedStyle(() => {
-    const intensity = interpolate(
-      scrollY.value,
-      [0, 10],
-      [0, 90],
-      'clamp'
-    );
-    return {
-      intensity,
-    };
-  });
+  const headerAnimatedStyle = useAnimatedStyle(() => ({
+    intensity: interpolate(scrollY.value, [0, 10], [0, 90], 'clamp'),
+  }));
 
-  const tiltX = useSharedValue(0);
-  const tiltY = useSharedValue(0);
-
-  React.useEffect(() => {
-    const subscription = DeviceMotion.addListener((data: DeviceMotionData) => {
-      // Increased from 3 to 4
-      tiltX.value = withSpring(data.rotation.gamma * 4);
-      tiltY.value = withSpring(data.rotation.beta * 4);
-    });
-
-    DeviceMotion.setUpdateInterval(16);
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
-  // Create separate animated styles for image and content with increased multipliers
   const imageStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: tiltX.value * 0.7 },  // Increased from 0.5 to 0.7
+      { translateX: tiltX.value * 0.7 },
       { translateY: tiltY.value * 0.7 },
       { scale: 1.05 },
     ],
@@ -128,14 +50,14 @@ export default function HomeScreen() {
 
   const categoriesStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: tiltX.value * -0.35 },  // Increased from -0.25 to -0.35
+      { translateX: tiltX.value * -0.35 },
       { translateY: tiltY.value * -0.35 },
     ],
   }));
 
   const buttonsStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: tiltX.value * -0.45 },  // Increased from -0.35 to -0.45
+      { translateX: tiltX.value * -0.45 },
       { translateY: tiltY.value * -0.45 },
     ],
   }));
@@ -149,34 +71,7 @@ export default function HomeScreen() {
         style={styles.gradient}
       />
 
-      <Animated.View style={[styles.header]}>
-        <BlurView
-          tint="systemUltraThickMaterialDark"
-          intensity={headerAnimatedStyle.intensity}
-          style={[styles.blurContainer, { paddingTop: insets.top }]}
-        >
-          <View style={styles.headerTitleContainer}>
-            <Text style={styles.headerTitle}>For Saúl</Text>
-            <Pressable style={styles.searchButton}>
-              <Ionicons name="search" size={24} color="#fff" />
-            </Pressable>
-          </View>
-          <View style={styles.categoryTabs}>
-            <Pressable style={styles.categoryTab}>
-              <Text style={styles.categoryTabText}>TV Shows</Text>
-            </Pressable>
-            <Pressable style={styles.categoryTab}>
-              <Text style={styles.categoryTabText}>Movies</Text>
-            </Pressable>
-            <Pressable style={styles.categoryTab}>
-              <Text style={styles.categoryTabTextWithIcon}>
-                Categories
-              </Text>
-              <Ionicons name="chevron-down" size={16} color="#fff" />
-            </Pressable>
-          </View>
-        </BlurView>
-      </Animated.View>
+      <AnimatedHeader headerAnimatedStyle={headerAnimatedStyle} title="For Saúl" />
 
       <Animated.ScrollView
         style={styles.scrollView}
@@ -184,39 +79,17 @@ export default function HomeScreen() {
         scrollEventThrottle={16}
         contentContainerStyle={styles.scrollViewContent}
       >
-        <View style={[styles.featuredContent, { marginTop: insets.top + 90 }]}>
-          <View style={styles.featuredWrapper}>
-            <View style={styles.featuredImageContainer}>
-              <Animated.Image
-                source={{ uri: FEATURED_MOVIE.thumbnail }}
-                style={[styles.featuredImage, imageStyle]}
-              />
-              <LinearGradient
-                colors={['transparent', 'rgba(0,0,0,0.8)']}
-                style={styles.featuredGradient}
-              />
-            </View>
-            <View style={styles.featuredOverlay}>
-              <Animated.View style={[styles.featuredCategories, categoriesStyle]}>
-                <Text style={styles.categoriesText}>
-                  {FEATURED_MOVIE.categories.join(' • ')}
-                </Text>
-              </Animated.View>
-              <Animated.View style={[styles.featuredButtons, buttonsStyle]}>
-                <Pressable style={styles.playButton}>
-                  <Ionicons name="play" size={24} color="#000" />
-                  <Text style={styles.playButtonText}>Play</Text>
-                </Pressable>
-                <Pressable style={styles.myListButton}>
-                  <Ionicons name="add" size={24} color="#fff" />
-                  <Text style={styles.myListButtonText}>My List</Text>
-                </Pressable>
-              </Animated.View>
-            </View>
-          </View>
-        </View>
+        <FeaturedContent
+          movie={FEATURED_MOVIE}
+          imageStyle={imageStyle}
+          categoriesStyle={categoriesStyle}
+          buttonsStyle={buttonsStyle}
+          topMargin={insets.top + 90}
+        />
 
-        {movies.map(row => renderMovieRow(row, router))}
+        {movies.map(row => (
+          <MovieList key={row.rowTitle} {...row} />
+        ))}
       </Animated.ScrollView>
     </View>
   );
