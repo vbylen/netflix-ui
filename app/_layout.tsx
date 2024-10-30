@@ -61,8 +61,6 @@ function AnimatedStack() {
 
 
       </Animated.View>
-
-      {/* putting anything here is not scalled down upon modal open */}
     </View>
   );
 }

@@ -7,6 +7,13 @@ export const styles = StyleSheet.create({
     },
     gradient: {
         flex: 1,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: '100%',
+        width: '100%',
     },
     scrollView: {
         flex: 1,
@@ -15,8 +22,9 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         paddingHorizontal: 16,
-        backgroundColor: '#1e311b',
         zIndex: 1000,
+        position: 'absolute',
+        width: '100%',
     },
     headerTitleContainer: {
         flexDirection: 'row',

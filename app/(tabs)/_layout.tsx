@@ -1,11 +1,12 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Platform, StyleSheet, Image, View } from 'react-native';
+import { Platform, StyleSheet, Image, View, Pressable } from 'react-native';
 import { BlurView } from 'expo-blur';
+import * as Haptics from 'expo-haptics';
 
 // Helper component for cross-platform icons
-function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'play-square' | 'person'; color: string }) {
+function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'play' | 'person'; color: string }) {
   return <TabBarIcon name={ionIcon} color={color} />;
 }
 
@@ -40,33 +41,47 @@ function ProfileImage({ focused }: { focused: boolean }) {
 }
 
 export default function TabLayout() {
+  const handleTabPress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
+
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: '#FFFFFF',
         tabBarInactiveTintColor: '#ffffff3f',
         headerShown: false,
-        tabBarBackground: () => (
-          <BlurView
-            tint="systemUltraThinMaterialDark"
-            intensity={100}
-            style={StyleSheet.absoluteFill}
-          />
-        ),
+
+        // tabBarBackground: () => (
+        //   <BlurView
+        //     tint="systemUltraThinMaterialDark"
+        //     intensity={100}
+        //     style={StyleSheet.absoluteFill}
+        //   />
+        // ),
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: 'transparent',
+          backgroundColor: '#1f1f1f',
           borderTopWidth: 0,
           elevation: 0,
-          height: 94,
+          height: 84,
           paddingTop: 0,
-          paddingBottom: 40,
+          paddingBottom: 35,
         },
         tabBarLabelStyle: {
           marginBottom: 10,
           // fontSize: 12,
           // fontWeight: '700',
         },
+        tabBarButton: (props) => (
+          <Pressable
+            {...props}
+            onPress={(e) => {
+              handleTabPress();
+              props.onPress?.(e);
+            }}
+          />
+        ),
       }}>
       <Tabs.Screen
         name="index"

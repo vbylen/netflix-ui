@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '@/styles/index';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BlurView } from 'expo-blur';
 
 interface Movie {
   id: string;
@@ -71,63 +72,68 @@ export default function HomeScreen() {
         colors={['#1e311b', '#002200', '#000000']}
         locations={[0, 0.4, 0.8]}
         style={styles.gradient}
+      />
+
+      <BlurView
+        tint="systemUltraThinMaterialDark"
+        intensity={100}
+        style={[styles.header, { paddingTop: insets.top }]}
       >
-        <View style={[styles.header, { paddingTop: insets.top }]}>
-          <View style={styles.headerTitleContainer}>
-            <Text style={styles.headerTitle}>For Saúl</Text>
-            <Pressable style={styles.searchButton}>
-              <Ionicons name="search" size={24} color="#fff" />
-            </Pressable>
+        <View style={styles.headerTitleContainer}>
+          <Text style={styles.headerTitle}>For Saúl</Text>
+          <Pressable style={styles.searchButton}>
+            <Ionicons name="search" size={24} color="#fff" />
+          </Pressable>
+        </View>
+        <View style={styles.categoryTabs}>
+          <Pressable style={styles.categoryTab}>
+            <Text style={styles.categoryTabText}>TV Shows</Text>
+          </Pressable>
+          <Pressable style={styles.categoryTab}>
+            <Text style={styles.categoryTabText}>Movies</Text>
+          </Pressable>
+          <Pressable style={styles.categoryTab}>
+            <Text style={styles.categoryTabTextWithIcon}>
+              Categories <Ionicons name="chevron-down" size={16} color="#fff" />
+            </Text>
+          </Pressable>
+        </View>
+      </BlurView>
+
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.featuredContent}>
+          <View style={styles.featuredImageContainer}>
+            <Image
+              source={{ uri: FEATURED_MOVIE.thumbnail }}
+              style={styles.featuredImage}
+            />
+            <LinearGradient
+              colors={['transparent', 'rgba(0,0,0,0.8)']}
+              style={styles.featuredGradient}
+            />
           </View>
-          <View style={styles.categoryTabs}>
-            <Pressable style={styles.categoryTab}>
-              <Text style={styles.categoryTabText}>TV Shows</Text>
-            </Pressable>
-            <Pressable style={styles.categoryTab}>
-              <Text style={styles.categoryTabText}>Movies</Text>
-            </Pressable>
-            <Pressable style={styles.categoryTab}>
-              <Text style={styles.categoryTabTextWithIcon}>
-                Categories <Ionicons name="chevron-down" size={16} color="#fff" />
+          <View style={styles.featuredOverlay}>
+            <View style={styles.featuredCategories}>
+              <Text style={styles.categoriesText}>
+                {FEATURED_MOVIE.categories.join(' • ')}
               </Text>
-            </Pressable>
+            </View>
+            <View style={styles.featuredButtons}>
+              <Pressable style={styles.playButton}>
+                <Ionicons name="play" size={24} color="#000" />
+                <Text style={styles.playButtonText}>Play</Text>
+              </Pressable>
+              <Pressable style={styles.myListButton}>
+                <Ionicons name="add" size={24} color="#fff" />
+                <Text style={styles.myListButtonText}>My List</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
 
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.featuredContent}>
-            <View style={styles.featuredImageContainer}>
-              <Image
-                source={{ uri: FEATURED_MOVIE.thumbnail }}
-                style={styles.featuredImage}
-              />
-              <LinearGradient
-                colors={['transparent', 'rgba(0,0,0,0.8)']}
-                style={styles.featuredGradient}
-              />
-            </View>
-            <View style={styles.featuredOverlay}>
-              <View style={styles.featuredCategories}>
-                <Text style={styles.categoriesText}>
-                  {FEATURED_MOVIE.categories.join(' • ')}
-                </Text>
-              </View>
-              <View style={styles.featuredButtons}>
-                <Pressable style={styles.playButton}>
-                  <Ionicons name="play" size={24} color="#000" />
-                  <Text style={styles.playButtonText}>Play</Text>
-                </Pressable>
-                <Pressable style={styles.myListButton}>
-                  <Ionicons name="add" size={24} color="#fff" />
-                  <Text style={styles.myListButtonText}>My List</Text>
-                </Pressable>
-              </View>
-            </View>
-          </View>
+        {movies.map(row => renderMovieRow(row, router))}
+      </ScrollView>
 
-          {movies.map(row => renderMovieRow(row, router))}
-        </ScrollView>
-      </LinearGradient>
     </View>
   );
 }
