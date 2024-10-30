@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
     },
     featuredContent: {
         width: '100%',
-        height: 480,
+        height: 528,
         marginBottom: 24,
         position: 'relative',
         paddingHorizontal: 20,
@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
         left: 0,
         right: 0,
         paddingBottom: 16,
-        paddingHorizontal: 16,
+        // paddingHorizontal: 16,
         zIndex: 2,
     },
     overlayGradient: {

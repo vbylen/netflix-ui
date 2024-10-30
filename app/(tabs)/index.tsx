@@ -184,7 +184,7 @@ export default function HomeScreen() {
         scrollEventThrottle={16}
         contentContainerStyle={styles.scrollViewContent}
       >
-        <View style={[styles.featuredContent, { marginTop: insets.top + 100 }]}>
+        <View style={[styles.featuredContent, { marginTop: insets.top + 90 }]}>
           <View style={styles.featuredWrapper}>
             <View style={styles.featuredImageContainer}>
               <Animated.Image
