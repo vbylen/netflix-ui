@@ -46,7 +46,7 @@ export const newStyles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 8,
         borderRadius: 20,
-        backgroundColor: '#333',
+        backgroundColor: 'transparent',
     },
     activeTab: {
         backgroundColor: '#fff',
@@ -59,6 +59,7 @@ export const newStyles = StyleSheet.create({
     categoryTabText: {
         color: '#fff',
         fontSize: 14,
+        fontWeight: '600',
     },
     activeTabText: {
         color: '#000',

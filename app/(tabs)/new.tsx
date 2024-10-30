@@ -148,7 +148,7 @@ export default function NewAndHotScreen() {
         >
             <Image
                 source={{ uri: tab.icon }}
-                style={[newStyles.tabIcon, activeTab === tab.id && { tintColor: '#000' }]}
+                style={[newStyles.tabIcon]}
             />
             <Text style={[
                 newStyles.categoryTabText,
