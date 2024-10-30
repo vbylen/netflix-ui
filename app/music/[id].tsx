@@ -13,7 +13,7 @@ import Animated, {
     runOnJS,
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { songs } from '@/data/songs.json';
+import { songs } from '@/data/movies.json';
 import * as Haptics from 'expo-haptics';
 
 const SCALE_FACTOR = 0.83;

@@ -5,13 +5,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 
-interface Content {
+interface Movie {
   id: string;
-  title: string;
-  type: 'movie' | 'show';
-  thumbnail: string;
-  categories: string[];
+  imageUrl: string;
+  // add other movie properties as needed
 }
+
+interface MovieRow {
+  rowTitle: string;
+  movies: Movie[];
+}
+
+interface MoviesData {
+  movies: MovieRow[];
+}
+
+import movieData from '../../data/movies.json';
 
 const FEATURED_MOVIE = {
   id: 'dont-move',
@@ -51,31 +60,39 @@ const TOP_PICKS = [
   }
 ];
 
+const renderContentItem = ({ item }: { item: Movie }) => (
+  <Pressable
+    onPress={() => router.push(`/movie/${item.id}`)}
+    style={styles.contentItem}
+  >
+    <Image source={{ uri: item.imageUrl }} style={styles.thumbnail} />
+  </Pressable>
+);
+
+const renderMovieRow = ({ rowTitle, movies }: MovieRow) => (
+  <View key={rowTitle} style={styles.movieRow}>
+    <Text style={styles.sectionTitle}>{rowTitle}</Text>
+    <FlatList
+      horizontal
+      data={movies}
+      renderItem={renderContentItem}
+      keyExtractor={item => item.id}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.contentList}
+    />
+  </View>
+);
+
 export default function HomeScreen() {
   const router = useRouter();
-
-  const renderContentItem = ({ item, index }: { item: Content; index: number }) => (
-    <Pressable
-      onPress={() => router.push('/(movie)/[id]', {
-        params: { id: item.id }
-      })}
-      style={styles.contentItem}
-    >
-      <Image source={{ uri: item.thumbnail }} style={styles.thumbnail} />
-      {index < 2 && (
-        <View style={styles.recentlyAddedBadge}>
-          <Text style={styles.recentlyAddedText}>Recently Added</Text>
-        </View>
-      )}
-    </Pressable>
-  );
+  const { movies } = movieData as MoviesData;
 
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
       <LinearGradient
-        colors={['#004400', '#002200', '#000000']} // Darker greens transitioning to black
-        locations={[0, 0.4, 0.8]} // Faster transition to dark
+        colors={['#004400', '#002200', '#000000']}
+        locations={[0, 0.4, 0.8]}
         style={styles.gradient}
       >
         <ScrollView style={styles.scrollView}>
@@ -122,15 +139,7 @@ export default function HomeScreen() {
             </View>
           </View>
 
-          <Text style={styles.sectionTitle}>Today's Top Picks for You</Text>
-          <FlatList
-            horizontal
-            data={TOP_PICKS}
-            renderItem={renderContentItem}
-            keyExtractor={item => item.id}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.contentList}
-          />
+          {movies.map(row => renderMovieRow(row))}
         </ScrollView>
       </LinearGradient>
     </View>
@@ -263,7 +272,6 @@ const styles = StyleSheet.create({
   },
   contentList: {
     paddingHorizontal: 16,
-    paddingBottom: 24,
   },
   contentItem: {
     width: 120,
@@ -275,20 +283,7 @@ const styles = StyleSheet.create({
     aspectRatio: 2 / 3,
     borderRadius: 6,
   },
-  recentlyAddedBadge: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#E50914',
-    padding: 4,
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
-  },
-  recentlyAddedText: {
-    color: '#fff',
-    fontSize: 10,
-    textAlign: 'center',
-    fontWeight: '600',
+  movieRow: {
+    marginBottom: 24,
   },
 });
