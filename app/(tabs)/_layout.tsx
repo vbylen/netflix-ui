@@ -1,45 +1,64 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { BlurView } from 'expo-blur';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, Image, View } from 'react-native';
 
 // Helper component for cross-platform icons
-function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'apps-sharp' | 'person'; color: string }) {
+function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'play-square' | 'person'; color: string }) {
   return <TabBarIcon name={ionIcon} color={color} />;
 }
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+// Netflix profile image component
+function ProfileImage({ focused }: { focused: boolean }) {
+  return (
+    <React.Fragment>
+      <Image
+        source={{ uri: 'https://i.imgur.com/KKkzRv7.png' }}
+        style={{
+          width: 24,
+          height: 24,
+          borderRadius: 4,
+          opacity: focused ? 1 : 0.5,
+          borderWidth: 2,
+          borderColor: 'white',
+        }}
+      />
+      <View
+        style={{
+          position: 'absolute',
+          bottom: -18,
+          alignSelf: 'center',
+          width: 5,
+          height: 5,
+          borderRadius: 2,
+          backgroundColor: '#db0000',
+        }}
+      />
+    </React.Fragment>
+  );
+}
 
+export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#FA2D48',
+        tabBarActiveTintColor: '#FFFFFF',
+        tabBarInactiveTintColor: '#ffffff3f',
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: Platform.select({
-            ios: 'transparent',
-            android: 'rgba(255, 255, 255, 0.8)', // Fallback for Android
-          }),
+          backgroundColor: 'rgba(20, 20, 20, 0.95)',
           borderTopWidth: 0,
           elevation: 0,
           height: 94,
           paddingTop: 0,
           paddingBottom: 40,
         },
-        tabBarBackground: () => (
-          Platform.OS === 'ios' ? (
-            <BlurView
-              tint={colorScheme === 'dark' ? 'systemThickMaterialDark' : 'systemThickMaterialLight'}
-              intensity={80}
-              style={StyleSheet.absoluteFill}
-            />
-          ) : null
-        ),
+        tabBarLabelStyle: {
+          marginBottom: 10,
+          // fontSize: 12,
+          // fontWeight: '700',
+        },
       }}>
       <Tabs.Screen
         name="index"
@@ -56,10 +75,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="new"
         options={{
-          title: 'New',
+          title: 'New & Hot',
           tabBarIcon: ({ color }) => (
             <TabIcon
-              ionIcon="apps-sharp"
+              ionIcon="play-square"
               color={color}
             />
           ),
@@ -69,12 +88,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'My Netflix',
-          tabBarIcon: ({ color }) => (
-            <TabIcon
-              ionIcon="person"
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ focused }) => <ProfileImage focused={focused} />,
         }}
       />
     </Tabs>
