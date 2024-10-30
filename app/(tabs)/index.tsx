@@ -7,6 +7,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '@/styles/index';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
+import Animated, {
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  interpolate,
+} from 'react-native-reanimated';
 
 interface Movie {
   id: string;
@@ -65,6 +71,27 @@ export default function HomeScreen() {
   const { movies } = movieData as MoviesData;
   const insets = useSafeAreaInsets();
 
+  const scrollY = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollY.value = event.contentOffset.y;
+    },
+  });
+
+  const headerAnimatedStyle = useAnimatedStyle(() => {
+    const intensity = interpolate(
+      scrollY.value,
+      [0, 10],
+      [0, 90],
+      'clamp'
+    );
+
+    return {
+      intensity,
+    };
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -74,34 +101,41 @@ export default function HomeScreen() {
         style={styles.gradient}
       />
 
-      <BlurView
-        tint="systemUltraThinMaterialDark"
-        intensity={0}
-        style={[styles.header, { paddingTop: insets.top }]}
-      >
-        <View style={styles.headerTitleContainer}>
-          <Text style={styles.headerTitle}>For Saúl</Text>
-          <Pressable style={styles.searchButton}>
-            <Ionicons name="search" size={24} color="#fff" />
-          </Pressable>
-        </View>
-        <View style={styles.categoryTabs}>
-          <Pressable style={styles.categoryTab}>
-            <Text style={styles.categoryTabText}>TV Shows</Text>
-          </Pressable>
-          <Pressable style={styles.categoryTab}>
-            <Text style={styles.categoryTabText}>Movies</Text>
-          </Pressable>
-          <Pressable style={styles.categoryTab}>
-            <Text style={styles.categoryTabTextWithIcon}>
-              Categories <Ionicons name="chevron-down" size={16} color="#fff" />
-            </Text>
-          </Pressable>
-        </View>
-      </BlurView>
+      <Animated.View style={[styles.header]}>
+        <BlurView
+          tint="systemUltraThickMaterialDark"
+          intensity={headerAnimatedStyle.intensity}
+          style={[styles.blurContainer, { paddingTop: insets.top }]}
+        >
+          <View style={styles.headerTitleContainer}>
+            <Text style={styles.headerTitle}>For Saúl</Text>
+            <Pressable style={styles.searchButton}>
+              <Ionicons name="search" size={24} color="#fff" />
+            </Pressable>
+          </View>
+          <View style={styles.categoryTabs}>
+            <Pressable style={styles.categoryTab}>
+              <Text style={styles.categoryTabText}>TV Shows</Text>
+            </Pressable>
+            <Pressable style={styles.categoryTab}>
+              <Text style={styles.categoryTabText}>Movies</Text>
+            </Pressable>
+            <Pressable style={styles.categoryTab}>
+              <Text style={styles.categoryTabTextWithIcon}>
+                Categories <Ionicons name="chevron-down" size={16} color="#fff" />
+              </Text>
+            </Pressable>
+          </View>
+        </BlurView>
+      </Animated.View>
 
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.featuredContent}>
+      <Animated.ScrollView
+        style={styles.scrollView}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={styles.scrollViewContent}
+      >
+        <View style={[styles.featuredContent, { marginTop: insets.top + 100 }]}>
           <View style={styles.featuredImageContainer}>
             <Image
               source={{ uri: FEATURED_MOVIE.thumbnail }}
@@ -132,8 +166,7 @@ export default function HomeScreen() {
         </View>
 
         {movies.map(row => renderMovieRow(row, router))}
-      </ScrollView>
-
+      </Animated.ScrollView>
     </View>
   );
 }

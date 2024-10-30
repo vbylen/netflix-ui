@@ -20,12 +20,11 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        paddingHorizontal: 16,
-        zIndex: 1000,
         position: 'absolute',
-        width: '100%',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
     },
     headerTitleContainer: {
         flexDirection: 'row',
@@ -45,7 +44,7 @@ export const styles = StyleSheet.create({
     categoryTabs: {
         flexDirection: 'row',
         paddingHorizontal: 16,
-        marginBottom: 12,
+        paddingBottom: 12,
         gap: 12,
     },
     categoryTab: {
@@ -170,6 +169,13 @@ export const styles = StyleSheet.create({
     },
     movieRow: {
         marginBottom: 24,
+    },
+    blurContainer: {
+        width: '100%',
+    },
+    scrollViewContent: {
+        paddingBottom: 100,
+        paddingTop: 20,
     },
 }
 );
