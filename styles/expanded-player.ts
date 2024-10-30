@@ -19,6 +19,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         width: '100%',
         height: width * 0.6, // 16:9 aspect ratio
         position: 'relative',
+        zIndex: 1,
     },
     video: {
         width: '100%',

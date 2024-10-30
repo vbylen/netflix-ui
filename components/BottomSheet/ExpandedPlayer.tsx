@@ -37,43 +37,43 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
             colors={['#1f1f1f', '#121212']}
             style={[styles.rootContainer, { marginTop: insets.top }]}
         >
+            <View style={styles.videoContainer}>
+                <Video
+                    ref={videoRef}
+                    style={styles.video}
+                    source={{ uri: movieData?.videoUrl ?? 'https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4' }}
+                    useNativeControls={false}
+                    resizeMode={ResizeMode.COVER}
+                    isLooping
+                    isMuted={isMuted}
+                    shouldPlay
+                />
+                <View style={styles.videoOverlay}>
+                    <Pressable
+                        style={styles.closeButton}
+                        onPress={() => {/* handle close */ }}
+                    >
+                        <Ionicons name="close" size={24} color="white" />
+                    </Pressable>
+                </View>
+                <View style={styles.muteOverlay}>
+                    <Pressable
+                        style={styles.soundButton}
+                        onPress={() => setIsMuted(!isMuted)}
+                    >
+                        <Ionicons
+                            name={isMuted ? "volume-mute" : "volume-medium"}
+                            size={24}
+                            color="white"
+                        />
+                    </Pressable>
+                </View>
+            </View>
+
             <ScrollComponentToUse
                 style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
             >
-                <View style={styles.videoContainer}>
-                    <Video
-                        ref={videoRef}
-                        style={styles.video}
-                        source={{ uri: movieData?.videoUrl ?? 'https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4' }}
-                        useNativeControls={false}
-                        resizeMode={ResizeMode.COVER}
-                        isLooping
-                        isMuted={isMuted}
-                        shouldPlay
-                    />
-                    <View style={styles.videoOverlay}>
-                        <Pressable
-                            style={styles.closeButton}
-                            onPress={() => {/* handle close */ }}
-                        >
-                            <Ionicons name="close" size={24} color="white" />
-                        </Pressable>
-                    </View>
-                    <View style={styles.muteOverlay}>
-                        <Pressable
-                            style={styles.soundButton}
-                            onPress={() => setIsMuted(!isMuted)}
-                        >
-                            <Ionicons
-                                name={isMuted ? "volume-mute" : "volume-medium"}
-                                size={24}
-                                color="white"
-                            />
-                        </Pressable>
-                    </View>
-                </View>
-
                 <View style={styles.contentContainer}>
                     <ThemedText style={styles.title}>{movieData?.title || "Movie Title"}</ThemedText>
 
