@@ -40,7 +40,14 @@ const FEATURED_MOVIE = {
   categories: ['Ominous', 'Chilling', 'Thriller', 'Serial Killer']
 };
 
-
+// Add type for DeviceMotion data
+type DeviceMotionData = {
+  rotation: {
+    alpha: number;
+    beta: number;
+    gamma: number;
+  };
+};
 
 const renderContentItem = ({ item, router }: { item: Movie; router: any }) => (
   <Pressable
@@ -97,28 +104,41 @@ export default function HomeScreen() {
   const tiltY = useSharedValue(0);
 
   React.useEffect(() => {
-    const subscription = DeviceMotion.addListener((data) => {
-      // Adjust sensitivity by multiplying the values
-      tiltX.value = withSpring(data.rotation.gamma * 10);
-      tiltY.value = withSpring(data.rotation.beta * 10);
+    const subscription = DeviceMotion.addListener((data: DeviceMotionData) => {
+      // Increased from 3 to 4
+      tiltX.value = withSpring(data.rotation.gamma * 4);
+      tiltY.value = withSpring(data.rotation.beta * 4);
     });
 
-    DeviceMotion.setUpdateInterval(16); // 60fps
+    DeviceMotion.setUpdateInterval(16);
 
     return () => {
       subscription.remove();
     };
   }, []);
 
-  const featuredCardStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { perspective: 1000 },
-        { rotateX: `${tiltY.value}deg` },
-        { rotateY: `${tiltX.value}deg` },
-      ],
-    };
-  });
+  // Create separate animated styles for image and content with increased multipliers
+  const imageStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: tiltX.value * 0.7 },  // Increased from 0.5 to 0.7
+      { translateY: tiltY.value * 0.7 },
+      { scale: 1.05 },
+    ],
+  }));
+
+  const categoriesStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: tiltX.value * -0.35 },  // Increased from -0.25 to -0.35
+      { translateY: tiltY.value * -0.35 },
+    ],
+  }));
+
+  const buttonsStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: tiltX.value * -0.45 },  // Increased from -0.35 to -0.45
+      { translateY: tiltY.value * -0.45 },
+    ],
+  }));
 
   return (
     <View style={styles.container}>
@@ -165,31 +185,33 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollViewContent}
       >
         <View style={[styles.featuredContent, { marginTop: insets.top + 100 }]}>
-          <Animated.View style={[styles.featuredImageContainer, featuredCardStyle]}>
-            <Image
-              source={{ uri: FEATURED_MOVIE.thumbnail }}
-              style={styles.featuredImage}
-            />
-            <LinearGradient
-              colors={['transparent', 'rgba(0,0,0,0.8)']}
-              style={styles.featuredGradient}
-            />
-          </Animated.View>
-          <View style={styles.featuredOverlay}>
-            <View style={styles.featuredCategories}>
-              <Text style={styles.categoriesText}>
-                {FEATURED_MOVIE.categories.join(' • ')}
-              </Text>
+          <View style={styles.featuredWrapper}>
+            <View style={styles.featuredImageContainer}>
+              <Animated.Image
+                source={{ uri: FEATURED_MOVIE.thumbnail }}
+                style={[styles.featuredImage, imageStyle]}
+              />
+              <LinearGradient
+                colors={['transparent', 'rgba(0,0,0,0.8)']}
+                style={styles.featuredGradient}
+              />
             </View>
-            <View style={styles.featuredButtons}>
-              <Pressable style={styles.playButton}>
-                <Ionicons name="play" size={24} color="#000" />
-                <Text style={styles.playButtonText}>Play</Text>
-              </Pressable>
-              <Pressable style={styles.myListButton}>
-                <Ionicons name="add" size={24} color="#fff" />
-                <Text style={styles.myListButtonText}>My List</Text>
-              </Pressable>
+            <View style={styles.featuredOverlay}>
+              <Animated.View style={[styles.featuredCategories, categoriesStyle]}>
+                <Text style={styles.categoriesText}>
+                  {FEATURED_MOVIE.categories.join(' • ')}
+                </Text>
+              </Animated.View>
+              <Animated.View style={[styles.featuredButtons, buttonsStyle]}>
+                <Pressable style={styles.playButton}>
+                  <Ionicons name="play" size={24} color="#000" />
+                  <Text style={styles.playButtonText}>Play</Text>
+                </Pressable>
+                <Pressable style={styles.myListButton}>
+                  <Ionicons name="add" size={24} color="#fff" />
+                  <Text style={styles.myListButtonText}>My List</Text>
+                </Pressable>
+              </Animated.View>
             </View>
           </View>
         </View>

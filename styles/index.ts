@@ -76,15 +76,14 @@ export const styles = StyleSheet.create({
         position: 'relative',
         paddingHorizontal: 20,
     },
-    featuredImageContainer: {
+    featuredWrapper: {
         width: '100%',
         height: '100%',
         position: 'relative',
-        borderWidth: 0.5,
-        borderColor: 'rgba(255, 255, 255, 0.2)',
         borderRadius: 8,
         overflow: 'hidden',
-        backfaceVisibility: 'hidden',
+        borderWidth: 0.5,
+        borderColor: 'rgba(255, 255, 255, 0.2)',
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -94,11 +93,16 @@ export const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
     },
+    featuredImageContainer: {
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        borderRadius: 8,
+    },
     featuredImage: {
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
-        backfaceVisibility: 'hidden',
     },
     featuredGradient: {
         position: 'absolute',
