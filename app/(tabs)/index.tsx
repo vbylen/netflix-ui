@@ -150,8 +150,9 @@ export default function HomeScreen() {
             </Pressable>
             <Pressable style={styles.categoryTab}>
               <Text style={styles.categoryTabTextWithIcon}>
-                Categories <Ionicons name="chevron-down" size={16} color="#fff" />
+                Categories
               </Text>
+              <Ionicons name="chevron-down" size={16} color="#fff" />
             </Pressable>
           </View>
         </BlurView>

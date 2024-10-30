@@ -46,18 +46,22 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingBottom: 12,
         gap: 12,
+        marginTop: 4
     },
     categoryTab: {
-        paddingVertical: 8,
+        paddingVertical: 7,
         paddingHorizontal: 16,
         borderWidth: 1,
         borderColor: 'rgba(255, 255, 255, 0.3)',
         borderRadius: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5
     },
     categoryTabText: {
         color: '#fff',
         fontSize: 14,
-        fontWeight: '500',
+        fontWeight: '600',
     },
     categoryTabTextWithIcon: {
         color: '#fff',
