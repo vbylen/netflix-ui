@@ -14,15 +14,16 @@ export const styles = StyleSheet.create({
     header: {
         flexDirection: 'column',
         justifyContent: 'space-between',
-        // alignItems: 'center',
         paddingHorizontal: 16,
-        // marginBottom: 16,
+        backgroundColor: '#1e311b',
+        zIndex: 1000,
     },
     headerTitleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 16,
+        height: 50,
     },
     headerTitle: {
         color: '#fff',
@@ -35,8 +36,7 @@ export const styles = StyleSheet.create({
     categoryTabs: {
         flexDirection: 'row',
         paddingHorizontal: 16,
-        marginBottom: 24,
-        // marginTop: 12,
+        marginBottom: 12,
         gap: 12,
     },
     categoryTab: {

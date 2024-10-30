@@ -1,7 +1,7 @@
-import { Text, Image, View, StyleSheet, Pressable, FlatList, ScrollView } from 'react-native';
+import React from 'react';
+import { Text, Image, View, Pressable, FlatList, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '@/styles/index';
@@ -72,32 +72,29 @@ export default function HomeScreen() {
         locations={[0, 0.4, 0.8]}
         style={styles.gradient}
       >
-        <ScrollView style={[styles.scrollView, { paddingTop: insets.top }]}>
-
-          <View style={[styles.header]}>
-            <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>For Saúl</Text>
-              <Pressable style={styles.searchButton}>
-                <Ionicons name="search" size={24} color="#fff" />
-              </Pressable>
-            </View>
-            <View style={styles.categoryTabs}>
-              <Pressable style={styles.categoryTab}>
-                <Text style={styles.categoryTabText}>TV Shows</Text>
-              </Pressable>
-              <Pressable style={styles.categoryTab}>
-                <Text style={styles.categoryTabText}>Movies</Text>
-              </Pressable>
-              <Pressable style={styles.categoryTab}>
-                <Text style={styles.categoryTabTextWithIcon}>
-                  Categories <Ionicons name="chevron-down" size={16} color="#fff" />
-                </Text>
-              </Pressable>
-            </View>
+        <View style={[styles.header, { paddingTop: insets.top }]}>
+          <View style={styles.headerTitleContainer}>
+            <Text style={styles.headerTitle}>For Saúl</Text>
+            <Pressable style={styles.searchButton}>
+              <Ionicons name="search" size={24} color="#fff" />
+            </Pressable>
           </View>
+          <View style={styles.categoryTabs}>
+            <Pressable style={styles.categoryTab}>
+              <Text style={styles.categoryTabText}>TV Shows</Text>
+            </Pressable>
+            <Pressable style={styles.categoryTab}>
+              <Text style={styles.categoryTabText}>Movies</Text>
+            </Pressable>
+            <Pressable style={styles.categoryTab}>
+              <Text style={styles.categoryTabTextWithIcon}>
+                Categories <Ionicons name="chevron-down" size={16} color="#fff" />
+              </Text>
+            </Pressable>
+          </View>
+        </View>
 
-
-
+        <ScrollView style={styles.scrollView}>
           <View style={styles.featuredContent}>
             <View style={styles.featuredImageContainer}>
               <Image
