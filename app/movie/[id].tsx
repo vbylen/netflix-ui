@@ -20,7 +20,7 @@ const SCALE_FACTOR = 0.83;
 const DRAG_THRESHOLD = Math.min(Dimensions.get('window').height * 0.20, 150);
 const HORIZONTAL_DRAG_THRESHOLD = Math.min(Dimensions.get('window').width * 0.51, 80);
 const DIRECTION_LOCK_ANGLE = 45; // Angle in degrees to determine horizontal vs vertical movement
-const ENABLE_HORIZONTAL_DRAG_CLOSE = false;
+const ENABLE_HORIZONTAL_DRAG_CLOSE = true;
 
 export default function MusicScreen() {
     const { id } = useLocalSearchParams();
