@@ -12,11 +12,17 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        // alignItems: 'center',
+        paddingHorizontal: 16,
+        // marginBottom: 16,
+    },
+    headerTitleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 16,
-        // marginBottom: 16,
     },
     headerTitle: {
         color: '#fff',
