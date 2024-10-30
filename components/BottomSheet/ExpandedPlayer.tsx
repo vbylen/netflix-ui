@@ -12,26 +12,6 @@ import {
     useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-function shadeColor(color: string, percent: number): string {
-    const R = parseInt(color.substring(1, 3), 16);
-    const G = parseInt(color.substring(3, 5), 16);
-    const B = parseInt(color.substring(5, 7), 16);
-
-    let newR = Math.round((R * (100 + percent)) / 100);
-    let newG = Math.round((G * (100 + percent)) / 100);
-    let newB = Math.round((B * (100 + percent)) / 100);
-
-    newR = newR < 255 ? newR : 255;
-    newG = newG < 255 ? newG : 255;
-    newB = newB < 255 ? newB : 255;
-
-    const RR = ((newR.toString(16).length === 1) ? "0" + newR.toString(16) : newR.toString(16));
-    const GG = ((newG.toString(16).length === 1) ? "0" + newG.toString(16) : newG.toString(16));
-    const BB = ((newB.toString(16).length === 1) ? "0" + newB.toString(16) : newB.toString(16));
-
-    return "#" + RR + GG + BB;
-}
-
 interface ExpandedPlayerProps {
     scrollComponent?: (props: any) => React.ReactElement;
 }
@@ -51,47 +31,7 @@ export function ExpandedPlayer({ scrollComponent }: ExpandedPlayerProps) {
     } = useAudio();
     const insets = useSafeAreaInsets();
 
-    const colorToUse = currentSong?.artwork_bg_color || "#000000";
-    const colors = [colorToUse, shadeColor(colorToUse, -50)];
 
-    const handleSkipForward = async () => {
-        if (sound) {
-            await sound.setPositionAsync(Math.min(duration, position + 10000));
-        }
-    };
-
-    const handleSkipBackward = async () => {
-        if (sound) {
-            await sound.setPositionAsync(Math.max(0, position - 10000));
-        }
-    };
-
-    const formatTime = (millis: number) => {
-        const minutes = Math.floor(millis / 60000);
-        const seconds = ((millis % 60000) / 1000).toFixed(0);
-        return `${minutes}:${Number(seconds) < 10 ? '0' : ''}${seconds}`;
-    };
-
-    const progress = duration > 0 ? (position / duration) * 100 : 0;
-
-    // Add sample lyrics (you should get this from your song data)
-    const lyrics = [
-        "Verse 1",
-        "First line of the song",
-        "Second line of the song",
-        "Third line goes here",
-        "",
-        "Chorus",
-        "This is the chorus",
-        "Another chorus line",
-        "Final chorus line",
-        "",
-        "Verse 2",
-        "Back to the verses",
-        "More lyrics here",
-        "And here as well",
-        // Add more lyrics as needed
-    ];
 
     return (
         <LinearGradient
