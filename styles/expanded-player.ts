@@ -175,7 +175,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         gap: 8,
     },
     moviePoster: {
-        width: '32%',
+        width: '31%',
         aspectRatio: 2 / 3,
         borderRadius: 4,
     },
