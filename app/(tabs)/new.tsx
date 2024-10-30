@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, Image, View, Pressable, ScrollView as RNScrollView } from 'react-native';
+import { Text, Image, View, Pressable, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '@/styles/index';
+import { newStyles } from '@/styles/new';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 import Animated, {
@@ -70,28 +71,47 @@ export default function NewAndHotScreen() {
     }));
 
     const renderComingSoonItem = (item: ComingSoonItem) => (
-        <View key={item.id} style={styles.comingSoonItem}>
-            <View style={styles.dateBadge}>
-                <Text style={styles.dateMonth}>{item.date.split(' ')[0]}</Text>
-                <Text style={styles.dateDay}>{item.date.split(' ')[1]}</Text>
+        <View key={item.id} style={newStyles.comingSoonItem}>
+            <View style={newStyles.dateContainer}>
+                <Text style={newStyles.dateMonth}>{item.date.split(' ')[0]}</Text>
+                <Text style={newStyles.dateDay}>{item.date.split(' ')[1]}</Text>
             </View>
-            <View style={styles.contentPreview}>
-                <Image source={{ uri: item.imageUrl }} style={styles.previewImage} />
-                <View style={styles.previewInfo}>
-                    <View style={styles.previewHeader}>
-                        <Text style={styles.previewTitle}>{item.title}</Text>
-                        <Text style={styles.previewRating}>{item.rating}</Text>
+
+            <View style={newStyles.contentContainer}>
+                <View style={newStyles.previewCard}>
+                    <Image source={{ uri: item.imageUrl }} style={newStyles.previewImage} />
+                    <View style={newStyles.liveTag}>
+                        <Text style={newStyles.liveText}>Live</Text>
+                        <Text style={newStyles.dateText}>11/15</Text>
                     </View>
-                    <Text style={styles.previewDescription}>{item.description}</Text>
                 </View>
-                <View style={styles.previewActions}>
-                    <Pressable style={styles.reminderButton}>
+                <View style={newStyles.titleContainer}>
+                    <Text style={newStyles.netflixTag}>N SPECIAL</Text>
+                    <Text style={newStyles.title}>{item.title}</Text>
+                    <Text style={newStyles.eventDate}>Live Event Coming November 15 at 8:00 PM EST</Text>
+                    <Text style={newStyles.description}>{item.description}</Text>
+                    <View style={newStyles.tags}>
+                        <Text style={newStyles.tag}>Rousing</Text>
+                        <Text style={newStyles.tag}>•</Text>
+                        <Text style={newStyles.tag}>Exciting</Text>
+                        <Text style={newStyles.tag}>•</Text>
+                        <Text style={newStyles.tag}>Sports Event</Text>
+                        <Text style={newStyles.tag}>•</Text>
+                        <Text style={newStyles.tag}>Clash of Generations</Text>
+                        <Text style={newStyles.tag}>•</Text>
+                        <Text style={newStyles.tag}>Boxing</Text>
+                        <Text style={newStyles.tag}>•</Text>
+                        <Text style={newStyles.tag}>TV-14</Text>
+                    </View>
+                </View>
+                <View style={newStyles.actionButtons}>
+                    <Pressable style={newStyles.actionButton}>
                         <Ionicons name="notifications-outline" size={24} color="#fff" />
-                        <Text style={styles.reminderText}>Remind Me</Text>
+                        <Text style={newStyles.actionButtonText}>Remind Me</Text>
                     </Pressable>
-                    <Pressable style={styles.infoButton}>
+                    <Pressable style={newStyles.actionButton}>
                         <Ionicons name="information-circle-outline" size={24} color="#fff" />
-                        <Text style={styles.infoText}>Info</Text>
+                        <Text style={newStyles.actionButtonText}>Info</Text>
                     </Pressable>
                 </View>
             </View>
@@ -101,51 +121,48 @@ export default function NewAndHotScreen() {
     const renderTab = (tab: typeof TAB_OPTIONS[0]) => (
         <Pressable
             key={tab.id}
-            style={[styles.categoryTab, activeTab === tab.id && styles.activeTab]}
+            style={[newStyles.categoryTab, activeTab === tab.id && newStyles.activeTab]}
             onPress={() => setActiveTab(tab.id)}
         >
             <Image
                 source={{ uri: tab.icon }}
-                style={styles.tabIcon}
+                style={[newStyles.tabIcon, activeTab === tab.id && { tintColor: '#000' }]}
             />
-            <Text style={styles.categoryTabText}>{tab.label}</Text>
+            <Text style={[
+                newStyles.categoryTabText,
+                activeTab === tab.id && newStyles.activeTabText
+            ]}>
+                {tab.label}
+            </Text>
         </Pressable>
     );
 
     return (
-        <View style={styles.container}>
+        <View style={newStyles.container}>
             <StatusBar style="light" />
-            <LinearGradient
-                colors={['#000000', '#000000']}
-                style={styles.gradient}
-            />
 
-            <Animated.View style={[styles.header, headerAnimatedStyle]}>
-                <BlurView
-                    tint="dark"
-                    intensity={0}
-                    style={[styles.blurContainer, { paddingTop: insets.top, backgroundColor: '#000000' }]}
-                >
-                    <View style={styles.headerTitleContainer}>
-                        <Text style={styles.headerTitle}>New & Hot</Text>
-                        <Pressable style={styles.searchButton}>
+            <Animated.View style={[newStyles.header, headerAnimatedStyle]}>
+                <View style={newStyles.headerContent}>
+                    <Text style={newStyles.headerTitle}>New & Hot</Text>
+                    <View style={newStyles.headerRight}>
+                        <Pressable>
+                            <Ionicons name="download-outline" size={24} color="#fff" />
+                        </Pressable>
+                        <Pressable>
                             <Ionicons name="search" size={24} color="#fff" />
                         </Pressable>
                     </View>
-                </BlurView>
+                </View>
             </Animated.View>
 
-            <RNScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.categoryTabs}
-            >
-                {TAB_OPTIONS.map(renderTab)}
-            </RNScrollView>
-
-            <View style={styles.comingSoonList}>
-                {COMING_SOON_DATA.map(renderComingSoonItem)}
-            </View>
+            <ScrollView>
+                <View style={newStyles.categoryTabs}>
+                    {TAB_OPTIONS.map(renderTab)}
+                </View>
+                <View style={newStyles.comingSoonList}>
+                    {COMING_SOON_DATA.map(renderComingSoonItem)}
+                </View>
+            </ScrollView>
         </View>
     );
 }
