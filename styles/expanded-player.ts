@@ -52,6 +52,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 8,
+        color: '#fff'
     },
     metaInfo: {
         flexDirection: 'row',
@@ -84,7 +85,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         borderRadius: 4,
     },
     buttonContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         gap: 12,
         marginBottom: 16,
     },
@@ -94,7 +95,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 4,
         gap: 8,
     },
@@ -109,7 +110,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 4,
         gap: 8,
     },

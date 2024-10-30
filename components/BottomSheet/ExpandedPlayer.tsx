@@ -45,7 +45,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     <Video
                         ref={videoRef}
                         style={styles.video}
-                        source={{ uri: movieData?.videoUrl ?? 'https://v.redd.it/5kgr2cel4omc1/DASH_1080.mp4?source=fallback' }}
+                        source={{ uri: movieData?.videoUrl ?? 'https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4' }}
                         useNativeControls={false}
                         resizeMode={ResizeMode.COVER}
                         isLooping
@@ -91,7 +91,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         </Pressable>
 
                         <Pressable style={styles.downloadButton}>
-                            <Ionicons name="download" size={24} color="white" />
+                            <Ionicons name="download" size={20} color="white" />
                             <ThemedText style={styles.downloadButtonText}>Download</ThemedText>
                         </Pressable>
                     </View>
