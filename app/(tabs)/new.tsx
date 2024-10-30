@@ -22,6 +22,7 @@ interface ComingSoonItem {
     imageUrl: string;
     description: string;
     rating: string;
+    logo: string;
 }
 
 const COMING_SOON_DATA: ComingSoonItem[] = [
@@ -31,7 +32,26 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         date: 'NOV 15',
         imageUrl: 'https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABe2bvw9phUMK1Q7bwrtu1vIHZuqJnpH5MZOlIXePqKZay4zRFAo2NcKsYckFB4Q-uDPaSlpGDN57Q4gHJyW-LAiOQonOP9_m2BwBC36YzfDw9OGC-aFb7iUtk3hxGrx1wDA9MwM9olUNXK9Q_54Gaq0IPH1FelfhOdCOeVHIBNaqrO714jryhoRPT277og-tzWGzFEHA90tU5wSUDEHTePFNkuE8nviW3ba2yRXNrsFt3bZvPyuwoPYTfurBZ3OLO-WA9G3uZN5KieZs71cao2XUVzk5a8c6-yX3ILag1px5JJEdUWMpcevyzu7oJHI0leNZDwFhnHno1rrVhuGt0g0nbe21-3SicR3nBT3typIySugKkKvbs8Yei5HjggkFgmNCAEK13IGAhs_vvszZOpy9KUmiq4wuDkkkZgChcwLb000hXnOUHbnQeg.jpg?r=bfd',
         description: 'Jake Paul battles Mike Tyson as they headline this must-see boxing mega-event streaming live in five languages from AT&T Stadium in Arlington, Texas.',
-        rating: 'TV-14'
+        rating: 'TV-14',
+        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABYQCLVhhcZ-wUcItP7QigVHhCd20AFvyssK-HBBWE4L9lSKfFfHJMA1PkRduUYlI_zLFswIDz9cPV5W9O0OXHhhhB2vSp0fKUDuTF0L8cNkjvkZouHWT5z1GaPjrK8lEjfmZ7lr3WYkp8wJ7DRftFJDYTYc68XCtomtoCUuX3KJggBDxu-XsZw.png?r=ea7'
+    },
+    {
+        id: '2',
+        title: 'Jake Paul vs. Mike Tyson',
+        date: 'NOV 15',
+        imageUrl: 'https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABe2bvw9phUMK1Q7bwrtu1vIHZuqJnpH5MZOlIXePqKZay4zRFAo2NcKsYckFB4Q-uDPaSlpGDN57Q4gHJyW-LAiOQonOP9_m2BwBC36YzfDw9OGC-aFb7iUtk3hxGrx1wDA9MwM9olUNXK9Q_54Gaq0IPH1FelfhOdCOeVHIBNaqrO714jryhoRPT277og-tzWGzFEHA90tU5wSUDEHTePFNkuE8nviW3ba2yRXNrsFt3bZvPyuwoPYTfurBZ3OLO-WA9G3uZN5KieZs71cao2XUVzk5a8c6-yX3ILag1px5JJEdUWMpcevyzu7oJHI0leNZDwFhnHno1rrVhuGt0g0nbe21-3SicR3nBT3typIySugKkKvbs8Yei5HjggkFgmNCAEK13IGAhs_vvszZOpy9KUmiq4wuDkkkZgChcwLb000hXnOUHbnQeg.jpg?r=bfd',
+        description: 'Jake Paul battles Mike Tyson as they headline this must-see boxing mega-event streaming live in five languages from AT&T Stadium in Arlington, Texas.',
+        rating: 'TV-14',
+        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABYQCLVhhcZ-wUcItP7QigVHhCd20AFvyssK-HBBWE4L9lSKfFfHJMA1PkRduUYlI_zLFswIDz9cPV5W9O0OXHhhhB2vSp0fKUDuTF0L8cNkjvkZouHWT5z1GaPjrK8lEjfmZ7lr3WYkp8wJ7DRftFJDYTYc68XCtomtoCUuX3KJggBDxu-XsZw.png?r=ea7'
+    },
+    {
+        id: '3',
+        title: 'Jake Paul vs. Mike Tyson',
+        date: 'NOV 15',
+        imageUrl: 'https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABe2bvw9phUMK1Q7bwrtu1vIHZuqJnpH5MZOlIXePqKZay4zRFAo2NcKsYckFB4Q-uDPaSlpGDN57Q4gHJyW-LAiOQonOP9_m2BwBC36YzfDw9OGC-aFb7iUtk3hxGrx1wDA9MwM9olUNXK9Q_54Gaq0IPH1FelfhOdCOeVHIBNaqrO714jryhoRPT277og-tzWGzFEHA90tU5wSUDEHTePFNkuE8nviW3ba2yRXNrsFt3bZvPyuwoPYTfurBZ3OLO-WA9G3uZN5KieZs71cao2XUVzk5a8c6-yX3ILag1px5JJEdUWMpcevyzu7oJHI0leNZDwFhnHno1rrVhuGt0g0nbe21-3SicR3nBT3typIySugKkKvbs8Yei5HjggkFgmNCAEK13IGAhs_vvszZOpy9KUmiq4wuDkkkZgChcwLb000hXnOUHbnQeg.jpg?r=bfd',
+        description: 'Jake Paul battles Mike Tyson as they headline this must-see boxing mega-event streaming live in five languages from AT&T Stadium in Arlington, Texas.',
+        rating: 'TV-14',
+        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABYQCLVhhcZ-wUcItP7QigVHhCd20AFvyssK-HBBWE4L9lSKfFfHJMA1PkRduUYlI_zLFswIDz9cPV5W9O0OXHhhhB2vSp0fKUDuTF0L8cNkjvkZouHWT5z1GaPjrK8lEjfmZ7lr3WYkp8wJ7DRftFJDYTYc68XCtomtoCUuX3KJggBDxu-XsZw.png?r=ea7'
     },
     // Add more items...
 ];
@@ -80,11 +100,24 @@ export default function NewAndHotScreen() {
             <View style={newStyles.contentContainer}>
                 <View style={newStyles.previewCard}>
                     <Image source={{ uri: item.imageUrl }} style={newStyles.previewImage} />
-                    <View style={newStyles.liveTag}>
-                        <Text style={newStyles.liveText}>Live</Text>
-                        <Text style={newStyles.dateText}>11/15</Text>
+
+                </View>
+
+
+                <View style={newStyles.featuredContainer}>
+                    <Image source={{ uri: item.logo }} style={newStyles.featuredLogo} />
+                    <View style={newStyles.actionButtons}>
+                        <Pressable style={newStyles.actionButton}>
+                            <Ionicons name="notifications-outline" size={24} color="#fff" />
+                            <Text style={newStyles.actionButtonText}>Remind Me</Text>
+                        </Pressable>
+                        <Pressable style={newStyles.actionButton}>
+                            <Ionicons name="information-circle-outline" size={24} color="#fff" />
+                            <Text style={newStyles.actionButtonText}>Info</Text>
+                        </Pressable>
                     </View>
                 </View>
+
                 <View style={newStyles.titleContainer}>
                     <Text style={newStyles.netflixTag}>N SPECIAL</Text>
                     <Text style={newStyles.title}>{item.title}</Text>
@@ -104,16 +137,7 @@ export default function NewAndHotScreen() {
                         <Text style={newStyles.tag}>TV-14</Text>
                     </View>
                 </View>
-                <View style={newStyles.actionButtons}>
-                    <Pressable style={newStyles.actionButton}>
-                        <Ionicons name="notifications-outline" size={24} color="#fff" />
-                        <Text style={newStyles.actionButtonText}>Remind Me</Text>
-                    </Pressable>
-                    <Pressable style={newStyles.actionButton}>
-                        <Ionicons name="information-circle-outline" size={24} color="#fff" />
-                        <Text style={newStyles.actionButtonText}>Info</Text>
-                    </Pressable>
-                </View>
+
             </View>
         </View>
     );

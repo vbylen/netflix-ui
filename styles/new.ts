@@ -100,23 +100,6 @@ export const newStyles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
-    liveTag: {
-        position: 'absolute',
-        bottom: 12,
-        left: 12,
-        backgroundColor: '#E50914',
-        paddingHorizontal: 8,
-        paddingVertical: 2,
-        borderRadius: 4,
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 4,
-    },
-    liveText: {
-        color: '#fff',
-        fontSize: 12,
-        fontWeight: '600',
-    },
     dateText: {
         color: '#fff',
         fontSize: 12,
@@ -124,6 +107,16 @@ export const newStyles = StyleSheet.create({
     },
     titleContainer: {
         paddingTop: 8,
+    },
+    featuredLogo: {
+        width: 150,
+        height: 30,
+    },
+    featuredContainer: {
+        paddingTop: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     netflixTag: {
         color: '#E50914',
