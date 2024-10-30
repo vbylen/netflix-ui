@@ -48,8 +48,8 @@ export default function TabLayout() {
         headerShown: false,
         tabBarBackground: () => (
           <BlurView
-            tint="systemMaterialDark"
-            intensity={99}
+            tint="systemUltraThinMaterialDark"
+            intensity={100}
             style={StyleSheet.absoluteFill}
           />
         ),
