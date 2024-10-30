@@ -8,7 +8,7 @@ export const newStyles = StyleSheet.create({
         backgroundColor: '#000',
     },
     header: {
-        position: 'absolute',
+        // position: 'absolute',
         left: 0,
         right: 0,
         zIndex: 100,

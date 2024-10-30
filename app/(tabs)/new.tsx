@@ -14,6 +14,7 @@ import Animated, {
     useSharedValue,
     interpolate,
 } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface ComingSoonItem {
     id: string;
@@ -86,9 +87,6 @@ export default function NewAndHotScreen() {
         },
     });
 
-    const headerAnimatedStyle = useAnimatedStyle(() => ({
-        opacity: interpolate(scrollY.value, [0, 100], [1, 0.9])
-    }));
 
     const renderComingSoonItem = (item: ComingSoonItem) => (
         <View key={item.id} style={newStyles.comingSoonItem}>
@@ -164,29 +162,32 @@ export default function NewAndHotScreen() {
     return (
         <View style={newStyles.container}>
             <StatusBar style="light" />
-
-            <Animated.View style={[newStyles.header, headerAnimatedStyle]}>
-                <View style={newStyles.headerContent}>
-                    <Text style={newStyles.headerTitle}>New & Hot</Text>
-                    <View style={newStyles.headerRight}>
-                        <Pressable>
-                            <Ionicons name="download-outline" size={24} color="#fff" />
-                        </Pressable>
-                        <Pressable>
-                            <Ionicons name="search" size={24} color="#fff" />
-                        </Pressable>
+            <SafeAreaView>
+                <View style={[newStyles.header]}>
+                    <View style={newStyles.headerContent}>
+                        <Text style={newStyles.headerTitle}>New & Hot</Text>
+                        <View style={newStyles.headerRight}>
+                            <Pressable>
+                                <Ionicons name="download-outline" size={24} color="#fff" />
+                            </Pressable>
+                            <Pressable>
+                                <Ionicons name="search" size={24} color="#fff" />
+                            </Pressable>
+                        </View>
+                    </View>
+                    <View style={newStyles.categoryTabs}>
+                        {TAB_OPTIONS.map(renderTab)}
                     </View>
                 </View>
-            </Animated.View>
 
-            <ScrollView>
-                <View style={newStyles.categoryTabs}>
-                    {TAB_OPTIONS.map(renderTab)}
-                </View>
-                <View style={newStyles.comingSoonList}>
-                    {COMING_SOON_DATA.map(renderComingSoonItem)}
-                </View>
-            </ScrollView>
+                <ScrollView>
+
+                    <View style={newStyles.comingSoonList}>
+                        {COMING_SOON_DATA.map(renderComingSoonItem)}
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+
         </View>
     );
 }
