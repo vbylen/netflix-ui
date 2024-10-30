@@ -12,7 +12,9 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   interpolate,
+  withSpring,
 } from 'react-native-reanimated';
+import { DeviceMotion } from 'expo-sensors';
 
 interface Movie {
   id: string;
@@ -86,9 +88,35 @@ export default function HomeScreen() {
       [0, 90],
       'clamp'
     );
-
     return {
       intensity,
+    };
+  });
+
+  const tiltX = useSharedValue(0);
+  const tiltY = useSharedValue(0);
+
+  React.useEffect(() => {
+    const subscription = DeviceMotion.addListener((data) => {
+      // Adjust sensitivity by multiplying the values
+      tiltX.value = withSpring(data.rotation.gamma * 10);
+      tiltY.value = withSpring(data.rotation.beta * 10);
+    });
+
+    DeviceMotion.setUpdateInterval(16); // 60fps
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  const featuredCardStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { perspective: 1000 },
+        { rotateX: `${tiltY.value}deg` },
+        { rotateY: `${tiltX.value}deg` },
+      ],
     };
   });
 
@@ -136,7 +164,7 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollViewContent}
       >
         <View style={[styles.featuredContent, { marginTop: insets.top + 100 }]}>
-          <View style={styles.featuredImageContainer}>
+          <Animated.View style={[styles.featuredImageContainer, featuredCardStyle]}>
             <Image
               source={{ uri: FEATURED_MOVIE.thumbnail }}
               style={styles.featuredImage}
@@ -145,7 +173,7 @@ export default function HomeScreen() {
               colors={['transparent', 'rgba(0,0,0,0.8)']}
               style={styles.featuredGradient}
             />
-          </View>
+          </Animated.View>
           <View style={styles.featuredOverlay}>
             <View style={styles.featuredCategories}>
               <Text style={styles.categoriesText}>

@@ -80,11 +80,21 @@ export const styles = StyleSheet.create({
         borderColor: 'rgba(255, 255, 255, 0.2)',
         borderRadius: 8,
         overflow: 'hidden',
+        backfaceVisibility: 'hidden',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     featuredImage: {
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
+        backfaceVisibility: 'hidden',
     },
     featuredGradient: {
         position: 'absolute',
@@ -96,12 +106,23 @@ export const styles = StyleSheet.create({
     featuredOverlay: {
         position: 'absolute',
         bottom: 0,
-        left: 16,
-        right: 16,
+        left: 0,
+        right: 0,
         paddingBottom: 16,
+        paddingHorizontal: 16,
+        zIndex: 2,
+    },
+    overlayGradient: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '200%',
+        zIndex: -1,
     },
     featuredCategories: {
         marginBottom: 16,
+        paddingHorizontal: 16,
     },
     categoriesText: {
         color: '#fff',
@@ -114,6 +135,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         gap: 16,
         marginHorizontal: 16,
+        paddingHorizontal: 16,
     },
     playButton: {
         flexDirection: 'row',
