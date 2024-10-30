@@ -31,7 +31,6 @@ export function ExpandedPlayer({ scrollComponent }: ExpandedPlayerProps) {
             end={{ x: 1, y: 0 }}
         >
 
-
             <ScrollComponentToUse
                 style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
