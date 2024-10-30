@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   stackContainer: {
     flex: 1,
     overflow: 'hidden',
-    borderRadius: 50,
+    borderRadius: 5,
   },
 });
 
