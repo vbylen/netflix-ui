@@ -34,7 +34,7 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         imageUrl: 'https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABe2bvw9phUMK1Q7bwrtu1vIHZuqJnpH5MZOlIXePqKZay4zRFAo2NcKsYckFB4Q-uDPaSlpGDN57Q4gHJyW-LAiOQonOP9_m2BwBC36YzfDw9OGC-aFb7iUtk3hxGrx1wDA9MwM9olUNXK9Q_54Gaq0IPH1FelfhOdCOeVHIBNaqrO714jryhoRPT277og-tzWGzFEHA90tU5wSUDEHTePFNkuE8nviW3ba2yRXNrsFt3bZvPyuwoPYTfurBZ3OLO-WA9G3uZN5KieZs71cao2XUVzk5a8c6-yX3ILag1px5JJEdUWMpcevyzu7oJHI0leNZDwFhnHno1rrVhuGt0g0nbe21-3SicR3nBT3typIySugKkKvbs8Yei5HjggkFgmNCAEK13IGAhs_vvszZOpy9KUmiq4wuDkkkZgChcwLb000hXnOUHbnQeg.jpg?r=bfd',
         description: 'Jake Paul battles Mike Tyson as they headline this must-see boxing mega-event streaming live in five languages from AT&T Stadium in Arlington, Texas.',
         rating: 'TV-14',
-        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABYQCLVhhcZ-wUcItP7QigVHhCd20AFvyssK-HBBWE4L9lSKfFfHJMA1PkRduUYlI_zLFswIDz9cPV5W9O0OXHhhhB2vSp0fKUDuTF0L8cNkjvkZouHWT5z1GaPjrK8lEjfmZ7lr3WYkp8wJ7DRftFJDYTYc68XCtomtoCUuX3KJggBDxu-XsZw.png?r=ea7'
+        logo: 'https://i.imgur.com/u5gJO8v.png'
     },
 
     {
@@ -66,7 +66,7 @@ const TAB_OPTIONS = [
     },
     {
         id: 'everyone-watching',
-        icon: 'https://img.icons8.com/?size=96&id=97192&format=png',
+        icon: 'https://img.icons8.com/?size=96&id=DAcHRPKIfSSq&format=png',
         label: "Everyone's Watching"
     },
     {
@@ -104,7 +104,12 @@ export default function NewAndHotScreen() {
 
 
                 <View style={newStyles.featuredContainer}>
-                    <Image source={{ uri: item.logo }} style={newStyles.featuredLogo} />
+
+                    <View style={{ gap: 6 }}>
+                        <Image source={{ uri: item.logo }} style={newStyles.featuredLogo} />
+                        <Text style={newStyles.eventDate}>Live Event Coming November 15 at 8:00 PM EST</Text>
+
+                    </View>
                     <View style={newStyles.actionButtons}>
                         <Pressable style={newStyles.actionButton}>
                             <Ionicons name="notifications-outline" size={24} color="#fff" />
@@ -118,9 +123,14 @@ export default function NewAndHotScreen() {
                 </View>
 
                 <View style={newStyles.titleContainer}>
-                    <Text style={newStyles.netflixTag}>N SPECIAL</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6, marginBottom: 2 }}>
+                        <Image
+                            source={{ uri: 'https://loodibee.com/wp-content/uploads/Netflix-N-Symbol-logo.png' }}
+                            style={{ width: 20, height: 20, top: -4, position: 'absolute', left: 0 }}
+                        />
+                        <Text style={newStyles.netflixTag}>SPECIAL</Text>
+                    </View>
                     <Text style={newStyles.title}>{item.title}</Text>
-                    <Text style={newStyles.eventDate}>Live Event Coming November 15 at 8:00 PM EST</Text>
                     <Text style={newStyles.description}>{item.description}</Text>
                     <View style={newStyles.tags}>
                         <Text style={newStyles.tag}>Rousing</Text>

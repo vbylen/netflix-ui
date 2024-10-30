@@ -37,14 +37,14 @@ export const newStyles = StyleSheet.create({
     categoryTabs: {
         flexDirection: 'row',
         paddingHorizontal: 12,
-        paddingVertical: 8,
+        paddingVertical: 6,
         gap: 8,
     },
     categoryTab: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 16,
-        paddingVertical: 8,
+        paddingVertical: 6,
         borderRadius: 20,
         backgroundColor: 'transparent',
     },
@@ -52,8 +52,8 @@ export const newStyles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     tabIcon: {
-        width: 16,
-        height: 16,
+        width: 28,
+        height: 22,
         marginRight: 6,
     },
     categoryTabText: {
@@ -93,6 +93,7 @@ export const newStyles = StyleSheet.create({
     },
     previewCard: {
         width: '100%',
+        height: 210,
         aspectRatio: 16 / 9,
         marginBottom: 12,
         borderRadius: 8,
@@ -125,8 +126,8 @@ export const newStyles = StyleSheet.create({
         marginRight: 6,
     },
     featuredLogo: {
-        width: 150,
-        height: 30,
+        width: 120,
+        height: 64,
     },
     featuredContainer: {
         paddingTop: 8,
@@ -135,10 +136,12 @@ export const newStyles = StyleSheet.create({
         alignItems: 'center',
     },
     netflixTag: {
-        color: '#E50914',
-        fontSize: 12,
+        color: '#ffffffa9',
+        fontSize: 8,
+        letterSpacing: 1.5,
         fontWeight: 'bold',
         marginBottom: 4,
+        paddingLeft: 20
     },
     title: {
         color: '#fff',
