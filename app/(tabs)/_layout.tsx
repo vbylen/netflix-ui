@@ -5,20 +5,9 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { BlurView } from 'expo-blur';
 import { Platform, StyleSheet } from 'react-native';
-import { SymbolView } from 'expo-symbols';
 
 // Helper component for cross-platform icons
-function TabIcon({ sfSymbol, ionIcon, color }: { sfSymbol: string; ionIcon: string; color: string }) {
-  // if (Platform.OS === 'ios') {
-  //   return (
-  //     <SymbolView
-  //       name={sfSymbol}
-  //       size={24}
-  //       tintColor={color}
-  //       fallback={<TabBarIcon name={ionIcon} color={color} />}
-  //     />
-  //   );
-  // }
+function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'apps-sharp' | 'person'; color: string }) {
   return <TabBarIcon name={ionIcon} color={color} />;
 }
 
@@ -58,7 +47,6 @@ export default function TabLayout() {
           title: 'Home',
           tabBarIcon: ({ color }) => (
             <TabIcon
-              sfSymbol="music.note.house"
               ionIcon="home-sharp"
               color={color}
             />
@@ -71,7 +59,6 @@ export default function TabLayout() {
           title: 'New',
           tabBarIcon: ({ color }) => (
             <TabIcon
-              sfSymbol="square.grid.2x2.fill"
               ionIcon="apps-sharp"
               color={color}
             />
@@ -79,39 +66,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="radio"
+        name="profile"
         options={{
-          title: 'Radio',
+          title: 'My Netflix',
           tabBarIcon: ({ color }) => (
             <TabIcon
-              sfSymbol="dot.radiowaves.left.and.right"
-              ionIcon="radio-outline"
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="library"
-        options={{
-          title: 'Library',
-          tabBarIcon: ({ color }) => (
-            <TabIcon
-              sfSymbol="music.note.list"
-              ionIcon="musical-notes"
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="search"
-        options={{
-          title: 'Search',
-          tabBarIcon: ({ color }) => (
-            <TabIcon
-              sfSymbol="magnifyingglass"
-              ionIcon="search"
+              ionIcon="person"
               color={color}
             />
           ),

@@ -12,6 +12,8 @@ import { AudioProvider } from '@/contexts/AudioContext';
 import { MiniPlayer } from '@/components/BottomSheet/MiniPlayer';
 import { useRouter } from 'expo-router';
 import { useAudio } from '@/contexts/AudioContext';
+import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 function AnimatedStack() {
   const { scale } = useRootScale();

@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function NewAndHotScreen() {
+export default function ProfileScreen() {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>New & Hot</Text>
+            <Text style={styles.text}>My Netflix</Text>
         </View>
     );
 }
