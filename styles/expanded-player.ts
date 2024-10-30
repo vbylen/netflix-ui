@@ -33,7 +33,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         height: 60,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        padding: 16,
+        // padding: 16,
     },
     muteOverlay: {
         position: 'absolute',
@@ -41,10 +41,24 @@ export const expandedPlayerStyles = StyleSheet.create({
         right: 16,
     },
     closeButton: {
-        padding: 8,
+        // padding: 8,
+        backgroundColor: '#000000bb',
+        width: 36,
+        height: 36,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        right: 10,
+        top: 10
     },
     soundButton: {
-        padding: 8,
+        backgroundColor: '#000000bb',
+        width: 28,
+        height: 28,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        // marginRight: 6,
     },
     contentContainer: {
         padding: 16,

@@ -84,7 +84,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         style={styles.closeButton}
                         onPress={() => {/* handle close */ }}
                     >
-                        <Ionicons name="close" size={24} color="white" />
+                        <Ionicons name="close-outline" size={26} color="white" />
                     </Pressable>
                 </View>
                 <View style={styles.muteOverlay}>
@@ -94,7 +94,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     >
                         <Ionicons
                             name={isMuted ? "volume-mute" : "volume-medium"}
-                            size={24}
+                            size={18}
                             color="white"
                         />
                     </Pressable>
