@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, useColorScheme } from 'react-native';
 import { useEffect, useCallback, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ThemedView } from '@/components/ThemedView';
@@ -16,6 +16,7 @@ import Animated, {
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import { movies } from '@/data/movies.json';
 import * as Haptics from 'expo-haptics';
+import { BlurView } from 'expo-blur';
 
 const SCALE_FACTOR = 0.83;
 const DRAG_THRESHOLD = Math.min(Dimensions.get('window').height * 0.20, 150);
@@ -37,6 +38,8 @@ export default function MusicScreen() {
     const initialGestureY = useSharedValue(0);
     const isHorizontalGesture = useSharedValue(false);
     const isScrolling = useSharedValue(false);
+    const colorScheme = useColorScheme();
+    const blurIntensity = useSharedValue(20);
 
     const numericId = typeof id === 'string' ? parseInt(id, 10) : Array.isArray(id) ? parseInt(id[0], 10) : 0;
     const movie = movies.find(s => s.id === numericId) || movies[0];
@@ -101,6 +104,7 @@ export default function MusicScreen() {
             if (ENABLE_HORIZONTAL_DRAG_CLOSE && isHorizontalGesture.value) {
                 translateX.value = dx;
                 translateY.value = dy;
+                blurIntensity.value = Math.max(0, 20 - (Math.abs(dx) / 10));
 
                 if (Math.abs(dx) / 300 > 0.2) {
                     statusBarStyle.value = 'dark';
@@ -110,6 +114,7 @@ export default function MusicScreen() {
             }
             else if (scrollOffset.value <= 0 && isDragging.value) {
                 translateY.value = Math.max(0, dy);
+                blurIntensity.value = Math.max(0, 20 - (dy / 20));
 
                 if (dy / 600 > 0.5) {
                     statusBarStyle.value = 'dark';
@@ -219,6 +224,10 @@ export default function MusicScreen() {
             { translateX: translateX.value }
         ],
         opacity: withSpring(1),
+    }));
+
+    const blurStyle = useAnimatedStyle(() => ({
+        intensity: blurIntensity.value,
     }));
 
     useEffect(() => {

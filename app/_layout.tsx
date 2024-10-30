@@ -1,7 +1,7 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, useColorScheme, View } from 'react-native';
 import { RootScaleProvider } from '@/contexts/RootScaleContext';
 import { useRootScale } from '@/contexts/RootScaleContext';
@@ -14,12 +14,14 @@ import { useRouter } from 'expo-router';
 import { useAudio } from '@/contexts/AudioContext';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
 
 function AnimatedStack() {
   const { scale } = useRootScale();
   const router = useRouter();
   const { currentSong, isPlaying, togglePlayPause } = useAudio();
-
+  const [isModalActive, setIsModalActive] = useState(false);
+  const colorScheme = useColorScheme();
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -33,6 +35,7 @@ function AnimatedStack() {
 
   return (
     <View style={{ flex: 1 }}>
+
       <Animated.View style={[styles.stackContainer, animatedStyle]}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -43,8 +46,11 @@ function AnimatedStack() {
               headerShown: false,
               contentStyle: {
                 backgroundColor: 'transparent',
-                // marginTop: 0,
               },
+            }}
+            listeners={{
+              focus: () => setIsModalActive(true),
+              beforeRemove: () => setIsModalActive(false),
             }}
           />
           <Stack.Screen name="+not-found" />
@@ -60,7 +66,13 @@ function AnimatedStack() {
           />
         )}
 
-
+        {isModalActive && (
+          <BlurView
+            intensity={100}
+            style={StyleSheet.absoluteFill}
+            tint={colorScheme === 'dark' ? 'dark' : 'light'}
+          />
+        )}
       </Animated.View>
     </View>
   );

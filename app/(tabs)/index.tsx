@@ -76,7 +76,7 @@ export default function HomeScreen() {
 
       <BlurView
         tint="systemUltraThinMaterialDark"
-        intensity={100}
+        intensity={0}
         style={[styles.header, { paddingTop: insets.top }]}
       >
         <View style={styles.headerTitleContainer}>
