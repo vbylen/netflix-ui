@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Platform, StyleSheet, Image, View } from 'react-native';
+import { BlurView } from 'expo-blur';
 
 // Helper component for cross-platform icons
 function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'play-square' | 'person'; color: string }) {
@@ -45,9 +46,16 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#FFFFFF',
         tabBarInactiveTintColor: '#ffffff3f',
         headerShown: false,
+        tabBarBackground: () => (
+          <BlurView
+            tint="dark"
+            intensity={95}
+            style={StyleSheet.absoluteFill}
+          />
+        ),
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: 'rgba(20, 20, 20, 0.95)',
+          backgroundColor: 'transparent',
           borderTopWidth: 0,
           elevation: 0,
           height: 94,

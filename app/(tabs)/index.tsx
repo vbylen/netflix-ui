@@ -31,22 +31,25 @@ const FEATURED_MOVIE = {
 
 
 
-const renderContentItem = ({ item }: { item: Movie }) => (
+const renderContentItem = ({ item, router }: { item: Movie; router: any }) => (
   <Pressable
-    onPress={() => router.push(`/movie/${item.id}`)}
+    onPress={() => router.push({
+      pathname: '/movie/[id]',
+      params: { id: item.id }
+    })}
     style={styles.contentItem}
   >
     <Image source={{ uri: item.imageUrl }} style={styles.thumbnail} />
   </Pressable>
 );
 
-const renderMovieRow = ({ rowTitle, movies }: MovieRow) => (
+const renderMovieRow = ({ rowTitle, movies }: MovieRow, router: any) => (
   <View key={rowTitle} style={styles.movieRow}>
     <Text style={styles.sectionTitle}>{rowTitle}</Text>
     <FlatList
       horizontal
       data={movies}
-      renderItem={renderContentItem}
+      renderItem={(props) => renderContentItem({ ...props, router })}
       keyExtractor={item => item.id}
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.contentList}
@@ -89,28 +92,36 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.featuredContent}>
-            <Image
-              source={{ uri: FEATURED_MOVIE.thumbnail }}
-              style={styles.featuredImage}
-            />
-            <View style={styles.featuredCategories}>
-              <Text style={styles.categoriesText}>
-                {FEATURED_MOVIE.categories.join(' • ')}
-              </Text>
+            <View style={styles.featuredImageContainer}>
+              <Image
+                source={{ uri: FEATURED_MOVIE.thumbnail }}
+                style={styles.featuredImage}
+              />
+              <LinearGradient
+                colors={['transparent', 'rgba(0,0,0,0.8)']}
+                style={styles.featuredGradient}
+              />
             </View>
-            <View style={styles.featuredButtons}>
-              <Pressable style={styles.playButton}>
-                <Ionicons name="play" size={24} color="#000" />
-                <Text style={styles.playButtonText}>Play</Text>
-              </Pressable>
-              <Pressable style={styles.myListButton}>
-                <Ionicons name="add" size={24} color="#fff" />
-                <Text style={styles.myListButtonText}>My List</Text>
-              </Pressable>
+            <View style={styles.featuredOverlay}>
+              <View style={styles.featuredCategories}>
+                <Text style={styles.categoriesText}>
+                  {FEATURED_MOVIE.categories.join(' • ')}
+                </Text>
+              </View>
+              <View style={styles.featuredButtons}>
+                <Pressable style={styles.playButton}>
+                  <Ionicons name="play" size={24} color="#000" />
+                  <Text style={styles.playButtonText}>Play</Text>
+                </Pressable>
+                <Pressable style={styles.myListButton}>
+                  <Ionicons name="add" size={24} color="#fff" />
+                  <Text style={styles.myListButtonText}>My List</Text>
+                </Pressable>
+              </View>
             </View>
           </View>
 
-          {movies.map(row => renderMovieRow(row))}
+          {movies.map(row => renderMovieRow(row, router))}
         </ScrollView>
       </LinearGradient>
     </View>
@@ -171,21 +182,39 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 480,
     marginBottom: 24,
-    paddingHorizontal: 16,
     position: 'relative',
+    paddingHorizontal: 16,
+  },
+  featuredImageContainer: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    borderWidth: 0.5,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   featuredImage: {
     width: '100%',
     height: '100%',
-    resizeMode: 'contain',
-    borderRadius: 12,
+    resizeMode: 'cover',
+  },
+  featuredGradient: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '40%',
+  },
+  featuredOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 16,
+    right: 16,
+    paddingBottom: 16,
   },
   featuredCategories: {
-    position: 'absolute',
-    bottom: 100,
-    left: 32,
-    right: 32,
-    alignItems: 'center',
+    marginBottom: 16,
   },
   categoriesText: {
     color: '#fff',
@@ -197,10 +226,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 16,
-    position: 'absolute',
-    bottom: 24,
-    left: 32,
-    right: 32,
   },
   playButton: {
     flexDirection: 'row',
@@ -208,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingHorizontal: 24,
-    paddingVertical: 12,
+    paddingVertical: 8,
     borderRadius: 4,
     gap: 8,
     flex: 1,
@@ -224,7 +249,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(51, 51, 51, 0.9)',
     paddingHorizontal: 24,
-    paddingVertical: 12,
+    paddingVertical: 8,
     borderRadius: 4,
     gap: 8,
     flex: 1,
