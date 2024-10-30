@@ -80,15 +80,16 @@ export const newStyles = StyleSheet.create({
         paddingRight: 16,
     },
     dateMonth: {
-        color: '#fff',
+        color: '#ffffffcc',
         fontSize: 13,
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
     },
     dateDay: {
         color: '#fff',
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 25,
+        fontWeight: '800',
         lineHeight: 28,
+        marginTop: 4,
     },
     previewCard: {
         width: '100%',
@@ -106,8 +107,22 @@ export const newStyles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '600',
     },
-    titleContainer: {
-        paddingTop: 8,
+    activeTabContainer: {
+        paddingTop: 30,
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingLeft: 10,
+        marginBottom: 6,
+    },
+    activeTabTitle: {
+        color: '#fff',
+        fontSize: 19,
+        fontWeight: 'bold',
+    },
+    activeTabIcon: {
+        width: 24,
+        height: 24,
+        marginRight: 6,
     },
     featuredLogo: {
         width: 150,
