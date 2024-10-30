@@ -29,36 +29,7 @@ const FEATURED_MOVIE = {
   categories: ['Ominous', 'Chilling', 'Thriller', 'Serial Killer']
 };
 
-const TOP_PICKS = [
-  {
-    id: 'do-patti',
-    title: 'Do Patti',
-    type: 'movie' as const,
-    thumbnail: 'https://m.media-amazon.com/images/M/MV5BYjQwOTRhMjctNGU4ZS00OWM2LWIyYzUtNDQ4MjQ5MTY5NjY3XkEyXkFqcGdeQXVyMTY3ODkyNDkz._V1_.jpg',
-    categories: ['Thriller']
-  },
-  {
-    id: 'khel-khel-mein',
-    title: 'Khel Khel Mein',
-    type: 'movie' as const,
-    thumbnail: 'https://m.media-amazon.com/images/M/MV5BNjU5ZTY1ODMtMGY3OC00ZDg0LWE1ZjYtODk0ODc4MGI0ZDk4XkEyXkFqcGdeQXVyMTU0ODI1NTA2._V1_.jpg',
-    categories: ['Drama']
-  },
-  {
-    id: '1670',
-    title: '1670',
-    type: 'show' as const,
-    thumbnail: 'https://m.media-amazon.com/images/M/MV5BZGYwZjNkYTctYzNiYS00YjQzLTg4MTAtZDM3NzU3YTYxYzBkXkEyXkFqcGdeQXVyMTEwMTY3NDI@._V1_.jpg',
-    categories: ['Historical']
-  },
-  {
-    id: 'animal',
-    title: 'Animal',
-    type: 'movie' as const,
-    thumbnail: 'https://m.media-amazon.com/images/M/MV5BNGViM2M4NmUtMmNkNy00MTQ5LTk5MDYtNmNhODAzODkwOTJlXkEyXkFqcGdeQXVyMTY1NDY4NTIw._V1_.jpg',
-    categories: ['Action']
-  }
-];
+
 
 const renderContentItem = ({ item }: { item: Movie }) => (
   <Pressable
@@ -161,7 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    marginBottom: 16,
+    // marginBottom: 16,
   },
   headerTitle: {
     color: '#fff',
@@ -175,7 +146,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 16,
     marginBottom: 24,
-    marginTop: 12,
+    // marginTop: 12,
     gap: 24,
   },
   categoryTab: {
