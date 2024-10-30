@@ -1,3 +1,4 @@
+import React from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { StyleSheet, Dimensions } from 'react-native';
 import { useEffect, useCallback, useRef } from 'react';
@@ -81,7 +82,6 @@ export default function MusicScreen() {
 
             if (scrollOffset.value <= 0) {
                 isDragging.value = true;
-                translateY.value = 0;
             }
         })
         .onUpdate((event) => {
@@ -90,7 +90,6 @@ export default function MusicScreen() {
             const dy = event.translationY;
             const angle = calculateGestureAngle(dx, dy);
 
-            // Only check for horizontal gesture if enabled
             if (ENABLE_HORIZONTAL_DRAG_CLOSE && !isHorizontalGesture.value && !isScrolling.value) {
                 if (Math.abs(dx) > 10) {
                     if (angle < DIRECTION_LOCK_ANGLE) {
@@ -99,31 +98,20 @@ export default function MusicScreen() {
                 }
             }
 
-            // Handle horizontal gesture only if enabled
             if (ENABLE_HORIZONTAL_DRAG_CLOSE && isHorizontalGesture.value) {
                 translateX.value = dx;
                 translateY.value = dy;
 
-                const totalDistance = Math.sqrt(dx * dx + dy * dy);
-                const progress = Math.min(totalDistance / 300, 1);
-
-                const newScale = SCALE_FACTOR + (progress * (1 - SCALE_FACTOR));
-                runOnJS(handleScale)(newScale);
-
-                if (progress > 0.2) {
+                if (Math.abs(dx) / 300 > 0.2) {
                     statusBarStyle.value = 'dark';
                 } else {
                     statusBarStyle.value = 'light';
                 }
             }
-            // Handle vertical-only gesture
             else if (scrollOffset.value <= 0 && isDragging.value) {
                 translateY.value = Math.max(0, dy);
-                const progress = Math.min(dy / 600, 1);
-                const newScale = SCALE_FACTOR + (progress * (1 - SCALE_FACTOR));
-                runOnJS(handleScale)(newScale);
 
-                if (progress > 0.5) {
+                if (dy / 600 > 0.5) {
                     statusBarStyle.value = 'dark';
                 } else {
                     statusBarStyle.value = 'light';
@@ -134,7 +122,6 @@ export default function MusicScreen() {
             'worklet';
             isDragging.value = false;
 
-            // Handle horizontal gesture end only if enabled
             if (ENABLE_HORIZONTAL_DRAG_CLOSE && isHorizontalGesture.value) {
                 const dx = event.translationX;
                 const dy = event.translationY;
@@ -142,7 +129,6 @@ export default function MusicScreen() {
                 const shouldClose = totalDistance > HORIZONTAL_DRAG_THRESHOLD;
 
                 if (shouldClose) {
-                    // Calculate the exit direction based on the gesture
                     const exitX = dx * 2;
                     const exitY = dy * 2;
 
@@ -153,7 +139,6 @@ export default function MusicScreen() {
                     runOnJS(handleHapticFeedback)();
                     runOnJS(goBack)();
                 } else {
-                    // Spring back to original position
                     translateX.value = withSpring(0, {
                         damping: 15,
                         stiffness: 150,
@@ -165,7 +150,6 @@ export default function MusicScreen() {
                     runOnJS(handleScale)(SCALE_FACTOR);
                 }
             }
-            // Handle vertical gesture end
             else if (scrollOffset.value <= 0) {
                 const shouldClose = event.translationY > DRAG_THRESHOLD;
 
