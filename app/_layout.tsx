@@ -43,6 +43,7 @@ function AnimatedStack() {
               headerShown: false,
               contentStyle: {
                 backgroundColor: 'transparent',
+                // marginTop: 0,
               },
             }}
           />

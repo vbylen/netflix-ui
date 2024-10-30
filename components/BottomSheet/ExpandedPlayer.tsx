@@ -95,140 +95,18 @@ export function ExpandedPlayer({ scrollComponent }: ExpandedPlayerProps) {
 
     return (
         <LinearGradient
-            colors={colors}
-            style={[styles.rootContainer, { paddingTop: insets.top }]}
+            colors={['#1f1f1f', '#1f1f1f']}
+            style={[styles.rootContainer, { marginTop: insets.top }]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
         >
-            <ThemedView style={styles.dragHandleContainer}>
-                <ThemedView style={styles.dragHandle} />
-            </ThemedView>
+
 
             <ScrollComponentToUse
                 style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
             >
-                <ThemedView style={styles.container}>
-                    <ThemedView style={styles.artworkContainer}>
-                        <Image
-                            source={{ uri: currentSong?.artwork }}
-                            style={styles.artwork}
-                        />
-                    </ThemedView>
 
-                    <ThemedView style={styles.controls}>
-
-                        <ThemedView style={styles.titleContainer}>
-                            <ThemedView style={styles.titleRow}>
-                                <ThemedView style={styles.titleMain}>
-                                    <ThemedText type="title" style={styles.title}>
-                                        {currentSong?.title}
-                                    </ThemedText>
-                                    <ThemedText style={styles.artist}>
-                                        {currentSong?.artist}
-                                    </ThemedText>
-                                </ThemedView>
-                                <ThemedView style={styles.titleIcons}>
-                                    <Pressable style={styles.iconButton}>
-                                        <Ionicons name="star-outline" size={18} color="#fff" />
-                                    </Pressable>
-                                    <Pressable style={styles.iconButton}>
-                                        <Ionicons name="ellipsis-horizontal" size={18} color="#fff" />
-                                    </Pressable>
-                                </ThemedView>
-                            </ThemedView>
-
-                            <ThemedView style={styles.progressBar}>
-                                <ThemedView
-                                    style={[
-                                        styles.progress,
-                                        { width: `${progress}%` }
-                                    ]}
-                                />
-                            </ThemedView>
-
-                            <ThemedView style={styles.timeContainer}>
-                                <ThemedText style={styles.timeText}>
-                                    {formatTime(position)}
-                                </ThemedText>
-                                <ThemedText style={styles.timeText}>
-                                    -{formatTime(Math.max(0, duration - position))}
-                                </ThemedText>
-                            </ThemedView>
-
-
-
-                            <ThemedView style={styles.buttonContainer}>
-                                <Pressable style={styles.button} onPress={playPreviousSong}>
-                                    <Ionicons name="play-skip-back" size={35} color="#fff" />
-                                </Pressable>
-                                <Pressable style={[styles.button, styles.playButton]} onPress={togglePlayPause}>
-                                    <Ionicons name={isPlaying ? "pause" : "play"} size={45} color="#fff" />
-                                </Pressable>
-                                <Pressable style={styles.button} onPress={playNextSong}>
-                                    <Ionicons name="play-skip-forward" size={35} color="#fff" />
-                                </Pressable>
-                            </ThemedView>
-
-
-                        </ThemedView>
-
-
-
-
-
-
-                        <ThemedView>
-                            <ThemedView style={styles.volumeControl}>
-                                <Ionicons name="volume-off" size={24} color="#fff" />
-                                <ThemedView style={styles.volumeBar}>
-                                    <ThemedView style={styles.volumeProgress} />
-                                </ThemedView>
-                                <Ionicons name="volume-high" size={24} color="#fff" />
-                            </ThemedView>
-
-
-
-
-
-                            <ThemedView style={styles.extraControls}>
-                                <Pressable style={styles.extraControlButton}>
-                                    <Ionicons name="chatbubble-outline" size={24} color="#fff" />
-                                </Pressable>
-
-                                <Pressable style={styles.extraControlButton}>
-                                    <ThemedView style={styles.extraControlIcons}>
-                                        <Ionicons name="volume-off" size={26} color="#fff" marginRight={-6} />
-                                        <Ionicons name="bluetooth" size={24} color="#fff" />
-                                    </ThemedView>
-                                    <ThemedText style={styles.extraControlText}>Px8</ThemedText>
-                                </Pressable>
-
-                                <Pressable style={styles.extraControlButton}>
-                                    <Ionicons name="list-outline" size={24} color="#fff" />
-                                </Pressable>
-                            </ThemedView>
-                        </ThemedView>
-
-
-
-                    </ThemedView>
-
-                    {/* Add lyrics section after the controls */}
-                    <ThemedView style={styles.lyricsContainer}>
-                        {lyrics.map((line, index) => (
-                            <ThemedText
-                                key={index}
-                                style={[
-                                    styles.lyricsText,
-                                    line === "" && styles.lyricsSpacing
-                                ]}
-                            >
-                                {line}
-                            </ThemedText>
-                        ))}
-                    </ThemedView>
-                </ThemedView>
             </ScrollComponentToUse>
         </LinearGradient>
     );
@@ -239,17 +117,10 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         width: '100%',
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
-    dragHandle: {
-        width: 40,
-        height: 5,
-        backgroundColor: 'rgba(255, 255, 255, 0.445)',
-        borderRadius: 5,
-        alignSelf: 'center',
-        marginTop: 10,
-    },
+
     container: {
         flex: 1,
         alignItems: 'center',
