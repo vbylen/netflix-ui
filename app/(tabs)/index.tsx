@@ -65,7 +65,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <StatusBar style="light" />
       <LinearGradient
-        colors={['#004400', '#002200', '#000000']}
+        colors={['#1e311b', '#002200', '#000000']}
         locations={[0, 0.4, 0.8]}
         style={styles.gradient}
       >

@@ -48,8 +48,8 @@ export default function TabLayout() {
         headerShown: false,
         tabBarBackground: () => (
           <BlurView
-            tint="dark"
-            intensity={95}
+            tint="systemMaterialDark"
+            intensity={99}
             style={StyleSheet.absoluteFill}
           />
         ),
@@ -86,7 +86,7 @@ export default function TabLayout() {
           title: 'New & Hot',
           tabBarIcon: ({ color }) => (
             <TabIcon
-              ionIcon="play-square"
+              ionIcon="play"
               color={color}
             />
           ),
