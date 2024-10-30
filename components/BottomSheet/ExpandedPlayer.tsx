@@ -7,6 +7,7 @@ import { Video, ResizeMode } from 'expo-av';
 import { useEffect, useState, useRef } from 'react';
 import { expandedPlayerStyles as styles } from '@/styles/expanded-player';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import movies from '@/data/movies.json';
 
 interface MovieData {
     id?: string;
@@ -58,6 +59,8 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         >
                             <Ionicons name="close" size={24} color="white" />
                         </Pressable>
+                    </View>
+                    <View style={styles.muteOverlay}>
                         <Pressable
                             style={styles.soundButton}
                             onPress={() => setIsMuted(!isMuted)}
@@ -124,6 +127,20 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                             <Ionicons name="share-social" size={24} color="white" />
                             <ThemedText style={styles.actionButtonText}>Share</ThemedText>
                         </Pressable>
+                    </View>
+                </View>
+
+                <View style={styles.moreLikeThis}>
+                    <ThemedText style={styles.moreLikeThisTitle}>More Like This</ThemedText>
+                    <View style={styles.movieGrid}>
+                        {movies.movies[0].movies.slice(0, 6).map((movie, index) => (
+                            <View key={movie.id} style={styles.moviePoster}>
+                                <Image
+                                    source={{ uri: movie.imageUrl }}
+                                    style={{ width: '100%', height: '100%', borderRadius: 4 }}
+                                />
+                            </View>
+                        ))}
                     </View>
                 </View>
             </ScrollComponentToUse>

@@ -31,8 +31,13 @@ export const expandedPlayerStyles = StyleSheet.create({
         right: 0,
         height: 60,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         padding: 16,
+    },
+    muteOverlay: {
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
     },
     closeButton: {
         padding: 8,
@@ -155,5 +160,23 @@ export const expandedPlayerStyles = StyleSheet.create({
     actionButtonText: {
         fontSize: 12,
         color: '#fff',
+    },
+    moreLikeThis: {
+        padding: 16,
+    },
+    moreLikeThisTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 16,
+    },
+    movieGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 8,
+    },
+    moviePoster: {
+        width: '32%',
+        aspectRatio: 2 / 3,
+        borderRadius: 4,
     },
 });
