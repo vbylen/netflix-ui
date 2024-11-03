@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: width,
-        gap: 20,
+        gap: 4,
         paddingHorizontal: 20,
     },
     profileButton: {
@@ -187,11 +187,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '500',
         color: '#e5e5e5',
-        // marginTop: 12,
     },
     addProfileContainer: {
         width: width * (0.30 - 0.06),
-        // height: undefined,
         aspectRatio: 1,
         borderRadius: 6,
         borderWidth: 2,
@@ -201,9 +199,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     plusIcon: {
-        // fontSize: 44,
-        // color: '#ffffff',
-        // fontWeight: '200',
     },
     addProfileText: {
         fontSize: 18,
