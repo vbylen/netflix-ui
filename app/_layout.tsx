@@ -15,7 +15,7 @@ import { useAudio } from '@/contexts/AudioContext';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
-import { WhoIsWatching } from '@/components/WhoIsWatching';
+import { WhoIsWatching } from '../components/WhoIsWatching';
 
 function AnimatedStack() {
   const { scale } = useRootScale();

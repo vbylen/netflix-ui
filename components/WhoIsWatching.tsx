@@ -1,11 +1,11 @@
-import { View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
+import React from 'react';
+import { TouchableOpacity, StyleSheet, Dimensions, Image, StatusBar } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { useState } from 'react';
 import Animated, {
     useAnimatedStyle,
     withSpring,
     withTiming,
-    interpolate,
-    runOnJS,
 } from 'react-native-reanimated';
 import { ThemedText } from './ThemedText';
 
@@ -72,97 +72,140 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
     };
 
     return (
-        <View style={styles.container}>
-            <ThemedText style={styles.title}>Who's Watching?</ThemedText>
-
-            <Animated.View style={[styles.gridContainer, containerStyle]}>
-                {PROFILES.map((profile) => (
-                    <TouchableOpacity
-                        key={profile.id}
-                        onPress={() => handleProfileSelect(profile)}
-                        style={styles.profileButton}
-                    >
-                        <Animated.View
-                            style={[
-                                styles.profileContainer,
-                                selectedProfile?.id === profile.id && selectedProfileStyle,
-                            ]}
-                        >
-                            <Image
-                                source={{ uri: profile.avatar }}
-                                style={styles.avatar}
-                                contentFit="cover"
-                            />
-                            <ThemedText style={styles.profileName}>{profile.name}</ThemedText>
-                        </Animated.View>
-                    </TouchableOpacity>
-                ))}
-
-                <TouchableOpacity style={styles.profileButton}>
-                    <View style={styles.addProfileContainer}>
-                        <ThemedText style={styles.plusIcon}>+</ThemedText>
-                        <ThemedText style={styles.addProfileText}>Add Profile</ThemedText>
-                    </View>
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" />
+            <View style={styles.header}>
+                <View style={styles.headerTitle}>
+                    <ThemedText style={styles.title}>Who's Watching?</ThemedText>
+                </View>
+                <TouchableOpacity>
+                    <ThemedText style={styles.editButton}>Edit</ThemedText>
                 </TouchableOpacity>
-            </Animated.View>
-        </View>
+            </View>
+
+            <View style={styles.content}>
+
+                <Animated.View style={[styles.gridContainer, containerStyle]}>
+                    {PROFILES.map((profile) => (
+                        <TouchableOpacity
+                            key={profile.id}
+                            onPress={() => handleProfileSelect(profile)}
+                            style={styles.profileButton}
+                        >
+                            <Animated.View
+                                style={[
+                                    styles.profileContainer,
+                                    selectedProfile?.id === profile.id && selectedProfileStyle,
+                                ]}
+                            >
+                                <Image
+                                    source={{ uri: profile.avatar }}
+                                    style={styles.avatar}
+                                />
+                                <ThemedText style={styles.profileName}>{profile.name}</ThemedText>
+                            </Animated.View>
+                        </TouchableOpacity>
+                    ))}
+
+                    <TouchableOpacity style={styles.profileButton}>
+                        <View style={styles.addProfileContainer}>
+                            <ThemedText style={styles.plusIcon}>+</ThemedText>
+                        </View>
+                        <ThemedText style={styles.addProfileText}>Add Profile</ThemedText>
+                    </TouchableOpacity>
+                </Animated.View>
+            </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#000',
     },
+    content: {
+        flex: 1,
+        justifyContent: 'center',
+        marginTop: -110,
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+    },
+    headerTitle: {
+        flex: 1,
+        alignItems: 'center',
+        height: 40,
+        justifyContent: 'center'
+
+    },
     title: {
-        fontSize: 32,
+        fontSize: 20,
         fontWeight: '600',
-        marginBottom: 48,
+        color: '#fff',
+    },
+    editButton: {
+        fontSize: 16,
+        color: '#fff',
+        fontWeight: '600',
+        position: 'absolute',
+        right: 0,
+        top: -12,
     },
     gridContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        width: width * 0.8,
-        gap: 24,
+        alignItems: 'center',
+        width: width,
+        gap: 20,
+        paddingHorizontal: 20,
     },
     profileButton: {
-        width: width * 0.3,
+        width: width * 0.30,
         aspectRatio: 1,
+        marginBottom: 24,
+        alignItems: 'center',
     },
     profileContainer: {
         alignItems: 'center',
-        gap: 12,
+        gap: 8,
     },
     avatar: {
-        width: '100%',
+        width: '80%',
         height: undefined,
         aspectRatio: 1,
-        borderRadius: 8,
+        borderRadius: 6,
     },
     profileName: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: '500',
+        color: '#e5e5e5',
+        // marginTop: 12,
     },
     addProfileContainer: {
         width: '100%',
-        height: undefined,
+        // height: undefined,
         aspectRatio: 1,
-        borderRadius: 8,
+        borderRadius: 6,
         borderWidth: 2,
-        borderColor: '#333',
+        borderColor: '#424242',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'transparent',
     },
     plusIcon: {
-        fontSize: 32,
-        color: '#333',
+        fontSize: 30,
+        color: '#ffffff',
+        fontWeight: '200',
     },
     addProfileText: {
-        fontSize: 16,
-        color: '#333',
-        marginTop: 8,
+        fontSize: 20,
+        color: '#ffffff',
+        marginTop: 12,
+        fontWeight: '400',
     },
 }); 
