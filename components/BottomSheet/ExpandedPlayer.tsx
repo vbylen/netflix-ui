@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Pressable, Dimensions, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, Image, Pressable, Dimensions, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemedText } from '@/components/ThemedText';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -10,6 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import movies from '@/data/movies.json';
 import { Slider } from 'react-native-awesome-slider';
 import { useSharedValue } from 'react-native-reanimated';
+import { newStyles } from '@/styles/new';
 
 interface MovieData {
     id?: string;
@@ -129,7 +130,14 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.contentContainer}>
-                    <ThemedText style={styles.title}>{movieData?.title || "Movie Title"}</ThemedText>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: -4, marginBottom: 8 }}>
+                        <Image
+                            source={{ uri: 'https://loodibee.com/wp-content/uploads/Netflix-N-Symbol-logo.png' }}
+                            style={{ width: 20, height: 20, top: -4, position: 'absolute', left: 0 }}
+                        />
+                        <Text style={newStyles.netflixTag}>FILM</Text>
+                    </View>
+                    <ThemedText style={styles.title}>{movieData?.title || "Expo Documentary"}</ThemedText>
 
                     <View style={styles.metaInfo}>
                         <ThemedText style={styles.year}>{movieData?.year || "2024"}</ThemedText>
@@ -169,12 +177,17 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     </View>
 
                     <View style={styles.actionButtons}>
-                        <Pressable style={styles.actionButton}>
+                        <Pressable style={[styles.actionButton, {
+                            // backgroundColor: '#000000bb',
+                            width: 100,
+                            borderBottomWidth: 4,
+                            borderBottomColor: '#db0000',
+                        }]}>
                             <Ionicons name="add" size={24} color="white" />
                             <ThemedText style={styles.actionButtonText}>My List</ThemedText>
                         </Pressable>
                         <Pressable style={styles.actionButton}>
-                            <Ionicons name="thumbs-up" size={24} color="white" />
+                            <Ionicons name="thumbs-up-outline" size={24} color="white" />
                             <ThemedText style={styles.actionButtonText}>Rate</ThemedText>
                         </Pressable>
                         <Pressable style={styles.actionButton}>
@@ -185,7 +198,10 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                 </View>
 
                 <View style={styles.moreLikeThis}>
-                    <ThemedText style={styles.moreLikeThisTitle}>More Like This</ThemedText>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 18 }}>
+                        <ThemedText style={styles.moreLikeThisTitle}>More Like This</ThemedText>
+                        <ThemedText style={[styles.moreLikeThisTitle, { opacity: 0.4 }]}>More Like This</ThemedText>
+                    </View>
                     <View style={styles.movieGrid}>
                         {movies.movies[0].movies.slice(0, 6).map((movie, index) => (
                             <View key={movie.id} style={styles.moviePoster}>

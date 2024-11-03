@@ -37,7 +37,7 @@ export default function HomeScreen() {
   });
 
   const headerAnimatedStyle = useAnimatedStyle(() => ({
-    intensity: interpolate(scrollY.value, [0, 10], [0, 90], 'clamp'),
+    intensity: interpolate(scrollY.value, [0, 0], [0, 0], 'clamp'),
   }));
 
   const imageStyle = useAnimatedStyle(() => ({

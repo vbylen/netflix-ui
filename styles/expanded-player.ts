@@ -17,7 +17,7 @@ export const expandedPlayerStyles = StyleSheet.create({
     },
     videoContainer: {
         width: '100%',
-        height: width * 0.6, // 16:9 aspect ratio
+        height: 238, // 16:9 aspect ratio
         position: 'relative',
         zIndex: 1,
     },
@@ -52,7 +52,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         top: 10
     },
     soundButton: {
-        backgroundColor: '#000000bb',
+        backgroundColoxr: '#000000bb',
         width: 28,
         height: 28,
         borderRadius: 20,
@@ -64,7 +64,8 @@ export const expandedPlayerStyles = StyleSheet.create({
         padding: 16,
     },
     title: {
-        fontSize: 24,
+        marginTop: -8,
+        fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
         color: '#fff'
@@ -164,24 +165,27 @@ export const expandedPlayerStyles = StyleSheet.create({
     },
     actionButtons: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingVertical: 16,
-        borderTopWidth: 1,
+
         borderTopColor: '#333',
+        gap: 80,
+        height: 60,
+
     },
     actionButton: {
         alignItems: 'center',
-        gap: 8,
+        gap: 1,
+        marginTop: -4
     },
     actionButtonText: {
-        fontSize: 12,
+        fontSize: 11,
         color: '#fff',
     },
     moreLikeThis: {
         padding: 16,
+        paddingTop: 0,
     },
     moreLikeThisTitle: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: 'bold',
         marginBottom: 16,
     },
@@ -197,10 +201,10 @@ export const expandedPlayerStyles = StyleSheet.create({
     },
     sliderContainer: {
         position: 'absolute',
-        bottom: 0,
         left: 0,
         right: 0,
-        height: 6,
+        bottom: -2,
+        height: 3,
         // paddingHorizontal: 16,
         justifyContent: 'center',
         // backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -209,7 +213,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         width: '100%',
     },
     sliderInner: {
-        backgroundColor: '#ffffff6d',
+        backgroundColor: '#ffffff4a',
         borderWidth: 0,
     },
 });

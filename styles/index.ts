@@ -179,15 +179,19 @@ export const styles = StyleSheet.create({
     },
     sectionTitle: {
         color: '#fff',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         marginLeft: 16,
-        marginBottom: 16,
+        marginBottom: 10,
+        marginTop: -8,
     },
     contentList: {
+
         paddingHorizontal: 16,
+
     },
     contentItem: {
+
         width: 120,
         marginRight: 12,
         position: 'relative',

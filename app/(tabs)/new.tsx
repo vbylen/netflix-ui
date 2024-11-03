@@ -66,12 +66,12 @@ const TAB_OPTIONS = [
     },
     {
         id: 'everyone-watching',
-        icon: 'https://img.icons8.com/?size=96&id=DAcHRPKIfSSq&format=png',
+        icon: 'https://i.imgur.com/VrFDja2.png',
         label: "Everyone's Watching"
     },
     {
         id: 'top-10',
-        icon: 'https://img.icons8.com/?size=96&id=97192&format=png',
+        icon: 'https://www.netflix.com/tudum/top10/images/top10.png',
         label: 'Top 10'
     }
 ];
@@ -107,7 +107,6 @@ export default function NewAndHotScreen() {
 
                     <View style={{ gap: 6 }}>
                         <Image source={{ uri: item.logo }} style={newStyles.featuredLogo} />
-                        <Text style={newStyles.eventDate}>Live Event Coming November 15 at 8:00 PM EST</Text>
 
                     </View>
                     <View style={newStyles.actionButtons}>
@@ -123,6 +122,8 @@ export default function NewAndHotScreen() {
                 </View>
 
                 <View style={newStyles.titleContainer}>
+                    <Text style={newStyles.eventDate}>Live Event Coming November 15 at 8:00 PM EST</Text>
+
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6, marginBottom: 2 }}>
                         <Image
                             source={{ uri: 'https://loodibee.com/wp-content/uploads/Netflix-N-Symbol-logo.png' }}

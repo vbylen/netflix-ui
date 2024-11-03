@@ -153,6 +153,7 @@ export const newStyles = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
         marginBottom: 8,
+        marginTop: 8,
     },
     description: {
         color: '#999',

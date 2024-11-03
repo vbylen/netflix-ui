@@ -16,7 +16,7 @@ export function AnimatedHeader({ headerAnimatedStyle, title }: AnimatedHeaderPro
 
     return (
         <Animated.View style={[styles.header]}>
-            <BlurView
+            <View
                 tint="systemUltraThinMaterialDark"
                 intensity={headerAnimatedStyle.intensity}
                 style={[styles.blurContainer, { paddingTop: insets.top }]}
@@ -39,7 +39,7 @@ export function AnimatedHeader({ headerAnimatedStyle, title }: AnimatedHeaderPro
                         <Ionicons name="chevron-down" size={16} color="#fff" />
                     </Pressable>
                 </View>
-            </BlurView>
+            </View>
         </Animated.View>
     );
 } 
