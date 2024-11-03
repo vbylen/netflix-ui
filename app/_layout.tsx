@@ -15,12 +15,14 @@ import { useAudio } from '@/contexts/AudioContext';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import { WhoIsWatching } from '@/components/WhoIsWatching';
 
 function AnimatedStack() {
   const { scale } = useRootScale();
   const router = useRouter();
   const { currentSong, isPlaying, togglePlayPause } = useAudio();
   const [isModalActive, setIsModalActive] = useState(false);
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
   const colorScheme = useColorScheme();
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -33,9 +35,16 @@ function AnimatedStack() {
     };
   });
 
+  const handleProfileSelect = (profileId: string) => {
+    setSelectedProfileId(profileId);
+  };
+
+  if (!selectedProfileId) {
+    return <WhoIsWatching onProfileSelect={handleProfileSelect} />;
+  }
+
   return (
     <View style={{ flex: 1 }}>
-
       <Animated.View style={[styles.stackContainer, animatedStyle]}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -55,7 +64,6 @@ function AnimatedStack() {
           />
           <Stack.Screen name="+not-found" />
         </Stack>
-
 
         {currentSong && (
           <MiniPlayer
