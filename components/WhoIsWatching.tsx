@@ -8,6 +8,9 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated';
 import { ThemedText } from './ThemedText';
+import { Ionicons } from '@expo/vector-icons';
+
+
 
 const { width } = Dimensions.get('window');
 
@@ -109,7 +112,7 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
 
                     <TouchableOpacity style={styles.profileButton}>
                         <View style={styles.addProfileContainer}>
-                            <ThemedText style={styles.plusIcon}>+</ThemedText>
+                            <Ionicons name="add" size={44} color="#fff" />
                         </View>
                         <ThemedText style={styles.addProfileText}>Add Profile</ThemedText>
                     </TouchableOpacity>
@@ -187,7 +190,7 @@ const styles = StyleSheet.create({
         // marginTop: 12,
     },
     addProfileContainer: {
-        width: '100%',
+        width: width * (0.30 - 0.06),
         // height: undefined,
         aspectRatio: 1,
         borderRadius: 6,
@@ -198,14 +201,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     plusIcon: {
-        fontSize: 30,
-        color: '#ffffff',
-        fontWeight: '200',
+        // fontSize: 44,
+        // color: '#ffffff',
+        // fontWeight: '200',
     },
     addProfileText: {
-        fontSize: 20,
+        fontSize: 18,
         color: '#ffffff',
-        marginTop: 12,
+        marginTop: 8,
         fontWeight: '400',
     },
 }); 
