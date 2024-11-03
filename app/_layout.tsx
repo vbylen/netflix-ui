@@ -16,13 +16,15 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { WhoIsWatching } from '../components/WhoIsWatching';
+import { UserProvider } from '@/contexts/UserContext';
+import { useUser } from '@/contexts/UserContext';
 
 function AnimatedStack() {
   const { scale } = useRootScale();
   const router = useRouter();
   const { currentSong, isPlaying, togglePlayPause } = useAudio();
   const [isModalActive, setIsModalActive] = useState(false);
-  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
+  const { selectedProfile, selectProfile } = useUser();
   const colorScheme = useColorScheme();
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -35,12 +37,8 @@ function AnimatedStack() {
     };
   });
 
-  const handleProfileSelect = (profileId: string) => {
-    setSelectedProfileId(profileId);
-  };
-
-  if (!selectedProfileId) {
-    return <WhoIsWatching onProfileSelect={handleProfileSelect} />;
+  if (!selectedProfile) {
+    return <WhoIsWatching onProfileSelect={selectProfile} />;
   }
 
   return (
@@ -98,9 +96,11 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <RootScaleProvider>
           <AudioProvider>
-            <OverlayProvider>
-              <AnimatedStack />
-            </OverlayProvider>
+            <UserProvider>
+              <OverlayProvider>
+                <AnimatedStack />
+              </OverlayProvider>
+            </UserProvider>
           </AudioProvider>
         </RootScaleProvider>
       </ThemeProvider>

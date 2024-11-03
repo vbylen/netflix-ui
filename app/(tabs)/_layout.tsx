@@ -4,6 +4,7 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Platform, StyleSheet, Image, View, Pressable } from 'react-native';
 import { BlurView } from 'expo-blur';
 import * as Haptics from 'expo-haptics';
+import { useUser } from '@/contexts/UserContext';
 
 // Helper component for cross-platform icons
 function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'play' | 'person'; color: string }) {
@@ -12,10 +13,12 @@ function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'play' | 'person'
 
 // Netflix profile image component
 function ProfileImage({ focused }: { focused: boolean }) {
+  const { selectedProfile } = useUser();
+
   return (
     <React.Fragment>
       <Image
-        source={{ uri: 'https://i.imgur.com/KKkzRv7.png' }}
+        source={{ uri: selectedProfile?.avatar }}
         style={{
           width: 24,
           height: 24,
