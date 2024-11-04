@@ -39,7 +39,7 @@ export default function ProfileScreen() {
             <View style={styles.notificationPreview}>
                 <View style={styles.notificationDot} />
                 <Image
-                    source={{ uri: 'https://dnm-cache.netflix.com/images/title/81661247/tile.jpg' }}
+                    source={{ uri: 'https://dnm.nflximg.net/api/v6/dGKhUGb9YF21yyDjKrWwmGN1H8o/AAAABdl3F7BjF71fC6gaLl7xCpGIak8CxmdDgY3FK8dEQhlfx5n5O-z9hhOTtzYyr1nr4Ajn5sAyHjAGGBIiFO0tCnDG5AevRDi10_WuPvvEFYTUQfZAEpUBPwrFbAKyalsQREodRB1mKPylnjU.jpg?r=c90' }}
                     style={styles.notificationImage}
                 />
                 <View style={styles.notificationText}>
