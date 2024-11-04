@@ -73,9 +73,14 @@ const TAB_OPTIONS = [
         label: "Everyone's Watching"
     },
     {
-        id: 'top-10',
+        id: 'top-10-shows',
         icon: 'https://www.netflix.com/tudum/top10/images/top10.png',
-        label: 'Top 10'
+        label: 'Top 10 TV Shows'
+    },
+    {
+        id: 'top-10-movies',
+        icon: 'https://www.netflix.com/tudum/top10/images/top10.png',
+        label: 'Top 10 Movies'
     }
 ];
 
@@ -203,13 +208,19 @@ export default function NewScreen() {
                                 </Pressable>
                             </View>
                         </View>
-                        <View style={newStyles.categoryTabs}>
+
+                        <ScrollView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={newStyles.categoryTabs}
+                        >
                             {TAB_OPTIONS.map(renderTab)}
-                        </View>
+                        </ScrollView>
                     </View>
 
                     <ScrollView
                         showsVerticalScrollIndicator={false}
+
                     >
 
 
