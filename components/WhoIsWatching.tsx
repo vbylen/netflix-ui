@@ -7,13 +7,16 @@ import Animated, {
     Easing,
     useSharedValue,
     runOnJS,
-    withDelay,
     FadeIn,
+    withRepeat,
+    withSequence,
+    withDelay,
 } from 'react-native-reanimated';
 import { ThemedText } from './ThemedText';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
 import { Audio } from 'expo-av';
+import Svg, { Circle } from 'react-native-svg';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +34,9 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
     const { profiles } = useUser();
     const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
     const profileRefs = useRef<{ [key: string]: LayoutRectangle | null }>({});
+    const spinnerRotation = useSharedValue(0);
 
     const selectedProfilePosition = useSharedValue({ x: 0, y: 0, width: 0, height: 0 });
 
@@ -50,12 +55,18 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
         }),
     }));
 
+    const spinnerStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{ rotateZ: `${spinnerRotation.value}deg` }],
+        };
+    });
+
     const selectedProfileStyle = useAnimatedStyle(() => {
         if (!selectedProfile) return {};
 
         const finalSize = width * 0.45;
         const centerY = height / 2;
-        const targetY = centerY - finalSize / 2;
+        const targetY = centerY - finalSize / 2 - 100; // Moved up to make room for spinner
 
         return {
             position: 'absolute',
@@ -116,9 +127,22 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             setSelectedProfile(profile);
             setIsAnimating(true);
 
+            // Start spinner animation after profile is centered
+            setTimeout(() => {
+                setShowSpinner(true);
+                spinnerRotation.value = withRepeat(
+                    withTiming(360, {
+                        duration: 1000,
+                        easing: Easing.linear,
+                    }),
+                    -1, // Infinite repetition
+                    false // Don't reverse the animation
+                );
+            }, 800);
+
             setTimeout(() => {
                 runOnJS(onProfileSelect)(profile.id);
-            }, 1000);
+            }, 2000);
         } catch (error) {
             console.log('Error playing sound:', error);
         }
@@ -176,11 +200,39 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                     style={[styles.selectedAvatar, selectedProfileStyle]}
                 />
             )}
+
+            {showSpinner && (
+                <Animated.View style={[styles.spinnerContainer, spinnerStyle]}>
+                    <Svg height="100" width="100" viewBox="0 0 100 100">
+                        <Circle
+                            cx="50"
+                            cy="50"
+                            r="45"
+                            stroke="#E50914"
+                            strokeWidth="8"
+                            fill="transparent"
+                            strokeLinecap="round"
+                            strokeDasharray="283"
+                            strokeDashoffset="200"
+                        />
+                    </Svg>
+                </Animated.View>
+            )}
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    spinnerContainer: {
+        position: 'absolute',
+        left: width / 2 - 50,
+        top: height / 2 + 50, // Position below the centered profile image
+        width: 100,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     container: {
         flex: 1,
         backgroundColor: '#000',
