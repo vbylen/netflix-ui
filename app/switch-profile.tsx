@@ -263,10 +263,10 @@ export default function SwitchProfileScreen() {
                     <View style={styles.switchProfileContainer}>
                         <View style={styles.header}>
                             <View style={styles.headerTitle}>
-                                <ThemedText style={styles.title}>Switch Profile</ThemedText>
+                                <ThemedText style={styles.title}>Switch Profiles</ThemedText>
                             </View>
-                            <TouchableOpacity>
-                                <ThemedText style={styles.editButton}>Edit</ThemedText>
+                            <TouchableOpacity style={styles.closeButton}>
+                                <Ionicons name="close-outline" size={24} color="#fff" />
                             </TouchableOpacity>
                         </View>
 
@@ -297,6 +297,7 @@ export default function SwitchProfileScreen() {
                                 </View>
                                 <ThemedText style={styles.addProfileText}>Add Profile</ThemedText>
                             </TouchableOpacity>
+
                         </View>
                     </View>
                 </ScrollComponent>
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
     modalContent: {
         flex: 1,
         backgroundColor: '#2d2d2d',
-        marginTop: height * 0.5, // This pushes the content down
+        marginTop: height * 0.7, // This pushes the content down
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
     },
@@ -331,10 +332,10 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         flex: 1,
-        alignItems: 'center',
+        // alignItems: 'center',
     },
     title: {
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: '600',
         color: '#fff',
     },
@@ -348,11 +349,11 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 4,
-        paddingHorizontal: 20,
+        gap: 0,
+        paddingHorizontal: 4,
     },
     profileButton: {
-        width: width * 0.30,
+        width: width * 0.20,
         aspectRatio: 1,
         marginBottom: 24,
         alignItems: 'center',
@@ -368,12 +369,12 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
     profileName: {
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: '500',
         color: '#e5e5e5',
     },
     addProfileContainer: {
-        width: width * (0.30 - 0.06),
+        width: width * 0.15,
         aspectRatio: 1,
         borderRadius: 6,
         borderWidth: 2,
@@ -383,9 +384,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     addProfileText: {
-        fontSize: 18,
+        fontSize: 13,
         color: '#ffffff',
         marginTop: 8,
         fontWeight: '400',
+    },
+    closeButton: {
+        padding: 2,
+        backgroundColor: '#0000005c',
+        borderRadius: 100,
     },
 });
