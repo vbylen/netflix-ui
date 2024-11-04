@@ -13,6 +13,7 @@ export const newStyles = StyleSheet.create({
         right: 0,
         zIndex: 100,
         backgroundColor: '#000',
+        paddingBottom: 8,
     },
     headerContent: {
         flexDirection: 'row',
