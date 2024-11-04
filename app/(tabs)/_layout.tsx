@@ -5,9 +5,10 @@ import { Platform, StyleSheet, Image, View, Pressable } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useUser } from '@/contexts/UserContext';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
+import { Home } from '@/icons/Home';
 
 // Helper component for cross-platform icons
-function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'person' | 'play-outline'; color: string }) {
+function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'play-square'; color: string }) {
   return <TabBarIcon name={ionIcon} color={color} />;
 }
 
@@ -47,15 +48,15 @@ export const TAB_SCREENS = [
   {
     name: 'index',
     title: 'Home',
-    icon: ({ color }: { color: string }) => (
-      <TabIcon ionIcon="home-sharp" color={color} />
+    icon: ({ color, focused }: { color: string; focused: boolean }) => (
+      <Home color={color} isActive={focused} />
     ),
   },
   {
     name: 'new',
     title: 'New & Hot',
     icon: ({ color }: { color: string }) => (
-      <TabIcon ionIcon="play-outline" color={color} />
+      <TabIcon ionIcon="play-square" color={color} />
     ),
   },
   {

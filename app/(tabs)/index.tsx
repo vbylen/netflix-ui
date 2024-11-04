@@ -130,6 +130,7 @@ export default function HomeScreen() {
           onScroll={scrollHandler}
           scrollEventThrottle={16}
           contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
         >
           <FeaturedContent
             movie={FEATURED_MOVIE}
