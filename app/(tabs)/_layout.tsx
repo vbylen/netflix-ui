@@ -96,6 +96,7 @@ export default function TabLayout() {
               color={color}
             />
           ),
+
         }}
       />
       <Tabs.Screen
