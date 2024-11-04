@@ -17,6 +17,7 @@ import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import { movies } from '@/data/movies.json';
 import * as Haptics from 'expo-haptics';
 import { BlurView } from 'expo-blur';
+import { Text, View } from 'react-native';
 
 const SCALE_FACTOR = 0.83;
 const DRAG_THRESHOLD = Math.min(Dimensions.get('window').height * 0.20, 150);
@@ -259,7 +260,12 @@ export default function SwitchProfileScreen() {
         <ThemedView style={styles.container}>
             <StatusBar animated={true} style={statusBarStyle.value} />
             <Animated.View style={[styles.modalContent, animatedStyle]}>
-                {/* todo contetn for switch profile here */}
+                <ScrollComponent>
+                    <Text>Switch Profile</Text>
+                    <View>
+                        <Text>Profiles</Text>
+                    </View>
+                </ScrollComponent>
             </Animated.View>
         </ThemedView>
     );

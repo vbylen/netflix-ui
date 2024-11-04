@@ -78,7 +78,6 @@ export default function ProfileScreen() {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <TouchableOpacity style={styles.profileSection} onPress={() => router.push('/switch-profile')}>
                     <Image
                         source={{ uri: selectedProfile?.avatar }}

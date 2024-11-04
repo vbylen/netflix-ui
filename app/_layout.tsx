@@ -21,6 +21,7 @@ function AnimatedStack() {
   const { scale } = useRootScale();
   const router = useRouter();
   const [isModalActive, setIsModalActive] = useState(false);
+  const [canBlur, setCanBlur] = useState(false);
   const { selectedProfile, selectProfile } = useUser();
   const colorScheme = useColorScheme();
   const animatedStyle = useAnimatedStyle(() => {
@@ -43,7 +44,7 @@ function AnimatedStack() {
 
   return (
     <View style={{ flex: 1 }}>
-      {isModalActive && (
+      {(isModalActive && canBlur) && (
         <BlurView
           intensity={50}
           style={[
@@ -66,8 +67,14 @@ function AnimatedStack() {
               },
             }}
             listeners={{
-              focus: () => setIsModalActive(true),
-              beforeRemove: () => setIsModalActive(false),
+              focus: () => {
+                setIsModalActive(true);
+                setCanBlur(true);
+              },
+              beforeRemove: () => {
+                setIsModalActive(false);
+                setCanBlur(false);
+              },
             }}
           />
           <Stack.Screen
@@ -80,8 +87,14 @@ function AnimatedStack() {
               },
             }}
             listeners={{
-              focus: () => setIsModalActive(true),
-              beforeRemove: () => setIsModalActive(false),
+              focus: () => {
+                setIsModalActive(true);
+                setCanBlur(false);
+              },
+              beforeRemove: () => {
+                setIsModalActive(false);
+                setCanBlur(false);
+              },
             }}
           />
           <Stack.Screen name="+not-found" />
