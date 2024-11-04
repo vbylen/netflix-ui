@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView, Text, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
-import { usePathname } from 'expo-router';
+import { usePathname, useRouter } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 
@@ -15,6 +15,7 @@ export default function ProfileScreen() {
     const { selectedProfile } = useUser();
     const pathname = usePathname();
     const isActive = pathname === '/profile';
+    const router = useRouter();
 
     const currentTabIndex = TAB_SCREENS.findIndex(screen =>
         screen.name === 'profile'
@@ -78,7 +79,7 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                <View style={styles.profileSection}>
+                <TouchableOpacity style={styles.profileSection} onPress={() => router.push('/switch-profile')}>
                     <Image
                         source={{ uri: selectedProfile?.avatar }}
                         style={styles.profileImage}
@@ -87,7 +88,7 @@ export default function ProfileScreen() {
                         <Text style={styles.profileName}>{selectedProfile?.name}</Text>
                         <Ionicons name="chevron-down" size={16} color="white" />
                     </View>
-                </View>
+                </TouchableOpacity>
 
                 <TouchableOpacity style={styles.menuItem}>
                     <View style={styles.menuIconContainer}>

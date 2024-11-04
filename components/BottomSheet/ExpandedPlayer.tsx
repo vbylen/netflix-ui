@@ -25,8 +25,12 @@ interface MovieData {
 }
 
 interface ExpandedPlayerProps {
-    scrollComponent?: (props: any) => React.ReactElement;
-    movieData: MovieData;
+    scrollComponent: (props: any) => React.ReactElement;
+    movieData: {
+        id: number;
+        imageUrl: string;
+        // other movie properties
+    };
 }
 
 interface PlaybackStatus {
