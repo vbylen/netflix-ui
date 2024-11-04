@@ -85,9 +85,15 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
                 >
                     <Animated.View style={[styles.headerTitleContainer, headerTitleStyle]}>
                         <Text style={styles.headerTitle}>{title}</Text>
-                        <Pressable style={styles.searchButton}>
-                            <Ionicons name="search" size={24} color="#fff" />
-                        </Pressable>
+
+                        <View style={styles.headerButtons}>
+                            <Pressable style={styles.searchButton}>
+                                <Ionicons name="download-outline" size={28} color="#fff" />
+                            </Pressable>
+                            <Pressable style={styles.searchButton}>
+                                <Ionicons name="search-outline" size={28} color="#fff" />
+                            </Pressable>
+                        </View>
                     </Animated.View>
                     <Animated.View style={[styles.categoryTabs, tabsAnimatedStyle]}>
                         <Pressable style={styles.categoryTab}>

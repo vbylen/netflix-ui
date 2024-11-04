@@ -26,6 +26,10 @@ export const styles = StyleSheet.create({
         right: 0,
         zIndex: 1000,
     },
+    headerButtons: {
+        flexDirection: 'row',
+        gap: 4,
+    },
     headerTitleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
