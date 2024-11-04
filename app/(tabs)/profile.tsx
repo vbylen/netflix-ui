@@ -162,8 +162,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
     },
     profileName: {
-        fontSize: 16,
-        fontWeight: '500',
+        fontSize: 22,
+        fontWeight: '800',
         color: '#fff',
     },
     menuItem: {
