@@ -22,14 +22,24 @@ interface AnimatedHeaderProps {
 export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: AnimatedHeaderProps) {
     const insets = useSafeAreaInsets();
 
+    const headerTitleStyle = useAnimatedStyle(() => {
+        return {
+            transform: [
+                {
+                    scale: interpolate(
+                        scrollDirection.value,
+                        [0, 1],
+                        [1, 0.96],
+                        'clamp'
+                    )
+                }
+            ]
+        };
+    });
+
     const tabsAnimatedStyle = useAnimatedStyle(() => {
         return {
-            height: interpolate(
-                scrollDirection.value,
-                [0, 1],
-                [40, 0],
-                'clamp'
-            ),
+
             opacity: interpolate(
                 scrollDirection.value,
                 [0, 0.5, 1],
@@ -46,7 +56,13 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
                     )
                 }
             ],
-            overflow: 'hidden'
+            overflow: 'hidden',
+            height: interpolate(
+                scrollDirection.value,
+                [0, 1],
+                [40, 0],
+                'clamp'
+            ),
         };
     });
 
@@ -57,12 +73,12 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
                 style={[styles.blurContainer, { paddingTop: insets.top }]}
                 animatedProps={headerAnimatedProps}
             >
-                <View style={styles.headerTitleContainer}>
+                <Animated.View style={[styles.headerTitleContainer, headerTitleStyle]}>
                     <Text style={styles.headerTitle}>{title}</Text>
                     <Pressable style={styles.searchButton}>
                         <Ionicons name="search" size={24} color="#fff" />
                     </Pressable>
-                </View>
+                </Animated.View>
                 <Animated.View style={[styles.categoryTabs, tabsAnimatedStyle]}>
                     <Pressable style={styles.categoryTab}>
                         <Text style={styles.categoryTabText}>TV Shows</Text>
