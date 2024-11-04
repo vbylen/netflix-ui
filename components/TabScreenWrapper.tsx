@@ -26,7 +26,7 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
             });
             opacity.value = withTiming(1, { duration: 150 });
         } else {
-            translateX.value = withSpring(slideDirection === 'left' ? -500 : 500, {
+            translateX.value = withSpring(slideDirection === 'left' ? -25 : 25, {
                 damping: 20,
                 stiffness: 90,
                 mass: 0.5
