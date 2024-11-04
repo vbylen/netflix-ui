@@ -15,6 +15,9 @@ import Animated, {
     interpolate,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { TAB_SCREENS } from '@/app/(tabs)/_layout';
+import { TabScreenWrapper } from '@/components/TabScreenWrapper';
+import { usePathname } from 'expo-router';
 
 interface ComingSoonItem {
     id: string;
@@ -76,7 +79,19 @@ const TAB_OPTIONS = [
     }
 ];
 
-export default function NewAndHotScreen() {
+export default function NewScreen() {
+    const pathname = usePathname();
+    const isActive = pathname === '/new';
+
+    const currentTabIndex = TAB_SCREENS.findIndex(screen =>
+        screen.name === 'new'
+    );
+    const activeTabIndex = TAB_SCREENS.findIndex(screen =>
+        pathname === `/${screen.name}` || (screen.name === 'index' && pathname === '/')
+    );
+
+    const slideDirection = activeTabIndex > currentTabIndex ? 'right' : 'left';
+
     const router = useRouter();
     const insets = useSafeAreaInsets();
     const scrollY = useSharedValue(0);
@@ -172,47 +187,49 @@ export default function NewAndHotScreen() {
     );
 
     return (
-        <View style={newStyles.container}>
-            <StatusBar style="light" />
-            <SafeAreaView>
-                <View style={[newStyles.header]}>
-                    <View style={newStyles.headerContent}>
-                        <Text style={newStyles.headerTitle}>New & Hot</Text>
-                        <View style={newStyles.headerRight}>
-                            <Pressable>
-                                <Ionicons name="download-outline" size={24} color="#fff" />
-                            </Pressable>
-                            <Pressable>
-                                <Ionicons name="search" size={24} color="#fff" />
-                            </Pressable>
+        <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
+            <View style={newStyles.container}>
+                <StatusBar style="light" />
+                <SafeAreaView>
+                    <View style={[newStyles.header]}>
+                        <View style={newStyles.headerContent}>
+                            <Text style={newStyles.headerTitle}>New & Hot</Text>
+                            <View style={newStyles.headerRight}>
+                                <Pressable>
+                                    <Ionicons name="download-outline" size={24} color="#fff" />
+                                </Pressable>
+                                <Pressable>
+                                    <Ionicons name="search" size={24} color="#fff" />
+                                </Pressable>
+                            </View>
+                        </View>
+                        <View style={newStyles.categoryTabs}>
+                            {TAB_OPTIONS.map(renderTab)}
                         </View>
                     </View>
-                    <View style={newStyles.categoryTabs}>
-                        {TAB_OPTIONS.map(renderTab)}
-                    </View>
-                </View>
 
-                <ScrollView>
+                    <ScrollView>
 
 
-                    <View style={newStyles.activeTabContainer}>
+                        <View style={newStyles.activeTabContainer}>
 
-                        <Image
-                            source={{ uri: TAB_OPTIONS[0].icon }}
-                            style={newStyles.activeTabIcon}
-                        />
-                        <Text style={newStyles.activeTabTitle}>Coming Soon</Text>
-                    </View>
+                            <Image
+                                source={{ uri: TAB_OPTIONS[0].icon }}
+                                style={newStyles.activeTabIcon}
+                            />
+                            <Text style={newStyles.activeTabTitle}>Coming Soon</Text>
+                        </View>
 
 
 
-                    <View style={newStyles.comingSoonList}>
-                        {COMING_SOON_DATA.map(renderComingSoonItem)}
-                    </View>
-                </ScrollView>
-            </SafeAreaView>
+                        <View style={newStyles.comingSoonList}>
+                            {COMING_SOON_DATA.map(renderComingSoonItem)}
+                        </View>
+                    </ScrollView>
+                </SafeAreaView>
 
-        </View>
+            </View>
+        </TabScreenWrapper>
     );
 }
 

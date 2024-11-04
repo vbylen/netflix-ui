@@ -43,7 +43,7 @@ function ProfileImage({ focused }: { focused: boolean }) {
   );
 }
 
-const TAB_SCREENS = [
+export const TAB_SCREENS = [
   {
     name: 'index',
     title: 'Home',

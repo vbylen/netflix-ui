@@ -10,10 +10,11 @@ import Animated, {
 interface Props {
     children: React.ReactNode;
     isActive: boolean;
+    slideDirection: 'left' | 'right';
 }
 
-export function TabScreenWrapper({ children, isActive }: Props) {
-    const translateX = useSharedValue(isActive ? 0 : 500);
+export function TabScreenWrapper({ children, isActive, slideDirection }: Props) {
+    const translateX = useSharedValue(isActive ? 0 : (slideDirection === 'left' ? -500 : 500));
     const opacity = useSharedValue(isActive ? 1 : 0);
 
     useEffect(() => {
@@ -25,14 +26,14 @@ export function TabScreenWrapper({ children, isActive }: Props) {
             });
             opacity.value = withTiming(1, { duration: 150 });
         } else {
-            translateX.value = withSpring(500, {
+            translateX.value = withSpring(slideDirection === 'left' ? -500 : 500, {
                 damping: 20,
                 stiffness: 90,
                 mass: 0.5
             });
             opacity.value = withTiming(0, { duration: 150 });
         }
-    }, [isActive]);
+    }, [isActive, slideDirection]);
 
     const animatedStyle = useAnimatedStyle(() => ({
         position: 'absolute',

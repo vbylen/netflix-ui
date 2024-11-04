@@ -20,6 +20,7 @@ import movieData from '../../data/movies.json';
 import { MoviesData } from '@/types/movie';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
+import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 
 const FEATURED_MOVIE = {
   id: 'dont-move',
@@ -99,8 +100,17 @@ export default function HomeScreen() {
   const pathname = usePathname();
   const isActive = pathname === '/' || pathname === '/index';
 
+  const currentTabIndex = TAB_SCREENS.findIndex(screen =>
+    screen.name === 'index'
+  );
+  const activeTabIndex = TAB_SCREENS.findIndex(screen =>
+    pathname === `/${screen.name}` || (screen.name === 'index' && pathname === '/')
+  );
+
+  const slideDirection = activeTabIndex > currentTabIndex ? 'right' : 'left';
+
   return (
-    <TabScreenWrapper isActive={isActive}>
+    <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
       <View style={styles.container}>
         <StatusBar style="light" />
         <LinearGradient
