@@ -233,9 +233,7 @@ export default function SwitchProfileScreen() {
         opacity: withSpring(1),
     }));
 
-    const blurStyle = useAnimatedStyle(() => ({
-        intensity: blurIntensity.value,
-    }));
+
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -261,9 +259,11 @@ export default function SwitchProfileScreen() {
             <StatusBar animated={true} style={statusBarStyle.value} />
             <Animated.View style={[styles.modalContent, animatedStyle]}>
                 <ScrollComponent>
-                    <Text>Switch Profile</Text>
-                    <View>
-                        <Text>Profiles</Text>
+                    <View style={styles.switchProfileContainer}>
+                        <Text>Switch Profile</Text>
+                        <View>
+                            <Text>Profiles</Text>
+                        </View>
                     </View>
                 </ScrollComponent>
             </Animated.View>
@@ -274,10 +274,17 @@ export default function SwitchProfileScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: '#0000008a',
     },
     modalContent: {
         flex: 1,
         backgroundColor: 'transparent',
+        justifyContent: 'flex-end',
+    },
+    switchProfileContainer: {
+        flex: 1,
+        backgroundColor: 'red',
+        height: '100%',
+        bottom: 0,
     },
 });
