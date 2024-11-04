@@ -47,6 +47,8 @@ export const newStyles = StyleSheet.create({
         paddingVertical: 6,
         borderRadius: 20,
         backgroundColor: 'transparent',
+        borderWidth: 1,
+        borderColor: '#ffffff63',
     },
     activeTab: {
         backgroundColor: '#fff',
