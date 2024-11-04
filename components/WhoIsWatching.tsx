@@ -10,6 +10,7 @@ import Animated, {
 import { ThemedText } from './ThemedText';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
+import { Audio } from 'expo-av';
 
 
 
@@ -96,12 +97,21 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
     });
 
     const handleProfileSelect = async (profile: Profile) => {
-        setSelectedProfile(profile);
-        setIsAnimating(true);
+        try {
+            const { sound } = await Audio.Sound.createAsync(
+                require('../assets/audio/profile-selected.mp3')
+            );
+            await sound.playAsync();
 
-        setTimeout(() => {
-            onProfileSelect(profile.id);
-        }, 1000);
+            setSelectedProfile(profile);
+            setIsAnimating(true);
+
+            setTimeout(() => {
+                onProfileSelect(profile.id);
+            }, 1000);
+        } catch (error) {
+            console.log('Error playing sound:', error);
+        }
     };
 
     return (
