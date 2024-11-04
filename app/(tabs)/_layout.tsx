@@ -43,6 +43,30 @@ function ProfileImage({ focused }: { focused: boolean }) {
   );
 }
 
+const TAB_SCREENS = [
+  {
+    name: 'index',
+    title: 'Home',
+    icon: ({ color }: { color: string }) => (
+      <TabIcon ionIcon="home-sharp" color={color} />
+    ),
+  },
+  {
+    name: 'new',
+    title: 'New & Hot',
+    icon: ({ color }: { color: string }) => (
+      <TabIcon ionIcon="play-outline" color={color} />
+    ),
+  },
+  {
+    name: 'profile',
+    title: 'My Netflix',
+    icon: ({ focused }: { focused: boolean }) => (
+      <ProfileImage focused={focused} />
+    ),
+  },
+];
+
 export default function TabLayout() {
   const pathname = usePathname();
   const handleTabPress = () => {
@@ -77,37 +101,16 @@ export default function TabLayout() {
           />
         ),
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => (
-            <TabIcon
-              ionIcon="home-sharp"
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="new"
-        options={{
-          title: 'New & Hot',
-          tabBarIcon: ({ color }) => (
-            <TabIcon
-              ionIcon="play-outline"
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'My Netflix',
-          tabBarIcon: ({ focused }) => <ProfileImage focused={focused} />,
-        }}
-      />
+      {TAB_SCREENS.map((screen) => (
+        <Tabs.Screen
+          key={screen.name}
+          name={screen.name}
+          options={{
+            title: screen.title,
+            tabBarIcon: screen.icon,
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
