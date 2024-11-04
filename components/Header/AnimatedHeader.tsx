@@ -3,20 +3,52 @@ import { View, Text, Pressable } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, { AnimatedProps } from 'react-native-reanimated';
+import Animated, {
+    AnimatedProps,
+    useAnimatedStyle,
+    interpolate
+} from 'react-native-reanimated';
 
 import { styles } from '@/styles';
 
-// Create an animated BlurView component
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 interface AnimatedHeaderProps {
     headerAnimatedProps: AnimatedProps<any>;
     title: string;
+    scrollDirection: Animated.SharedValue<number>;
 }
 
-export function AnimatedHeader({ headerAnimatedProps, title }: AnimatedHeaderProps) {
+export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: AnimatedHeaderProps) {
     const insets = useSafeAreaInsets();
+
+    const tabsAnimatedStyle = useAnimatedStyle(() => {
+        return {
+            height: interpolate(
+                scrollDirection.value,
+                [0, 1],
+                [40, 0],
+                'clamp'
+            ),
+            opacity: interpolate(
+                scrollDirection.value,
+                [0, 0.5, 1],
+                [1, 0.8, 0],
+                'clamp'
+            ),
+            transform: [
+                {
+                    translateY: interpolate(
+                        scrollDirection.value,
+                        [0, 1],
+                        [0, -40],
+                        'clamp'
+                    )
+                }
+            ],
+            overflow: 'hidden'
+        };
+    });
 
     return (
         <Animated.View style={[styles.header]}>
@@ -31,7 +63,7 @@ export function AnimatedHeader({ headerAnimatedProps, title }: AnimatedHeaderPro
                         <Ionicons name="search" size={24} color="#fff" />
                     </Pressable>
                 </View>
-                <View style={styles.categoryTabs}>
+                <Animated.View style={[styles.categoryTabs, tabsAnimatedStyle]}>
                     <Pressable style={styles.categoryTab}>
                         <Text style={styles.categoryTabText}>TV Shows</Text>
                     </Pressable>
@@ -42,7 +74,7 @@ export function AnimatedHeader({ headerAnimatedProps, title }: AnimatedHeaderPro
                         <Text style={styles.categoryTabTextWithIcon}>Categories</Text>
                         <Ionicons name="chevron-down" size={16} color="#fff" />
                     </Pressable>
-                </View>
+                </Animated.View>
             </AnimatedBlurView>
         </Animated.View>
     );

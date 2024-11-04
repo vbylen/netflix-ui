@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     categoryTabs: {
         flexDirection: 'row',
         paddingHorizontal: 16,
-        paddingBottom: 12,
+        paddingBottom: 4,
         gap: 12,
         marginTop: 4
     },

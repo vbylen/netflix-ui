@@ -9,6 +9,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   interpolate,
+  withTiming,
 } from 'react-native-reanimated';
 import { styles } from '@/styles';
 import { AnimatedHeader } from '@/components/Header/AnimatedHeader';
@@ -30,10 +31,33 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const { tiltX, tiltY } = useDeviceMotion();
 
+  const SCROLL_THRESHOLD = 15;
+  const SLIDE_ACTIVATION_POINT = 90; // Point at which sliding can start
   const scrollY = useSharedValue(0);
+  const lastScrollY = useSharedValue(0);
+  const scrollDirection = useSharedValue(0);
+
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
-      scrollY.value = event.contentOffset.y;
+      const currentScrollY = event.contentOffset.y;
+      const scrollDelta = currentScrollY - lastScrollY.value;
+
+      // Only trigger direction change if we've scrolled past SLIDE_ACTIVATION_POINT
+      if (currentScrollY >= SLIDE_ACTIVATION_POINT) {
+        if (scrollDelta > SCROLL_THRESHOLD) {
+          // Scrolling down - hide tabs
+          scrollDirection.value = withTiming(1, { duration: 400 });
+        } else if (scrollDelta < -SCROLL_THRESHOLD) {
+          // Scrolling up - show tabs
+          scrollDirection.value = withTiming(0, { duration: 400 });
+        }
+      } else {
+        // Before SLIDE_ACTIVATION_POINT, always show tabs
+        scrollDirection.value = withTiming(0, { duration: 400 });
+      }
+
+      lastScrollY.value = currentScrollY;
+      scrollY.value = currentScrollY;
     },
   });
 
@@ -79,7 +103,11 @@ export default function HomeScreen() {
         style={styles.gradient}
       />
 
-      <AnimatedHeader headerAnimatedProps={headerAnimatedProps} title="For Saúl" />
+      <AnimatedHeader
+        headerAnimatedProps={headerAnimatedProps}
+        title="For Saúl"
+        scrollDirection={scrollDirection}
+      />
 
       <Animated.ScrollView
         style={styles.scrollView}
