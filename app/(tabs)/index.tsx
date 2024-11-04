@@ -22,8 +22,8 @@ import { MoviesData } from '@/types/movie';
 const FEATURED_MOVIE = {
   id: 'dont-move',
   title: "Don't Move",
-  thumbnail: 'https://images.squarespace-cdn.com/content/v1/511eea22e4b06642027a9a99/932ca36a-7b49-4d93-9df7-b4d1c123ba80/Don%27t+Move.jpg',
-  categories: ['Ominous', 'Chilling', 'Thriller', 'Serial Killer']
+  thumbnail: 'https://i.redd.it/q53e4iwud0971.jpg',
+  categories: ['Violent', 'Gritty', 'Thriller', 'Drug Lord']
 };
 
 export default function HomeScreen() {
@@ -31,7 +31,7 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const { tiltX, tiltY } = useDeviceMotion();
 
-  const SCROLL_THRESHOLD = 15;
+  const SCROLL_THRESHOLD = 4;
   const SLIDE_ACTIVATION_POINT = 90; // Point at which sliding can start
   const scrollY = useSharedValue(0);
   const lastScrollY = useSharedValue(0);
@@ -98,7 +98,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <StatusBar style="light" />
       <LinearGradient
-        colors={['#1e311b', '#002200', '#000000']}
+        colors={['#03341b', '#002820', '#000000']}
         locations={[0, 0.4, 0.8]}
         style={styles.gradient}
       />
