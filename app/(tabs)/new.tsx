@@ -208,7 +208,9 @@ export default function NewScreen() {
                         </View>
                     </View>
 
-                    <ScrollView>
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                    >
 
 
                         <View style={newStyles.activeTabContainer}>

@@ -337,8 +337,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2d2d2d',
         marginTop: height * 0.7, // This pushes the content down
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
+        borderTopLeftRadius: 14,
+        borderTopRightRadius: 14,
     },
     switchProfileContainer: {
         flex: 1,

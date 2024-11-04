@@ -66,7 +66,7 @@ export default function ProfileScreen() {
 
     return (
         <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
                     <Text style={styles.title}>My Netflix</Text>
                     <View style={styles.headerRight}>
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     menuText: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: '500',
         color: '#fff',
     },
