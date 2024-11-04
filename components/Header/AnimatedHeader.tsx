@@ -8,6 +8,7 @@ import Animated, {
     useAnimatedStyle,
     interpolate
 } from 'react-native-reanimated';
+import * as Haptics from 'expo-haptics';
 
 import { styles } from '@/styles';
 import { CategoriesListModal } from '../CategoriesListModal/CategoriesListModal';
@@ -23,6 +24,12 @@ interface AnimatedHeaderProps {
 export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: AnimatedHeaderProps) {
     const [showCategories, setShowCategories] = useState(false);
     const insets = useSafeAreaInsets();
+
+
+    const onCategoryPress = () => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        setShowCategories(true);
+    };
 
     const headerTitleStyle = useAnimatedStyle(() => {
         return {
@@ -91,7 +98,7 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
                         </Pressable>
                         <Pressable
                             style={styles.categoryTab}
-                            onPress={() => setShowCategories(true)}
+                            onPress={onCategoryPress}
                         >
                             <Text style={styles.categoryTabTextWithIcon}>Categories</Text>
                             <Ionicons name="chevron-down" size={16} color="#fff" />
