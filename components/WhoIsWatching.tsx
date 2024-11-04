@@ -106,7 +106,7 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                             easing: Easing.bezier(0.33, 0, 0.67, 1),
                         }),
                     },
-                ],
+                ]
             };
         }
 
