@@ -163,6 +163,7 @@ export const newStyles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 20,
         marginBottom: 16,
+        overflow: 'hidden',
     },
     tags: {
         flexDirection: 'row',

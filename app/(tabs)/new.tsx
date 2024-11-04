@@ -31,7 +31,7 @@ interface ComingSoonItem {
 
 const COMING_SOON_DATA: ComingSoonItem[] = [
     {
-        id: '1',
+        id: '-1',
         title: 'Jake Paul vs. Mike Tyson',
         date: 'NOV 15',
         imageUrl: 'https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABe2bvw9phUMK1Q7bwrtu1vIHZuqJnpH5MZOlIXePqKZay4zRFAo2NcKsYckFB4Q-uDPaSlpGDN57Q4gHJyW-LAiOQonOP9_m2BwBC36YzfDw9OGC-aFb7iUtk3hxGrx1wDA9MwM9olUNXK9Q_54Gaq0IPH1FelfhOdCOeVHIBNaqrO714jryhoRPT277og-tzWGzFEHA90tU5wSUDEHTePFNkuE8nviW3ba2yRXNrsFt3bZvPyuwoPYTfurBZ3OLO-WA9G3uZN5KieZs71cao2XUVzk5a8c6-yX3ILag1px5JJEdUWMpcevyzu7oJHI0leNZDwFhnHno1rrVhuGt0g0nbe21-3SicR3nBT3typIySugKkKvbs8Yei5HjggkFgmNCAEK13IGAhs_vvszZOpy9KUmiq4wuDkkkZgChcwLb000hXnOUHbnQeg.jpg?r=bfd',
@@ -41,7 +41,7 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
     },
 
     {
-        id: '2',
+        id: '0',
         title: 'My Boo',
         date: 'NOV 10',
         imageUrl: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABZ7I1Otnn_uWjUs8sZ3_33Hs_S4H9f1czAgLrrIwHuiAVZtYpoGb7PuafokPbqlca23N4AW8uhBT68YCGkmdzt4Gy7L0Lco4Kzvp.jpg?r=4e5',
@@ -50,15 +50,75 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABYQCLVhhcZ-wUcItP7QigVHhCd20AFvyssK-HBBWE4L9lSKfFfHJMA1PkRduUYlI_zLFswIDz9cPV5W9O0OXHhhhB2vSp0fKUDuTF0L8cNkjvkZouHWT5z1GaPjrK8lEjfmZ7lr3WYkp8wJ7DRftFJDYTYc68XCtomtoCUuX3KJggBDxu-XsZw.png?r=ea7'
     },
     {
-        id: '3',
-        title: 'Jake Paul vs. Mike Tyson',
-        date: 'NOV 15',
-        imageUrl: 'https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABe2bvw9phUMK1Q7bwrtu1vIHZuqJnpH5MZOlIXePqKZay4zRFAo2NcKsYckFB4Q-uDPaSlpGDN57Q4gHJyW-LAiOQonOP9_m2BwBC36YzfDw9OGC-aFb7iUtk3hxGrx1wDA9MwM9olUNXK9Q_54Gaq0IPH1FelfhOdCOeVHIBNaqrO714jryhoRPT277og-tzWGzFEHA90tU5wSUDEHTePFNkuE8nviW3ba2yRXNrsFt3bZvPyuwoPYTfurBZ3OLO-WA9G3uZN5KieZs71cao2XUVzk5a8c6-yX3ILag1px5JJEdUWMpcevyzu7oJHI0leNZDwFhnHno1rrVhuGt0g0nbe21-3SicR3nBT3typIySugKkKvbs8Yei5HjggkFgmNCAEK13IGAhs_vvszZOpy9KUmiq4wuDkkkZgChcwLb000hXnOUHbnQeg.jpg?r=bfd',
-        description: 'Jake Paul battles Mike Tyson as they headline this must-see boxing mega-event streaming live in five languages from AT&T Stadium in Arlington, Texas.',
-        rating: 'TV-14',
-        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABcvy79ayB-9FKjXltu6TB8XXlK-c2-9C6kQfkLw-JXDxuGS-LXytzHgw61Hva_YYsoQtazhZhfSgiyGsmP-NtS-KliYvUSJ1O4cMPBCwHGTU.png?r=011'
+        id: '1',
+        title: 'Outer Banks',
+        date: 'NOV 7',
+        description: 'Season 4: Part 2 of the popular teen mystery drama continues the adventures of the Pogues in their treasure-hunting escapades.',
+        rating: 'TV-MA',
     },
-    // Add more items...
+    {
+        id: '2',
+        title: 'cane',
+        date: 'NOV 9',
+        description: 'Season 2, Act I of the critically acclaimed animated series based on League of Legends returns with more action and intrigue.',
+        rating: 'TV-14',
+    },
+    {
+        id: '3',
+        title: 'The Lost City',
+        date: 'NOV 9',
+        description: 'A romantic comedy adventure starring Sandra Bullock and Channing Tatum as an unlikely duo thrust into a dangerous jungle expedition.',
+        rating: 'PG-13',
+    },
+    {
+        id: '4',
+        title: 'Emilia Pérez',
+        date: 'NOV 13',
+        description: 'A musical crime drama directed by Jacques Audiard, starring Zoe Saldaña and Selena Gomez, about a cartel leader\'s transformation.',
+        rating: 'R',
+    },
+    {
+        id: '5',
+        title: 'The Empress',
+        date: 'NOV 22',
+        description: 'Season 2 of the historical drama series continues to follow the life of Empress Elisabeth of Austria.',
+        rating: 'TV-MA',
+    },
+    {
+        id: '6',
+        title: 'The Madness',
+        date: 'NOV 28',
+        description: 'A thriller series starring Colman Domingo as a media pundit caught in a deadly conspiracy.',
+        rating: 'TV-MA',
+    },
+    {
+        id: '7',
+        title: 'Joy',
+        date: 'NOV 22',
+        description: 'A historical drama about the development of IVF technology in the 1960s and 1970s, starring Bill Nighy and Thomasin McKenzie.',
+        rating: 'PG-13',
+    },
+    {
+        id: '8',
+        title: 'The Piano Lesson',
+        date: 'NOV 22',
+        description: 'An adaptation of August Wilson\'s Pulitzer Prize-winning play about family legacy and the power of a piano.',
+        rating: 'PG-13',
+    },
+    {
+        id: '9',
+        title: 'Rhythm + Flow: Brazil',
+        date: 'NOV 12',
+        description: 'A new season of the hip-hop competition series, this time focusing on Brazilian talent.',
+        rating: 'TV-MA',
+    },
+    {
+        id: '10',
+        title: 'Tokyo Override',
+        date: 'NOV 21',
+        description: 'A new Japanese anime series set in a futuristic Tokyo.',
+        rating: 'TV-14',
+    }
 ];
 
 const TAB_OPTIONS = [
