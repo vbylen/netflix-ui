@@ -23,7 +23,7 @@ const SCALE_FACTOR = 0.83;
 const DRAG_THRESHOLD = Math.min(height * 0.20, 150);
 const HORIZONTAL_DRAG_THRESHOLD = Math.min(width * 0.51, 80);
 const DIRECTION_LOCK_ANGLE = 45;
-const ENABLE_HORIZONTAL_DRAG_CLOSE = true;
+const ENABLE_HORIZONTAL_DRAG_CLOSE = false;
 
 export default function SwitchProfileScreen() {
     const { id } = useLocalSearchParams();
@@ -211,6 +211,9 @@ export default function SwitchProfileScreen() {
                     scrollEventThrottle={16}
                     // bounces={scrollOffset.value >= 0 && !isDragging.value}
                     bounces={false}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    scrollEnabled={false}
 
 
                 />
@@ -301,7 +304,7 @@ export default function SwitchProfileScreen() {
                         </View>
 
                         <TouchableOpacity style={styles.doneButton}>
-                            <Ionicons name="pencil" size={24} color="#ffffffa7" />
+                            <Ionicons name="pencil" size={24} color="#ffffffba" />
                             <ThemedText style={styles.doneButtonText}>Manage Profiles</ThemedText>
                         </TouchableOpacity>
                     </View>
@@ -323,7 +326,7 @@ const styles = StyleSheet.create({
     },
     doneButtonText: {
         fontSize: 16,
-        color: '#ffffffa7',
+        color: '#ffffffba',
         fontWeight: '700',
     },
     container: {
@@ -401,9 +404,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     addProfileText: {
-        fontSize: 13,
+        fontSize: 12,
         color: '#ffffff',
-        marginTop: 8,
+        // marginTop: 8,
         fontWeight: '400',
     },
     closeButton: {
