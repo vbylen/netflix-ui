@@ -97,7 +97,7 @@ export default function ProfileScreen() {
                     </View>
                     <View style={styles.menuContent}>
                         <Text style={styles.menuText}>Notifications</Text>
-                        <Ionicons name="chevron-forward" size={20} color="#666" />
+                        <Ionicons name="chevron-forward" size={20} color="#fff" />
                     </View>
                 </TouchableOpacity>
 
@@ -122,7 +122,7 @@ export default function ProfileScreen() {
                     </View>
                     <View style={styles.menuContent}>
                         <Text style={styles.menuText}>Downloads</Text>
-                        <Ionicons name="chevron-forward" size={20} color="#666" />
+                        <Ionicons name="chevron-forward" size={20} color="#fff" />
                     </View>
                 </TouchableOpacity>
 
@@ -186,9 +186,12 @@ const styles = StyleSheet.create({
     menuItem: {
         paddingHorizontal: 16,
         paddingVertical: 12,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
     },
     menuIconContainer: {
-        marginBottom: 8,
+        // marginBottom: 8,
     },
     profileNameContainer: {
         flexDirection: 'row',
@@ -215,6 +218,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        flex: 1,
     },
     menuText: {
         fontSize: 16,
@@ -283,11 +287,11 @@ const styles = StyleSheet.create({
     },
     likedItemContainer: {
         marginRight: 16,
-        width: 200,
+        width: 90,
     },
     likedShowImage: {
-        width: 200,
-        height: 120,
+        width: 90,
+        height: 150,
         borderRadius: 8,
     },
     shareButton: {
