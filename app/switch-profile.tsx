@@ -1,40 +1,35 @@
 import React from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { StyleSheet, Dimensions, useColorScheme } from 'react-native';
+import { StyleSheet, Dimensions, TouchableOpacity, Image, View } from 'react-native';
 import { useEffect, useCallback, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ThemedView } from '@/components/ThemedView';
-import { ExpandedPlayer } from '@/components/BottomSheet/ExpandedPlayer';
+import { ThemedText } from '@/components/ThemedText';
 import { useRootScale } from '@/contexts/RootScaleContext';
+import { useUser } from '@/contexts/UserContext';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
     withSpring,
     withTiming,
     runOnJS,
+    FadeIn,
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { movies } from '@/data/movies.json';
 import * as Haptics from 'expo-haptics';
-import { BlurView } from 'expo-blur';
-import { Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
+const { width, height } = Dimensions.get('window');
 const SCALE_FACTOR = 0.83;
-const DRAG_THRESHOLD = Math.min(Dimensions.get('window').height * 0.20, 150);
-const HORIZONTAL_DRAG_THRESHOLD = Math.min(Dimensions.get('window').width * 0.51, 80);
-const DIRECTION_LOCK_ANGLE = 45; // Angle in degrees to determine horizontal vs vertical movement
+const DRAG_THRESHOLD = Math.min(height * 0.20, 150);
+const HORIZONTAL_DRAG_THRESHOLD = Math.min(width * 0.51, 80);
+const DIRECTION_LOCK_ANGLE = 45;
 const ENABLE_HORIZONTAL_DRAG_CLOSE = true;
-
-interface Movie {
-    id: number;
-    imageUrl: string;
-    // Add other movie properties as needed
-}
 
 export default function SwitchProfileScreen() {
     const { id } = useLocalSearchParams();
     const router = useRouter();
     const { setScale } = useRootScale();
+    const { profiles } = useUser();
     const translateY = useSharedValue(0);
     const isClosing = useRef(false);
     const statusBarStyle = useSharedValue<'light' | 'dark'>('light');
@@ -45,11 +40,9 @@ export default function SwitchProfileScreen() {
     const initialGestureY = useSharedValue(0);
     const isHorizontalGesture = useSharedValue(false);
     const isScrolling = useSharedValue(false);
-    const colorScheme = useColorScheme();
     const blurIntensity = useSharedValue(20);
 
     const numericId = typeof id === 'string' ? parseInt(id, 10) : Array.isArray(id) ? parseInt(id[0], 10) : 0;
-    const movie = movies.find((s: Movie) => s.id === numericId) || movies[0];
 
     const handleHapticFeedback = useCallback(() => {
         try {
@@ -225,6 +218,16 @@ export default function SwitchProfileScreen() {
         );
     }, [composedGestures]);
 
+    const handleProfileSelect = async (profileId: string) => {
+        try {
+            handleHapticFeedback();
+            // Add your profile switching logic here
+            goBack();
+        } catch (error) {
+            console.log('Error switching profile:', error);
+        }
+    };
+
     const animatedStyle = useAnimatedStyle(() => ({
         transform: [
             { translateY: translateY.value },
@@ -232,8 +235,6 @@ export default function SwitchProfileScreen() {
         ],
         opacity: withSpring(1),
     }));
-
-
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -255,19 +256,52 @@ export default function SwitchProfileScreen() {
     }, []);
 
     return (
-        <ThemedView style={styles.container}>
+        <View style={styles.container}>
             <StatusBar animated={true} style={statusBarStyle.value} />
             <Animated.View style={[styles.modalContent, animatedStyle]}>
                 <ScrollComponent>
                     <View style={styles.switchProfileContainer}>
-                        <Text>Switch Profile</Text>
-                        <View>
-                            <Text>Profiles</Text>
+                        <View style={styles.header}>
+                            <View style={styles.headerTitle}>
+                                <ThemedText style={styles.title}>Switch Profile</ThemedText>
+                            </View>
+                            <TouchableOpacity>
+                                <ThemedText style={styles.editButton}>Edit</ThemedText>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styles.gridContainer}>
+                            {profiles.map((profile, index) => (
+                                <Animated.View
+                                    key={profile.id}
+                                    entering={FadeIn.delay(index * 100)}
+                                >
+                                    <TouchableOpacity
+                                        onPress={() => handleProfileSelect(profile.id)}
+                                        style={styles.profileButton}
+                                    >
+                                        <View style={styles.profileContainer}>
+                                            <Image
+                                                source={{ uri: profile.avatar }}
+                                                style={styles.avatar}
+                                            />
+                                            <ThemedText style={styles.profileName}>{profile.name}</ThemedText>
+                                        </View>
+                                    </TouchableOpacity>
+                                </Animated.View>
+                            ))}
+
+                            <TouchableOpacity style={styles.profileButton}>
+                                <View style={styles.addProfileContainer}>
+                                    <Ionicons name="add" size={44} color="#fff" />
+                                </View>
+                                <ThemedText style={styles.addProfileText}>Add Profile</ThemedText>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </ScrollComponent>
             </Animated.View>
-        </ThemedView>
+        </View>
     );
 }
 
@@ -278,13 +312,80 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         flex: 1,
-        backgroundColor: 'transparent',
-        justifyContent: 'flex-end',
+        backgroundColor: '#2d2d2d',
+        marginTop: height * 0.5, // This pushes the content down
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
     },
     switchProfileContainer: {
         flex: 1,
-        backgroundColor: 'red',
-        height: '100%',
-        bottom: 0,
+        paddingTop: 20,
+        minHeight: height * 0.7, // Ensures the container takes up at least 70% of screen height
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        marginBottom: 30,
+    },
+    headerTitle: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: '#fff',
+    },
+    editButton: {
+        fontSize: 16,
+        color: '#fff',
+        fontWeight: '600',
+    },
+    gridContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 4,
+        paddingHorizontal: 20,
+    },
+    profileButton: {
+        width: width * 0.30,
+        aspectRatio: 1,
+        marginBottom: 24,
+        alignItems: 'center',
+    },
+    profileContainer: {
+        alignItems: 'center',
+        gap: 8,
+    },
+    avatar: {
+        width: '80%',
+        height: undefined,
+        aspectRatio: 1,
+        borderRadius: 6,
+    },
+    profileName: {
+        fontSize: 18,
+        fontWeight: '500',
+        color: '#e5e5e5',
+    },
+    addProfileContainer: {
+        width: width * (0.30 - 0.06),
+        aspectRatio: 1,
+        borderRadius: 6,
+        borderWidth: 2,
+        borderColor: '#424242',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
+    addProfileText: {
+        fontSize: 18,
+        color: '#ffffff',
+        marginTop: 8,
+        fontWeight: '400',
     },
 });
