@@ -68,7 +68,7 @@ export const newStyles = StyleSheet.create({
         color: '#000',
     },
     comingSoonList: {
-        paddingTop: 8,
+        // paddingTop: 8,
     },
     comingSoonItem: {
         marginBottom: 32,
@@ -80,7 +80,10 @@ export const newStyles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        paddingRight: 16,
+        marginHorizontal: 8,
+        borderWidth: 1,
+        borderColor: '#ffffff36',
+        borderRadius: 8,
     },
     dateMonth: {
         color: '#ffffffcc',
@@ -96,11 +99,12 @@ export const newStyles = StyleSheet.create({
     },
     previewCard: {
         width: '100%',
-        height: 210,
         aspectRatio: 16 / 9,
         marginBottom: 12,
         borderRadius: 8,
         overflow: 'hidden',
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0
     },
     previewImage: {
         width: '100%',
@@ -112,7 +116,7 @@ export const newStyles = StyleSheet.create({
         fontWeight: '600',
     },
     activeTabContainer: {
-        paddingTop: 30,
+        // paddingTop: 30,
         alignItems: 'center',
         flexDirection: 'row',
         paddingLeft: 10,
@@ -154,7 +158,7 @@ export const newStyles = StyleSheet.create({
     },
     eventDate: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 12,
         marginBottom: 8,
         marginTop: 8,
     },
@@ -169,22 +173,50 @@ export const newStyles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         gap: 4,
+        marginTop: 8
     },
     tag: {
-        color: '#999',
-        fontSize: 12,
+        color: '#71767c',
+        fontSize: 13
     },
     actionButtons: {
         flexDirection: 'row',
         gap: 48,
-        marginTop: 16,
+        marginTop: 0,
+        marginHorizontal: 8,
+        marginBottom: 16
     },
     actionButton: {
         alignItems: 'center',
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 4,
+        padding: 8,
+        borderRadius: 4,
+        paddingHorizontal: 16
+
     },
     actionButtonText: {
+        color: '#000000',
+        fontSize: 18,
+        fontWeight: '600'
+    },
+    titleContainer: {
+        paddingTop: 12,
+        paddingHorizontal: 12,
+        gap: 4
+    },
+    eventDate: {
         color: '#fff',
-        marginTop: 4,
+        fontSize: 18,
+        fontWeight: '600'
+    },
+    netflixTag: {
+        color: '#fff',
         fontSize: 12,
+        fontWeight: '500',
+        marginLeft: 24
     }
 });

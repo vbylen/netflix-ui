@@ -34,10 +34,10 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         id: '-1',
         title: 'Jake Paul vs. Mike Tyson',
         date: 'NOV 15',
-        imageUrl: 'https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABe2bvw9phUMK1Q7bwrtu1vIHZuqJnpH5MZOlIXePqKZay4zRFAo2NcKsYckFB4Q-uDPaSlpGDN57Q4gHJyW-LAiOQonOP9_m2BwBC36YzfDw9OGC-aFb7iUtk3hxGrx1wDA9MwM9olUNXK9Q_54Gaq0IPH1FelfhOdCOeVHIBNaqrO714jryhoRPT277og-tzWGzFEHA90tU5wSUDEHTePFNkuE8nviW3ba2yRXNrsFt3bZvPyuwoPYTfurBZ3OLO-WA9G3uZN5KieZs71cao2XUVzk5a8c6-yX3ILag1px5JJEdUWMpcevyzu7oJHI0leNZDwFhnHno1rrVhuGt0g0nbe21-3SicR3nBT3typIySugKkKvbs8Yei5HjggkFgmNCAEK13IGAhs_vvszZOpy9KUmiq4wuDkkkZgChcwLb000hXnOUHbnQeg.jpg?r=bfd',
+        imageUrl: 'https://occ-0-2430-2433.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABSWRinEsQOaPuYqcT8MP4lkknrc5czNm9qgpVzfBrl7maTIufi_VLNohrkfAyT4zPnHfos7z0-PMaq-cjPP8qI4fmsmo7F4nRO6M.jpg?r=77a',
         description: 'Jake Paul battles Mike Tyson as they headline this must-see boxing mega-event streaming live in five languages from AT&T Stadium in Arlington, Texas.',
         rating: 'TV-14',
-        logo: 'https://i.imgur.com/u5gJO8v.png'
+        logo: 'https://path/to/event-logo.png'
     },
 
     {
@@ -171,10 +171,7 @@ export default function NewScreen() {
 
     const renderComingSoonItem = (item: ComingSoonItem) => (
         <View key={item.id} style={newStyles.comingSoonItem}>
-            <View style={newStyles.dateContainer}>
-                <Text style={newStyles.dateMonth}>{item.date.split(' ')[0]}</Text>
-                <Text style={newStyles.dateDay}>{item.date.split(' ')[1]}</Text>
-            </View>
+
 
             <View style={newStyles.contentContainer}>
                 <View style={newStyles.previewCard}>
@@ -186,19 +183,13 @@ export default function NewScreen() {
                 <View style={newStyles.featuredContainer}>
 
                     <View style={{ gap: 6 }}>
-                        <Image source={{ uri: item.logo }} style={newStyles.featuredLogo} />
+                        <Image
+                            source={{ uri: 'https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2023.ico' }}
+                            style={{ width: 16, height: 16, marginRight: 4 }}
+                        />
 
                     </View>
-                    <View style={newStyles.actionButtons}>
-                        <Pressable style={newStyles.actionButton}>
-                            <Ionicons name="notifications-outline" size={24} color="#fff" />
-                            <Text style={newStyles.actionButtonText}>Remind Me</Text>
-                        </Pressable>
-                        <Pressable style={newStyles.actionButton}>
-                            <Ionicons name="information-circle-outline" size={24} color="#fff" />
-                            <Text style={newStyles.actionButtonText}>Info</Text>
-                        </Pressable>
-                    </View>
+
                 </View>
 
                 <View style={newStyles.titleContainer}>
@@ -213,21 +204,16 @@ export default function NewScreen() {
                     </View>
                     <Text style={newStyles.title}>{item.title}</Text>
                     <Text style={newStyles.description}>{item.description}</Text>
-                    <View style={newStyles.tags}>
-                        <Text style={newStyles.tag}>Rousing</Text>
-                        <Text style={newStyles.tag}>•</Text>
-                        <Text style={newStyles.tag}>Exciting</Text>
-                        <Text style={newStyles.tag}>•</Text>
-                        <Text style={newStyles.tag}>Sports Event</Text>
-                        <Text style={newStyles.tag}>•</Text>
-                        <Text style={newStyles.tag}>Clash of Generations</Text>
-                        <Text style={newStyles.tag}>•</Text>
-                        <Text style={newStyles.tag}>Boxing</Text>
-                        <Text style={newStyles.tag}>•</Text>
-                        <Text style={newStyles.tag}>TV-14</Text>
-                    </View>
+
                 </View>
 
+                <View style={newStyles.actionButtons}>
+                    <Pressable style={newStyles.actionButton}>
+                        <Ionicons name="notifications-outline" size={20} color="#000" />
+                        <Text style={newStyles.actionButtonText}>Remind Me</Text>
+                    </Pressable>
+
+                </View>
             </View>
         </View>
     );
@@ -282,7 +268,7 @@ export default function NewScreen() {
                         showsVerticalScrollIndicator={false}
 
                     >
-
+                        {/* 
 
                         <View style={newStyles.activeTabContainer}>
 
@@ -291,7 +277,7 @@ export default function NewScreen() {
                                 style={newStyles.activeTabIcon}
                             />
                             <Text style={newStyles.activeTabTitle}>Coming Soon</Text>
-                        </View>
+                        </View> */}
 
 
 
