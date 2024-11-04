@@ -49,8 +49,9 @@ export const styles = StyleSheet.create({
         marginTop: 4
     },
     categoryTab: {
-        paddingVertical: 7,
+        // paddingVertical: 7,
         paddingHorizontal: 16,
+        height: 34,
         borderWidth: 1,
         borderColor: 'rgba(255, 255, 255, 0.3)',
         borderRadius: 20,
