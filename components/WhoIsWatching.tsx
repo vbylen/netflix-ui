@@ -8,9 +8,9 @@ import Animated, {
     useSharedValue,
     runOnJS,
     FadeIn,
-    withRepeat,
     withSequence,
     withDelay,
+    withRepeat,
 } from 'react-native-reanimated';
 import { ThemedText } from './ThemedText';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,7 +18,10 @@ import { useUser } from '@/contexts/UserContext';
 import { Audio } from 'expo-av';
 import Svg, { Circle } from 'react-native-svg';
 
+
 const { width, height } = Dimensions.get('window');
+const PROFILE_ICON_SIZE = 32; // Size of the profile icon in the top-right corner
+const PROFILE_ICON_MARGIN = 16; // Margin from the top and right edges
 
 interface Profile {
     id: string;
@@ -35,6 +38,7 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
     const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
     const [isAnimating, setIsAnimating] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
+    const [isMinimizing, setIsMinimizing] = useState(false);
     const profileRefs = useRef<{ [key: string]: LayoutRectangle | null }>({});
     const spinnerRotation = useSharedValue(0);
 
@@ -58,6 +62,10 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
     const spinnerStyle = useAnimatedStyle(() => {
         return {
             transform: [{ rotateZ: `${spinnerRotation.value}deg` }],
+            opacity: withTiming(isMinimizing ? 0 : 1, {
+                duration: 300,
+                easing: Easing.bezier(0.33, 0, 0.67, 1),
+            }),
         };
     });
 
@@ -66,7 +74,41 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
 
         const finalSize = width * 0.45;
         const centerY = height / 2;
-        const targetY = centerY - finalSize / 2 - 100; // Moved up to make room for spinner
+        const targetY = centerY - finalSize / 2 - 100;
+
+        if (isMinimizing) {
+            return {
+                position: 'absolute',
+                width: withTiming(PROFILE_ICON_SIZE, {
+                    duration: 500,
+                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                }),
+                height: withTiming(PROFILE_ICON_SIZE, {
+                    duration: 500,
+                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                }),
+                top: withTiming(height - 70, {
+                    duration: 500,
+                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                }),
+                left: withTiming(width - 80, {
+                    duration: 500,
+                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                }),
+                borderRadius: withTiming(PROFILE_ICON_SIZE / 2, {
+                    duration: 500,
+                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                }),
+                transform: [
+                    {
+                        scale: withTiming(1, {
+                            duration: 500,
+                            easing: Easing.bezier(0.33, 0, 0.67, 1),
+                        }),
+                    },
+                ],
+            };
+        }
 
         return {
             position: 'absolute',
@@ -135,13 +177,18 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                         duration: 1000,
                         easing: Easing.linear,
                     }),
-                    -1, // Infinite repetition
-                    false // Don't reverse the animation
+                    -1,
+                    false
                 );
             }, 800);
 
+            // Start minimizing animation after 2 seconds
             setTimeout(() => {
-                runOnJS(onProfileSelect)(profile.id);
+                setIsMinimizing(true);
+                // Call onProfileSelect after minimizing animation
+                setTimeout(() => {
+                    runOnJS(onProfileSelect)(profile.id);
+                }, 500);
             }, 2000);
         } catch (error) {
             console.log('Error playing sound:', error);
@@ -226,11 +273,17 @@ const styles = StyleSheet.create({
     spinnerContainer: {
         position: 'absolute',
         left: width / 2 - 50,
-        top: height / 2 + 50, // Position below the centered profile image
+        top: height / 2 + 50,
         width: 100,
         height: 100,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    selectedAvatar: {
+        position: 'absolute',
+        width: width * 0.3,
+        height: width * 0.3,
+        borderRadius: 8,
     },
 
     container: {
@@ -312,11 +365,5 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         marginTop: 8,
         fontWeight: '400',
-    },
-    selectedAvatar: {
-        position: 'absolute',
-        width: width * 0.3,
-        height: width * 0.3,
-        borderRadius: 8,
     },
 });
