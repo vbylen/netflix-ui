@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Pressable, ScrollView } from 'react-native';
+import { View, Text, Pressable, ScrollView, Modal, StyleSheet } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 interface CategoriesListModalProps {
     visible: boolean;
@@ -41,50 +41,62 @@ const categories = [
 export function CategoriesListModal({ visible, onClose }: CategoriesListModalProps) {
     const insets = useSafeAreaInsets();
 
-    if (!visible) return null;
+    const handleCategoryPress = async (category: string) => {
+        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    };
+
+    const handleClose = async () => {
+        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        onClose();
+    };
 
     return (
-        <View style={styles.overlay}>
-            <BlurView intensity={90} tint="dark" style={StyleSheet.absoluteFill}>
-                <ScrollView
-                    style={[styles.content, { paddingTop: insets.top }]}
-                    contentContainerStyle={[
-                        styles.scrollContent,
-                        { paddingBottom: insets.bottom + 80 }
-                    ]}
-                >
-                    {categories.map((category) => (
-                        <Pressable
-                            key={category}
-                            style={styles.categoryItem}
-                        >
-                            <Text style={styles.categoryText}>{category}</Text>
-                        </Pressable>
-                    ))}
-                </ScrollView>
+        <Modal
+            visible={visible}
+            animationType="fade"
+            transparent
+            statusBarTranslucent
+            onRequestClose={handleClose}
+        >
+            <View style={styles.overlay}>
+                <BlurView intensity={96} tint="dark" style={StyleSheet.absoluteFill}>
+                    <ScrollView
+                        style={[styles.content, { paddingTop: insets.top }]}
+                        contentContainerStyle={[
+                            styles.scrollContent,
 
-                <View style={[styles.bottomContainer, { paddingBottom: insets.bottom + 20 }]}>
-                    <Pressable
-                        style={styles.closeButton}
-                        onPress={onClose}
+                            { paddingTop: 40, paddingBottom: insets.bottom + 80 }
+                        ]}
                     >
-                        <Ionicons name="close" size={24} color="#fff" />
-                    </Pressable>
-                </View>
-            </BlurView>
-        </View>
+                        {categories.map((category) => (
+                            <Pressable
+                                key={category}
+                                style={styles.categoryItem}
+                                onPress={() => handleCategoryPress(category)}
+                            >
+                                <Text style={styles.categoryText}>{category}</Text>
+                            </Pressable>
+                        ))}
+                    </ScrollView>
+
+                    <View style={[styles.bottomContainer, { paddingBottom: insets.bottom + 20 }]}>
+                        <Pressable
+                            style={styles.closeButton}
+                            onPress={handleClose}
+                        >
+                            <Ionicons name="close" size={26} color="#000" />
+                        </Pressable>
+                    </View>
+                </BlurView>
+            </View>
+        </Modal>
     );
 }
 
 const styles = StyleSheet.create({
     overlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 9999,
-        elevation: 9999,
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     content: {
         flex: 1,
@@ -93,10 +105,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     categoryItem: {
-        paddingVertical: 14,
+        paddingVertical: 18,
     },
     categoryText: {
-        color: 'rgba(255, 255, 255, 0.609)',
+        color: 'rgba(255, 255, 255, 0.501)',
         fontSize: 18,
         fontWeight: '400',
     },
@@ -110,10 +122,10 @@ const styles = StyleSheet.create({
         zIndex: 1000,
     },
     closeButton: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        backgroundColor: 'rgba(255, 255, 255, 1)',
         alignItems: 'center',
         justifyContent: 'center',
     },
