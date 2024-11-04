@@ -1,18 +1,67 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, ScrollView, Text, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView, Text, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
 
+
+const exampleLikedShowsAndMovies = [
+    { id: 2, imageUrl: 'https://occ-0-2348-2568.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU2Tv7ElpWoaZskSjugnCfgUyxx0k8zFkrSLnw8OByra6I4Pu0hvpNMKPqHKk0_VIq_pP47WE4eiU6bLjH30mOAHixRdrQeMX5296hvGq7hFvPhm-1kaKYp2MLO5H3oxUV1q8UEmz3NwsmrYXnnzvNJ2aXgp7drGClF671VG2U62G9s3qaes9qXaz6ChmJpD31wnaRJjsoqvybX0wzGk0Ij_wU1zH2yqI5b7fNA3D4-AsawmmgN6jCiScTDHpH-252lKjP9LJsbjwVGMht06gnyOeADlJQ.jpg' },
+    { id: 3, imageUrl: 'https://occ-0-2348-2568.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU2Tv7ElpWoaZskSjugnCfgUyxx0k8zFkrSLnw8OByra6I4Pu0hvpNMKPqHKk0_VIq_pP47WE4eiU6bLjH30mOAHixRdrQeMX5296hvGq7hFvPhm-1kaKYp2MLO5H3oxUV1q8UEmz3NwsmrYXnnzvNJ2aXgp7drGClF671VG2U62G9s3qaes9qXaz6ChmJpD31wnaRJjsoqvybX0wzGk0Ij_wU1zH2yqI5b7fNA3D4-AsawmmgN6jCiScTDHpH-252lKjP9LJsbjwVGMht06gnyOeADlJQ.jpg' },
+];
+
 export default function ProfileScreen() {
     const { selectedProfile } = useUser();
+
+    const renderLikedContent = () => (
+        <View style={styles.likedContent}>
+            <FlatList
+                horizontal
+                data={exampleLikedShowsAndMovies}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({ item }) => (
+                    <View style={styles.likedItemContainer}>
+                        <Image
+                            source={{ uri: item.imageUrl }}
+                            style={styles.likedShowImage}
+                        />
+                        <TouchableOpacity style={styles.shareButton}>
+                            <Ionicons name="share-outline" size={24} color="white" />
+                            <Text style={styles.shareText}>Share</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+                showsHorizontalScrollIndicator={false}
+            />
+        </View>
+    );
+
+    const renderMyList = () => (
+        <FlatList
+            horizontal
+            data={[1, 2, 3, 4]} // Replace with actual data
+            renderItem={({ item }) => (
+                <Image
+                    style={styles.myListImage}
+                    source={{ uri: 'https://path-to-show-image.jpg' }}
+                />
+            )}
+            showsHorizontalScrollIndicator={false}
+            style={styles.myList}
+        />
+    );
 
     return (
         <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>My Netflix</Text>
-                <TouchableOpacity style={styles.searchButton}>
-                    <Ionicons name="search" size={24} color="white" />
-                </TouchableOpacity>
+                <View style={styles.headerRight}>
+                    <TouchableOpacity style={styles.searchButton}>
+                        <Ionicons name="search" size={24} color="white" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuButton}>
+                        <Ionicons name="menu" size={24} color="white" />
+                    </TouchableOpacity>
+                </View>
             </View>
 
             <View style={styles.profileSection}>
@@ -63,6 +112,17 @@ export default function ProfileScreen() {
 
             <View style={styles.section}>
                 <Text style={styles.sectionHeader}>TV Shows & Movies You've Liked</Text>
+                {renderLikedContent()}
+            </View>
+
+            <View style={styles.section}>
+                <View style={styles.sectionHeaderContainer}>
+                    <Text style={styles.sectionHeader}>My List</Text>
+                    <TouchableOpacity>
+                        <Text style={styles.seeAll}>See All</Text>
+                    </TouchableOpacity>
+                </View>
+                {renderMyList()}
             </View>
         </ScrollView>
     );
@@ -188,5 +248,52 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '700',
         color: '#fff',
+    },
+    headerRight: {
+        flexDirection: 'row',
+        gap: 16,
+    },
+    menuButton: {
+        padding: 8,
+    },
+    likedContent: {
+        marginTop: 12,
+    },
+    likedItemContainer: {
+        marginRight: 16,
+        width: 200,
+    },
+    likedShowImage: {
+        width: 200,
+        height: 120,
+        borderRadius: 8,
+    },
+    shareButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+        paddingVertical: 8,
+    },
+    shareText: {
+        color: 'white',
+        fontSize: 14,
+    },
+    sectionHeaderContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    seeAll: {
+        color: 'white',
+        fontSize: 14,
+    },
+    myList: {
+        marginTop: 12,
+    },
+    myListImage: {
+        width: 120,
+        height: 180,
+        borderRadius: 4,
+        marginRight: 8,
     },
 }); 
