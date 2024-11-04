@@ -37,7 +37,7 @@ function AnimatedStack() {
     };
   });
 
-  return <WhoIsWatching onProfileSelect={selectProfile} />;
+  // return <WhoIsWatching onProfileSelect={selectProfile} />;
 
 
   if (!selectedProfile) {

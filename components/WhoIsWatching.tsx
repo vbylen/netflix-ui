@@ -7,6 +7,8 @@ import Animated, {
     Easing,
     useSharedValue,
     runOnJS,
+    withDelay,
+    FadeIn,
 } from 'react-native-reanimated';
 import { ThemedText } from './ThemedText';
 import { Ionicons } from '@expo/vector-icons';
@@ -87,7 +89,6 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                     }),
                 },
             ],
-            opacity: 1,
             borderRadius: withTiming(12, {
                 duration: 700,
                 easing: Easing.bezier(0.33, 0, 0.67, 1),
@@ -137,23 +138,27 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
 
             <View style={styles.content}>
                 <Animated.View style={[styles.gridContainer, containerStyle]}>
-                    {profiles.map((profile) => (
-                        <TouchableOpacity
+                    {profiles.map((profile, index) => (
+                        <Animated.View
                             key={profile.id}
-                            onPress={() => handleProfileSelect(profile)}
-                            style={styles.profileButton}
-                            onLayout={(event) => {
-                                profileRefs.current[profile.id] = event.nativeEvent.layout;
-                            }}
+                            entering={FadeIn.delay(index * 100)}
                         >
-                            <Animated.View style={styles.profileContainer}>
-                                <Animated.Image
-                                    source={{ uri: profile.avatar }}
-                                    style={styles.avatar}
-                                />
-                                <ThemedText style={styles.profileName}>{profile.name}</ThemedText>
-                            </Animated.View>
-                        </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => handleProfileSelect(profile)}
+                                style={styles.profileButton}
+                                onLayout={(event) => {
+                                    profileRefs.current[profile.id] = event.nativeEvent.layout;
+                                }}
+                            >
+                                <Animated.View style={styles.profileContainer}>
+                                    <Animated.Image
+                                        source={{ uri: profile.avatar }}
+                                        style={styles.avatar}
+                                    />
+                                    <ThemedText style={styles.profileName}>{profile.name}</ThemedText>
+                                </Animated.View>
+                            </TouchableOpacity>
+                        </Animated.View>
                     ))}
 
                     <TouchableOpacity style={styles.profileButton}>
@@ -174,7 +179,6 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
         </SafeAreaView>
     );
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -197,7 +201,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 40,
         justifyContent: 'center'
-
     },
     title: {
         fontSize: 20,
@@ -252,8 +255,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'transparent',
     },
-    plusIcon: {
-    },
     addProfileText: {
         fontSize: 18,
         color: '#ffffff',
@@ -266,4 +267,4 @@ const styles = StyleSheet.create({
         height: width * 0.3,
         borderRadius: 8,
     },
-}); 
+});
