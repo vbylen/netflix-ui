@@ -201,6 +201,15 @@ export const styles = StyleSheet.create({
         marginRight: 12,
         position: 'relative',
     },
+    title: {
+        color: '#fff',
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
+    type: {
+        color: '#999',
+        fontSize: 12,
+    },
     thumbnail: {
         width: '100%',
         aspectRatio: 2 / 3,

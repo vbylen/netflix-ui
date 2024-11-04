@@ -21,6 +21,7 @@ import { MoviesData } from '@/types/movie';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
+import { GameList } from '@/components/GameList/GameList';
 
 const FEATURED_MOVIE = {
   id: 'dont-move',
@@ -141,7 +142,7 @@ export default function HomeScreen() {
           />
 
           {movies.map(row => (
-            <MovieList key={row.rowTitle} {...row} />
+            row.rowTitle === 'Mobile Games' ? <GameList key={row.rowTitle} {...row} /> : <MovieList key={row.rowTitle} {...row} />
           ))}
         </Animated.ScrollView>
       </View>

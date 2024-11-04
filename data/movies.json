@@ -1,7 +1,7 @@
 {
     "movies": [
         {
-            "rowTitle": "Best of React Native",
+            "rowTitle": "Today's Top Picks for You",
             "movies": [
                 {
                     "id": "81681817",
@@ -162,6 +162,29 @@
                 {
                     "id": "80192612",
                     "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABTQNS1iBZYCkgcpBGyIKp2t3_M1ZIDW8eJ4Ilw7VJxENo8J5HPrzxJMjpyq_6BgUSvUTHwk6Q_CcBITIl0meM2MxxKnM4SLrKOc.jpg?r=5cd"
+                }
+            ]
+        },
+        {
+            "rowTitle": "Mobile Games",
+            "movies": [
+                {
+                    "id": "1",
+                    "imageUrl": "https://dnm.nflximg.net/api/v6/2DuQlx0fM4wd1nzqm5BFBi6ILa8/AAAAQXlHfX_1WN1bSiZv4jXieBsZbXRLNIUU9BPzv0Cohep2F2pmqrMzmWwRp7anXyBLRGhrBKMOuoAZoj9v8Si3-mJ6o2-5bc6o2YZtsJSIgpOiM4gcLAETYcGsppaorpaRaXWzgZBX5ftLz-15gi1mBNcD.jpg?r=77f",
+                    "title": "Dead Cells",
+                    "type": "Action"
+                },
+                {
+                    "id": "2",
+                    "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABUnmXd_soPCc_iFqnOjPVvz_-JU4afIKWthsrcwze8yW5-YgVMkW3cdvR-FPAEZY1VHmSXlg0v0s3N_jpc3VzzyST6RGHVweTIQ2W0TqkT7qJ9Fhvp0xApz8fks4_t-BnIdYL2AjbacP9VB9H0xiaHlKiIEWPGBEhWYpwnqpRwcThzdXMH2blYjIo1-RYrjC7FClE6y95fEPXZku1KytM5O0-4MUaEYEz2zqrRdJCMRCgbxrgvgZbY2hmSe5ip8xLb-GoRmiGF0PorJtwL-0WLrUEgV9.jpg?r=592",
+                    "title": "Subway Surfers",
+                    "type": "Adventure"
+                },
+                {
+                    "id": "3",
+                    "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABUnmXd_soPCc_iFqnOjPVvz_-JU4afIKWthsrcwze8yW5-YgVMkW3cdvR-FPAEZY1VHmSXlg0v0s3N_jpc3VzzyST6RGHVweTIQ2W0TqkT7qJ9Fhvp0xApz8fks4_t-BnIdYL2AjbacP9VB9H0xiaHlKiIEWPGBEhWYpwnqpRwcThzdXMH2blYjIo1-RYrjC7FClE6y95fEPXZku1KytM5O0-4MUaEYEz2zqrRdJCMRCgbxrgvgZbY2hmSe5ip8xLb-GoRmiGF0PorJtwL-0WLrUEgV9.jpg?r=592",
+                    "title": "Subway Surfers",
+                    "type": "Adventure"
                 }
             ]
         },
