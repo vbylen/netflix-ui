@@ -25,7 +25,7 @@ export default function ProfileScreen() {
                             style={styles.likedShowImage}
                         />
                         <TouchableOpacity style={styles.shareButton}>
-                            <Ionicons name="share-outline" size={24} color="white" />
+                            <Ionicons name="ios-send-outline" size={24} color="white" />
                             <Text style={styles.shareText}>Share</Text>
                         </TouchableOpacity>
                     </View>
@@ -69,8 +69,10 @@ export default function ProfileScreen() {
                     source={{ uri: selectedProfile?.avatar }}
                     style={styles.profileImage}
                 />
-                <Text style={styles.profileName}>{selectedProfile?.name}</Text>
-                <Ionicons name="chevron-down" size={16} color="white" />
+                <View style={styles.profileNameContainer}>
+                    <Text style={styles.profileName}>{selectedProfile?.name}</Text>
+                    <Ionicons name="chevron-down" size={16} color="white" />
+                </View>
             </View>
 
             <TouchableOpacity style={styles.menuItem}>
@@ -150,15 +152,15 @@ const styles = StyleSheet.create({
         padding: 8,
     },
     profileSection: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         paddingHorizontal: 16,
         paddingVertical: 12,
         gap: 8,
     },
     profileImage: {
-        width: 40,
-        height: 40,
+        width: 60,
+        height: 60,
         borderRadius: 4,
     },
     profileName: {
@@ -172,6 +174,11 @@ const styles = StyleSheet.create({
     },
     menuIconContainer: {
         marginBottom: 8,
+    },
+    profileNameContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
     },
     notificationIconContainer: {
         width: 40,
