@@ -299,6 +299,11 @@ export default function SwitchProfileScreen() {
                             </TouchableOpacity>
 
                         </View>
+
+                        <TouchableOpacity style={styles.doneButton}>
+                            <Ionicons name="pencil" size={24} color="#ffffffa7" />
+                            <ThemedText style={styles.doneButtonText}>Manage Profiles</ThemedText>
+                        </TouchableOpacity>
                     </View>
                 </ScrollComponent>
             </Animated.View>
@@ -307,6 +312,20 @@ export default function SwitchProfileScreen() {
 }
 
 const styles = StyleSheet.create({
+    doneButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
+        paddingHorizontal: 20,
+        marginBottom: 20,
+        justifyContent: 'center',
+        marginTop: 12,
+    },
+    doneButtonText: {
+        fontSize: 16,
+        color: '#ffffffa7',
+        fontWeight: '700',
+    },
     container: {
         flex: 1,
         backgroundColor: '#0000008a',
