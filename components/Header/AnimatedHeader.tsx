@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { styles } from '@/styles';
+import { CategoriesListModal } from '../CategoriesListModal/CategoriesListModal';
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
@@ -20,6 +21,7 @@ interface AnimatedHeaderProps {
 }
 
 export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: AnimatedHeaderProps) {
+    const [showCategories, setShowCategories] = useState(false);
     const insets = useSafeAreaInsets();
 
     const headerTitleStyle = useAnimatedStyle(() => {
@@ -67,31 +69,41 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
     });
 
     return (
-        <Animated.View style={[styles.header]}>
-            <AnimatedBlurView
-                tint="systemUltraThinMaterialDark"
-                style={[styles.blurContainer, { paddingTop: insets.top }]}
-                animatedProps={headerAnimatedProps}
-            >
-                <Animated.View style={[styles.headerTitleContainer, headerTitleStyle]}>
-                    <Text style={styles.headerTitle}>{title}</Text>
-                    <Pressable style={styles.searchButton}>
-                        <Ionicons name="search" size={24} color="#fff" />
-                    </Pressable>
-                </Animated.View>
-                <Animated.View style={[styles.categoryTabs, tabsAnimatedStyle]}>
-                    <Pressable style={styles.categoryTab}>
-                        <Text style={styles.categoryTabText}>TV Shows</Text>
-                    </Pressable>
-                    <Pressable style={styles.categoryTab}>
-                        <Text style={styles.categoryTabText}>Movies</Text>
-                    </Pressable>
-                    <Pressable style={styles.categoryTab}>
-                        <Text style={styles.categoryTabTextWithIcon}>Categories</Text>
-                        <Ionicons name="chevron-down" size={16} color="#fff" />
-                    </Pressable>
-                </Animated.View>
-            </AnimatedBlurView>
-        </Animated.View>
+        <>
+            <Animated.View style={[styles.header]}>
+                <AnimatedBlurView
+                    tint="systemUltraThinMaterialDark"
+                    style={[styles.blurContainer, { paddingTop: insets.top }]}
+                    animatedProps={headerAnimatedProps}
+                >
+                    <Animated.View style={[styles.headerTitleContainer, headerTitleStyle]}>
+                        <Text style={styles.headerTitle}>{title}</Text>
+                        <Pressable style={styles.searchButton}>
+                            <Ionicons name="search" size={24} color="#fff" />
+                        </Pressable>
+                    </Animated.View>
+                    <Animated.View style={[styles.categoryTabs, tabsAnimatedStyle]}>
+                        <Pressable style={styles.categoryTab}>
+                            <Text style={styles.categoryTabText}>TV Shows</Text>
+                        </Pressable>
+                        <Pressable style={styles.categoryTab}>
+                            <Text style={styles.categoryTabText}>Movies</Text>
+                        </Pressable>
+                        <Pressable
+                            style={styles.categoryTab}
+                            onPress={() => setShowCategories(true)}
+                        >
+                            <Text style={styles.categoryTabTextWithIcon}>Categories</Text>
+                            <Ionicons name="chevron-down" size={16} color="#fff" />
+                        </Pressable>
+                    </Animated.View>
+                </AnimatedBlurView>
+            </Animated.View>
+
+            <CategoriesListModal
+                visible={showCategories}
+                onClose={() => setShowCategories(false)}
+            />
+        </>
     );
 } 
