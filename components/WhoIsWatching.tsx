@@ -20,7 +20,7 @@ import Svg, { Circle } from 'react-native-svg';
 
 
 const { width, height } = Dimensions.get('window');
-const PROFILE_ICON_SIZE = 32; // Size of the profile icon in the top-right corner
+const PROFILE_ICON_SIZE = 24; // Size of the profile icon in the top-right corner
 const PROFILE_ICON_MARGIN = 16; // Margin from the top and right edges
 
 interface Profile {
@@ -77,36 +77,43 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
         const targetY = centerY - finalSize / 2 - 100;
 
         if (isMinimizing) {
+            const finalTop = height - 70;
+            const finalLeft = width - 80;
+
             return {
                 position: 'absolute',
                 width: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 500,
-                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                    duration: 600,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
                 }),
                 height: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 500,
-                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                    duration: 600,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
                 }),
-                top: withTiming(height - 70, {
-                    duration: 500,
-                    easing: Easing.bezier(0.33, 0, 0.67, 1),
-                }),
-                left: withTiming(width - 80, {
-                    duration: 500,
-                    easing: Easing.bezier(0.33, 0, 0.67, 1),
-                }),
-                borderRadius: withTiming(PROFILE_ICON_SIZE / 2, {
-                    duration: 500,
-                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                top: withSequence(
+                    withTiming(finalTop - 20, { duration: 400, easing: Easing.out(Easing.quad) }),
+                    withTiming(finalTop, { duration: 200, easing: Easing.bounce })
+                ),
+                left: withSequence(
+                    withTiming(finalLeft, { duration: 400, easing: Easing.out(Easing.quad) }),
+                    withTiming(finalLeft, { duration: 200, easing: Easing.bounce })
+                ),
+                borderRadius: withTiming(4, {
+                    duration: 600,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
                 }),
                 transform: [
                     {
-                        scale: withTiming(1, {
-                            duration: 500,
-                            easing: Easing.bezier(0.33, 0, 0.67, 1),
-                        }),
+                        scale: withSequence(
+                            withTiming(0.8, { duration: 400, easing: Easing.out(Easing.quad) }),
+                            withTiming(1, { duration: 200, easing: Easing.bounce })
+                        ),
                     },
-                ]
+                ],
+                opacity: withTiming(0.8, {
+                    duration: 600,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+                }),
             };
         }
 
@@ -146,8 +153,10 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                 duration: 700,
                 easing: Easing.bezier(0.33, 0, 0.67, 1),
             }),
+            opacity: 1,
         };
     });
+
 
     const handleProfileSelect = async (profile: Profile) => {
         try {

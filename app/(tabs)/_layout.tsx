@@ -26,13 +26,13 @@ function ProfileImage({ focused }: { focused: boolean }) {
           borderRadius: 4,
           opacity: focused ? 1 : 0.5,
           borderWidth: 2,
-          borderColor: 'white',
+          borderColor: focused ? 'white' : 'transparent',
         }}
       />
       <View
         style={{
           position: 'absolute',
-          bottom: -18,
+          bottom: -16,
           alignSelf: 'center',
           width: 5,
           height: 5,
