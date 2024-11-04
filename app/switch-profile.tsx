@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
     },
     profileContainer: {
         alignItems: 'center',
-        gap: 8,
+        gap: 2,
     },
     avatar: {
         width: '80%',
