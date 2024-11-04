@@ -6,6 +6,8 @@ import * as Haptics from 'expo-haptics';
 import { useUser } from '@/contexts/UserContext';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { Home } from '@/icons/Home';
+import { Netflix } from '@/icons/Netflix';
+import { NetflixOutline } from '@/icons/NetflixOutline';
 
 // Helper component for cross-platform icons
 function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'play-square'; color: string }) {
@@ -55,8 +57,8 @@ export const TAB_SCREENS = [
   {
     name: 'new',
     title: 'New & Hot',
-    icon: ({ color }: { color: string }) => (
-      <TabIcon ionIcon="play-square" color={color} />
+    icon: ({ color, focused }: { color: string; focused: boolean }) => (
+      focused ? <Netflix color={color} isActive={focused} /> : <NetflixOutline color={color} isActive={focused} />
     ),
   },
   {
