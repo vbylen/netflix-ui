@@ -1,10 +1,11 @@
 import { View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Animated, {
     useAnimatedStyle,
     withTiming,
     useSharedValue,
-    withSpring
+    withSpring,
+    runOnJS
 } from 'react-native-reanimated';
 
 interface Props {
@@ -16,13 +17,17 @@ interface Props {
 export function TabScreenWrapper({ children, isActive, slideDirection }: Props) {
     const translateX = useSharedValue(isActive ? 0 : (slideDirection === 'left' ? -500 : 500));
     const opacity = useSharedValue(isActive ? 1 : 0);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
+        setIsAnimating(true);
         if (isActive) {
             translateX.value = withSpring(0, {
                 damping: 20,
                 stiffness: 90,
                 mass: 0.5
+            }, () => {
+                runOnJS(setIsAnimating)(false);
             });
             opacity.value = withTiming(1, { duration: 150 });
         } else {
@@ -31,7 +36,9 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
                 stiffness: 90,
                 mass: 0.5
             });
-            opacity.value = withTiming(0, { duration: 150 });
+            opacity.value = withTiming(0, { duration: 150 }, () => {
+                runOnJS(setIsAnimating)(false);
+            });
         }
     }, [isActive, slideDirection]);
 
@@ -44,7 +51,7 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     }));
 
     return (
-        <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+        <Animated.View style={[{ flex: 1 }, isAnimating ? animatedStyle : null]}>
             {children}
         </Animated.View>
     );
