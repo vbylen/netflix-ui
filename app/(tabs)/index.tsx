@@ -18,6 +18,8 @@ import { MovieList } from '@/components/MovieList/MovieList';
 import { useDeviceMotion } from '@/hooks/useDeviceMotion';
 import movieData from '../../data/movies.json';
 import { MoviesData } from '@/types/movie';
+import { TabScreenWrapper } from '@/components/TabScreenWrapper';
+import { usePathname } from 'expo-router';
 
 const FEATURED_MOVIE = {
   id: 'dont-move',
@@ -94,40 +96,45 @@ export default function HomeScreen() {
     ],
   }));
 
+  const pathname = usePathname();
+  const isActive = pathname === '/' || pathname === '/index';
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <LinearGradient
-        colors={['#03341b', '#002820', '#000000']}
-        locations={[0, 0.4, 0.8]}
-        style={styles.gradient}
-      />
-
-      <AnimatedHeader
-        headerAnimatedProps={headerAnimatedProps}
-        title="For Saúl"
-        scrollDirection={scrollDirection}
-      />
-
-      <Animated.ScrollView
-        style={styles.scrollView}
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollViewContent}
-      >
-        <FeaturedContent
-          movie={FEATURED_MOVIE}
-          imageStyle={imageStyle}
-          categoriesStyle={categoriesStyle}
-          buttonsStyle={buttonsStyle}
-          topMargin={insets.top + 90}
+    <TabScreenWrapper isActive={isActive}>
+      <View style={styles.container}>
+        <StatusBar style="light" />
+        <LinearGradient
+          colors={['#03341b', '#002820', '#000000']}
+          locations={[0, 0.4, 0.8]}
+          style={styles.gradient}
         />
 
-        {movies.map(row => (
-          <MovieList key={row.rowTitle} {...row} />
-        ))}
-      </Animated.ScrollView>
-    </View>
+        <AnimatedHeader
+          headerAnimatedProps={headerAnimatedProps}
+          title="For Saúl"
+          scrollDirection={scrollDirection}
+        />
+
+        <Animated.ScrollView
+          style={styles.scrollView}
+          onScroll={scrollHandler}
+          scrollEventThrottle={16}
+          contentContainerStyle={styles.scrollViewContent}
+        >
+          <FeaturedContent
+            movie={FEATURED_MOVIE}
+            imageStyle={imageStyle}
+            categoriesStyle={categoriesStyle}
+            buttonsStyle={buttonsStyle}
+            topMargin={insets.top + 90}
+          />
+
+          {movies.map(row => (
+            <MovieList key={row.rowTitle} {...row} />
+          ))}
+        </Animated.ScrollView>
+      </View>
+    </TabScreenWrapper>
   );
 }
 

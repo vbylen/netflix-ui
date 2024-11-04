@@ -1,13 +1,13 @@
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter, usePathname } from 'expo-router';
 import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Platform, StyleSheet, Image, View, Pressable } from 'react-native';
-import { BlurView } from 'expo-blur';
 import * as Haptics from 'expo-haptics';
 import { useUser } from '@/contexts/UserContext';
+import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 
 // Helper component for cross-platform icons
-function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'play' | 'person'; color: string }) {
+function TabIcon({ ionIcon, color }: { ionIcon: 'home-sharp' | 'person' | 'play-outline'; color: string }) {
   return <TabBarIcon name={ionIcon} color={color} />;
 }
 
@@ -44,6 +44,7 @@ function ProfileImage({ focused }: { focused: boolean }) {
 }
 
 export default function TabLayout() {
+  const pathname = usePathname();
   const handleTabPress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
@@ -54,14 +55,6 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#FFFFFF',
         tabBarInactiveTintColor: '#ffffff3f',
         headerShown: false,
-
-        // tabBarBackground: () => (
-        //   <BlurView
-        //     tint="systemUltraThinMaterialDark"
-        //     intensity={100}
-        //     style={StyleSheet.absoluteFill}
-        //   />
-        // ),
         tabBarStyle: {
           position: 'absolute',
           backgroundColor: '#1f1f1f',
@@ -73,8 +66,6 @@ export default function TabLayout() {
         },
         tabBarLabelStyle: {
           marginBottom: 10,
-          // fontSize: 12,
-          // fontWeight: '700',
         },
         tabBarButton: (props) => (
           <Pressable
@@ -96,7 +87,6 @@ export default function TabLayout() {
               color={color}
             />
           ),
-
         }}
       />
       <Tabs.Screen
@@ -105,7 +95,7 @@ export default function TabLayout() {
           title: 'New & Hot',
           tabBarIcon: ({ color }) => (
             <TabIcon
-              ionIcon="play"
+              ionIcon="play-outline"
               color={color}
             />
           ),
