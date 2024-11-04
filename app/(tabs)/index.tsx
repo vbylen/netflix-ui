@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   useAnimatedScrollHandler,
+  useAnimatedProps,
   useAnimatedStyle,
   useSharedValue,
   interpolate,
@@ -36,9 +37,16 @@ export default function HomeScreen() {
     },
   });
 
-  const headerAnimatedStyle = useAnimatedStyle(() => ({
-    intensity: interpolate(scrollY.value, [0, 90], [0, 90], 'clamp'),
-  }));
+  const headerAnimatedProps = useAnimatedProps(() => {
+    return {
+      intensity: interpolate(
+        scrollY.value,
+        [0, 90],
+        [0, 90],
+        'clamp'
+      )
+    };
+  });
 
   const imageStyle = useAnimatedStyle(() => ({
     transform: [
@@ -71,7 +79,7 @@ export default function HomeScreen() {
         style={styles.gradient}
       />
 
-      <AnimatedHeader headerAnimatedStyle={headerAnimatedStyle} title="For Saúl" />
+      <AnimatedHeader headerAnimatedProps={headerAnimatedProps} title="For Saúl" />
 
       <Animated.ScrollView
         style={styles.scrollView}
