@@ -29,7 +29,7 @@ export default function SwitchProfileScreen() {
     const { id } = useLocalSearchParams();
     const router = useRouter();
     const { setScale } = useRootScale();
-    const { profiles } = useUser();
+    const { profiles, selectProfile } = useUser();
     const translateY = useSharedValue(0);
     const isClosing = useRef(false);
     const statusBarStyle = useSharedValue<'light' | 'dark'>('light');
@@ -222,13 +222,8 @@ export default function SwitchProfileScreen() {
     }, [composedGestures]);
 
     const handleProfileSelect = async (profileId: string) => {
-        try {
-            handleHapticFeedback();
-            // Add your profile switching logic here
-            goBack();
-        } catch (error) {
-            console.log('Error switching profile:', error);
-        }
+        selectProfile(profileId);
+        goBack();
     };
 
     const animatedStyle = useAnimatedStyle(() => ({
