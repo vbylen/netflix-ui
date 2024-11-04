@@ -2,7 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView, Text, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
-
+import { usePathname } from 'expo-router';
+import { TAB_SCREENS } from '@/app/(tabs)/_layout';
+import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 
 const exampleLikedShowsAndMovies = [
     { id: 2, imageUrl: 'https://occ-0-2348-2568.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU2Tv7ElpWoaZskSjugnCfgUyxx0k8zFkrSLnw8OByra6I4Pu0hvpNMKPqHKk0_VIq_pP47WE4eiU6bLjH30mOAHixRdrQeMX5296hvGq7hFvPhm-1kaKYp2MLO5H3oxUV1q8UEmz3NwsmrYXnnzvNJ2aXgp7drGClF671VG2U62G9s3qaes9qXaz6ChmJpD31wnaRJjsoqvybX0wzGk0Ij_wU1zH2yqI5b7fNA3D4-AsawmmgN6jCiScTDHpH-252lKjP9LJsbjwVGMht06gnyOeADlJQ.jpg' },
@@ -11,6 +13,17 @@ const exampleLikedShowsAndMovies = [
 
 export default function ProfileScreen() {
     const { selectedProfile } = useUser();
+    const pathname = usePathname();
+    const isActive = pathname === '/profile';
+
+    const currentTabIndex = TAB_SCREENS.findIndex(screen =>
+        screen.name === 'profile'
+    );
+    const activeTabIndex = TAB_SCREENS.findIndex(screen =>
+        pathname === `/${screen.name}` || (screen.name === 'index' && pathname === '/')
+    );
+
+    const slideDirection = activeTabIndex > currentTabIndex ? 'right' : 'left';
 
     const renderLikedContent = () => (
         <View style={styles.likedContent}>
@@ -25,7 +38,7 @@ export default function ProfileScreen() {
                             style={styles.likedShowImage}
                         />
                         <TouchableOpacity style={styles.shareButton}>
-                            <Ionicons name="ios-send-outline" size={24} color="white" />
+                            <Ionicons name="send-outline" size={24} color="white" />
                             <Text style={styles.shareText}>Share</Text>
                         </TouchableOpacity>
                     </View>
@@ -51,82 +64,84 @@ export default function ProfileScreen() {
     );
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>My Netflix</Text>
-                <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.searchButton}>
-                        <Ionicons name="search" size={24} color="white" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuButton}>
-                        <Ionicons name="menu" size={24} color="white" />
-                    </TouchableOpacity>
-                </View>
-            </View>
-
-            <View style={styles.profileSection}>
-                <Image
-                    source={{ uri: selectedProfile?.avatar }}
-                    style={styles.profileImage}
-                />
-                <View style={styles.profileNameContainer}>
-                    <Text style={styles.profileName}>{selectedProfile?.name}</Text>
-                    <Ionicons name="chevron-down" size={16} color="white" />
-                </View>
-            </View>
-
-            <TouchableOpacity style={styles.menuItem}>
-                <View style={styles.menuIconContainer}>
-                    <View style={[styles.notificationIconContainer, { backgroundColor: '#E51013' }]}>
-                        <Ionicons name="notifications" size={24} color="#fff" />
+        <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
+            <ScrollView style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>My Netflix</Text>
+                    <View style={styles.headerRight}>
+                        <TouchableOpacity style={styles.searchButton}>
+                            <Ionicons name="search" size={24} color="white" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuButton}>
+                            <Ionicons name="menu" size={24} color="white" />
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.menuContent}>
-                    <Text style={styles.menuText}>Notifications</Text>
-                    <Ionicons name="chevron-forward" size={20} color="#666" />
-                </View>
-            </TouchableOpacity>
 
-            <View style={styles.notificationPreview}>
-                <View style={styles.notificationDot} />
-                <Image
-                    source={{ uri: 'https://dnm.nflximg.net/api/v6/dGKhUGb9YF21yyDjKrWwmGN1H8o/AAAABdl3F7BjF71fC6gaLl7xCpGIak8CxmdDgY3FK8dEQhlfx5n5O-z9hhOTtzYyr1nr4Ajn5sAyHjAGGBIiFO0tCnDG5AevRDi10_WuPvvEFYTUQfZAEpUBPwrFbAKyalsQREodRB1mKPylnjU.jpg?r=c90' }}
-                    style={styles.notificationImage}
-                />
-                <View style={styles.notificationText}>
-                    <Text style={styles.notificationTitle}>New Arrival</Text>
-                    <Text style={styles.notificationSubtitle}>The Perfect Couple</Text>
-                    <Text style={styles.notificationDate}>Sep 05</Text>
-                </View>
-            </View>
-
-            <TouchableOpacity style={styles.menuItem}>
-                <View style={styles.menuIconContainer}>
-                    <View style={[styles.downloadIconContainer, { backgroundColor: '#0071EB' }]}>
-                        <Ionicons name="arrow-down-circle" size={24} color="#fff" />
+                <View style={styles.profileSection}>
+                    <Image
+                        source={{ uri: selectedProfile?.avatar }}
+                        style={styles.profileImage}
+                    />
+                    <View style={styles.profileNameContainer}>
+                        <Text style={styles.profileName}>{selectedProfile?.name}</Text>
+                        <Ionicons name="chevron-down" size={16} color="white" />
                     </View>
                 </View>
-                <View style={styles.menuContent}>
-                    <Text style={styles.menuText}>Downloads</Text>
-                    <Ionicons name="chevron-forward" size={20} color="#666" />
-                </View>
-            </TouchableOpacity>
 
-            <View style={styles.section}>
-                <Text style={styles.sectionHeader}>TV Shows & Movies You've Liked</Text>
-                {renderLikedContent()}
-            </View>
+                <TouchableOpacity style={styles.menuItem}>
+                    <View style={styles.menuIconContainer}>
+                        <View style={[styles.notificationIconContainer, { backgroundColor: '#E51013' }]}>
+                            <Ionicons name="notifications" size={24} color="#fff" />
+                        </View>
+                    </View>
+                    <View style={styles.menuContent}>
+                        <Text style={styles.menuText}>Notifications</Text>
+                        <Ionicons name="chevron-forward" size={20} color="#666" />
+                    </View>
+                </TouchableOpacity>
 
-            <View style={styles.section}>
-                <View style={styles.sectionHeaderContainer}>
-                    <Text style={styles.sectionHeader}>My List</Text>
-                    <TouchableOpacity>
-                        <Text style={styles.seeAll}>See All</Text>
-                    </TouchableOpacity>
+                <View style={styles.notificationPreview}>
+                    <View style={styles.notificationDot} />
+                    <Image
+                        source={{ uri: 'https://dnm.nflximg.net/api/v6/dGKhUGb9YF21yyDjKrWwmGN1H8o/AAAABdl3F7BjF71fC6gaLl7xCpGIak8CxmdDgY3FK8dEQhlfx5n5O-z9hhOTtzYyr1nr4Ajn5sAyHjAGGBIiFO0tCnDG5AevRDi10_WuPvvEFYTUQfZAEpUBPwrFbAKyalsQREodRB1mKPylnjU.jpg?r=c90' }}
+                        style={styles.notificationImage}
+                    />
+                    <View style={styles.notificationText}>
+                        <Text style={styles.notificationTitle}>New Arrival</Text>
+                        <Text style={styles.notificationSubtitle}>The Perfect Couple</Text>
+                        <Text style={styles.notificationDate}>Sep 05</Text>
+                    </View>
                 </View>
-                {renderMyList()}
-            </View>
-        </ScrollView>
+
+                <TouchableOpacity style={styles.menuItem}>
+                    <View style={styles.menuIconContainer}>
+                        <View style={[styles.downloadIconContainer, { backgroundColor: '#0071EB' }]}>
+                            <Ionicons name="arrow-down-circle" size={24} color="#fff" />
+                        </View>
+                    </View>
+                    <View style={styles.menuContent}>
+                        <Text style={styles.menuText}>Downloads</Text>
+                        <Ionicons name="chevron-forward" size={20} color="#666" />
+                    </View>
+                </TouchableOpacity>
+
+                <View style={styles.section}>
+                    <Text style={styles.sectionHeader}>TV Shows & Movies You've Liked</Text>
+                    {renderLikedContent()}
+                </View>
+
+                <View style={styles.section}>
+                    <View style={styles.sectionHeaderContainer}>
+                        <Text style={styles.sectionHeader}>My List</Text>
+                        <TouchableOpacity>
+                            <Text style={styles.seeAll}>See All</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {renderMyList()}
+                </View>
+            </ScrollView>
+        </TabScreenWrapper>
     );
 }
 
