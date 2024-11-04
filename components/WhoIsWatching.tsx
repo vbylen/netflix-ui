@@ -1,20 +1,19 @@
-import React from 'react';
-import { TouchableOpacity, StyleSheet, Dimensions, Image, StatusBar } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { TouchableOpacity, StyleSheet, Dimensions, Image, StatusBar, LayoutRectangle } from 'react-native';
 import { SafeAreaView, View } from 'react-native';
-import { useState } from 'react';
 import Animated, {
     useAnimatedStyle,
     withTiming,
     Easing,
+    useSharedValue,
+    runOnJS,
 } from 'react-native-reanimated';
 import { ThemedText } from './ThemedText';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
 import { Audio } from 'expo-av';
 
-
-
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 interface Profile {
     id: string;
@@ -30,50 +29,53 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
     const { profiles } = useUser();
     const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
     const [isAnimating, setIsAnimating] = useState(false);
+    const profileRefs = useRef<{ [key: string]: LayoutRectangle | null }>({});
 
-    const containerStyle = useAnimatedStyle(() => {
-        if (!selectedProfile) return {};
+    const selectedProfilePosition = useSharedValue({ x: 0, y: 0, width: 0, height: 0 });
 
-        return {
-            transform: [
-                {
-                    scale: withTiming(isAnimating ? 0.9 : 1, {
-                        duration: 800,
-                        easing: Easing.bezier(0.33, 0, 0.67, 1),
-                    }),
-                },
-            ],
-            opacity: withTiming(isAnimating ? 0 : 1, {
-                duration: 500,
-                easing: Easing.bezier(0.33, 0, 0.67, 1),
-            }),
-        };
-    });
+    const containerStyle = useAnimatedStyle(() => ({
+        transform: [
+            {
+                scale: withTiming(isAnimating ? 0.9 : 1, {
+                    duration: 800,
+                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                }),
+            },
+        ],
+        opacity: withTiming(isAnimating ? 0 : 1, {
+            duration: 500,
+            easing: Easing.bezier(0.33, 0, 0.67, 1),
+        }),
+    }));
 
     const selectedProfileStyle = useAnimatedStyle(() => {
         if (!selectedProfile) return {};
 
+        const finalSize = width * 0.45;
+        const centerY = height / 2;
+        const targetY = centerY - finalSize / 2;
+
         return {
             position: 'absolute',
-            width: withTiming(width * 0.45, {
+            width: withTiming(finalSize, {
                 duration: 700,
                 easing: Easing.bezier(0.33, 0, 0.67, 1),
             }),
-            height: withTiming(width * 0.45, {
+            height: withTiming(finalSize, {
                 duration: 700,
                 easing: Easing.bezier(0.33, 0, 0.67, 1),
             }),
-            top: '50%',
-            left: '50%',
+            top: selectedProfilePosition.value.y,
+            left: selectedProfilePosition.value.x,
             transform: [
                 {
-                    translateX: withTiming(-width * 0.225, {
+                    translateX: withTiming((width - finalSize) / 2 - selectedProfilePosition.value.x, {
                         duration: 700,
                         easing: Easing.bezier(0.33, 0, 0.67, 1),
                     }),
                 },
                 {
-                    translateY: withTiming(-width * 0.225, {
+                    translateY: withTiming(targetY - selectedProfilePosition.value.y, {
                         duration: 700,
                         easing: Easing.bezier(0.33, 0, 0.67, 1),
                     }),
@@ -85,10 +87,7 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                     }),
                 },
             ],
-            opacity: withTiming(1, {
-                duration: 400,
-                easing: Easing.bezier(0.33, 0, 0.67, 1),
-            }),
+            opacity: 1,
             borderRadius: withTiming(12, {
                 duration: 700,
                 easing: Easing.bezier(0.33, 0, 0.67, 1),
@@ -103,11 +102,21 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             );
             await sound.playAsync();
 
+            const layout = profileRefs.current[profile.id];
+            if (layout) {
+                selectedProfilePosition.value = {
+                    x: layout.x,
+                    y: layout.y,
+                    width: layout.width,
+                    height: layout.height,
+                };
+            }
+
             setSelectedProfile(profile);
             setIsAnimating(true);
 
             setTimeout(() => {
-                onProfileSelect(profile.id);
+                runOnJS(onProfileSelect)(profile.id);
             }, 1000);
         } catch (error) {
             console.log('Error playing sound:', error);
@@ -133,6 +142,9 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                             key={profile.id}
                             onPress={() => handleProfileSelect(profile)}
                             style={styles.profileButton}
+                            onLayout={(event) => {
+                                profileRefs.current[profile.id] = event.nativeEvent.layout;
+                            }}
                         >
                             <Animated.View style={styles.profileContainer}>
                                 <Animated.Image
@@ -162,6 +174,7 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
         </SafeAreaView>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
