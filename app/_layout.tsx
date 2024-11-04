@@ -43,6 +43,16 @@ function AnimatedStack() {
 
   return (
     <View style={{ flex: 1 }}>
+      {isModalActive && (
+        <BlurView
+          intensity={50}
+          style={[
+            StyleSheet.absoluteFill,
+            { zIndex: 1 }
+          ]}
+          tint={colorScheme === 'dark' ? 'dark' : 'light'}
+        />
+      )}
       <Animated.View style={[styles.stackContainer, animatedStyle]}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -69,14 +79,6 @@ function AnimatedStack() {
             isPlaying={isPlaying}
             onPlayPause={togglePlayPause}
             onPress={() => router.push(`/music/${currentSong.id}`)}
-          />
-        )}
-
-        {isModalActive && (
-          <BlurView
-            intensity={100}
-            style={StyleSheet.absoluteFill}
-            tint={colorScheme === 'dark' ? 'dark' : 'light'}
           />
         )}
       </Animated.View>
