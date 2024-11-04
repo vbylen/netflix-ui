@@ -26,8 +26,8 @@ export default function ProfileScreen() {
 
             <TouchableOpacity style={styles.menuItem}>
                 <View style={styles.menuIconContainer}>
-                    <View style={styles.notificationIconContainer}>
-                        <Ionicons name="notifications" size={24} color="#E51013" />
+                    <View style={[styles.notificationIconContainer, { backgroundColor: '#E51013' }]}>
+                        <Ionicons name="notifications" size={24} color="#fff" />
                     </View>
                 </View>
                 <View style={styles.menuContent}>
@@ -51,8 +51,8 @@ export default function ProfileScreen() {
 
             <TouchableOpacity style={styles.menuItem}>
                 <View style={styles.menuIconContainer}>
-                    <View style={styles.downloadIconContainer}>
-                        <Ionicons name="arrow-down-circle" size={24} color="#0071EB" />
+                    <View style={[styles.downloadIconContainer, { backgroundColor: '#0071EB' }]}>
+                        <Ionicons name="arrow-down-circle" size={24} color="#fff" />
                     </View>
                 </View>
                 <View style={styles.menuContent}>
