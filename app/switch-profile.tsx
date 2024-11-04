@@ -348,9 +348,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        alignItems: 'center',
-        gap: 0,
-        paddingHorizontal: 4,
+        // alignItems: 'center',
     },
     profileButton: {
         width: width * 0.20,
@@ -360,7 +358,7 @@ const styles = StyleSheet.create({
     },
     profileContainer: {
         alignItems: 'center',
-        gap: 2,
+        // gap: 2,
     },
     avatar: {
         width: '80%',
