@@ -39,7 +39,10 @@ export default function ProfileScreen() {
                             style={styles.likedShowImage}
                         />
                         <TouchableOpacity style={styles.shareButton}>
-                            <Ionicons name="send-outline" size={24} color="white" />
+                            <Ionicons name="send" size={18} color="white" style={{
+                                marginRight: 4,
+                                transform: [{ rotate: '320deg' }]
+                            }} />
                             <Text style={styles.shareText}>Share</Text>
                         </TouchableOpacity>
                     </View>
@@ -287,10 +290,12 @@ const styles = StyleSheet.create({
     },
     likedItemContainer: {
         marginRight: 16,
-        width: 90,
+        width: 100,
+        backgroundColor: '#161616',
+        alignItems: 'center'
     },
     likedShowImage: {
-        width: 90,
+        width: 100,
         height: 150,
         borderRadius: 8,
     },
@@ -302,7 +307,7 @@ const styles = StyleSheet.create({
     },
     shareText: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 13,
     },
     sectionHeaderContainer: {
         flexDirection: 'row',
