@@ -156,7 +156,7 @@ export const newStyles = StyleSheet.create({
         marginBottom: 8,
     },
     eventDate: {
-        color: '#ffffffa9',
+        color: '#ffffffd4',
         fontSize: 15,
         marginBottom: 8,
         marginTop: 8,

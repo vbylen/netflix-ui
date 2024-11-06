@@ -73,6 +73,18 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         logoWidth: 280,
         logoHeight: 40
     },
+    {
+        id: '3',
+        title: 'Focus',
+        date: 'Sunday',
+        subText: 'More Episodes Coming Saturday',
+        imageUrl: 'https://images.indianexpress.com/2024/02/Kapil-Sharma-announces-his-new-show-with-Netflix-called-The-Great-Indian-Kapil-Show.jpg',
+        description: 'Kapil Sharma hosts this variety show with celebrity guests and funny antics.',
+        rating: 'TV-MA',
+        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABXFIPH8nosIICBR7detx3exky9ZKT6tnpL0SkJDgccILFdGcAIOHiJiwaq5ikO8h2wGzc7zMhZWQvw16fgSsyWfpmKyQffqc1E7nKq5cwhI4JukGAzcy-oAWHafPlpjJUgy7ZEXHAf1ReuI1HP_A-whren-NCAsuo4iiB3Dx32AozolwbLokTw.png?r=19d',
+        logoWidth: 280,
+        logoHeight: 60
+    },
 ];
 
 const TAB_OPTIONS = [
