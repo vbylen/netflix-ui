@@ -118,33 +118,34 @@ export default function HomeScreen() {
           colors={['#03341b', '#002820', '#000000']}
           locations={[0, 0.4, 0.8]}
           style={styles.gradient}
-        />
-
-        <AnimatedHeader
-          headerAnimatedProps={headerAnimatedProps}
-          title="For Saúl"
-          scrollDirection={scrollDirection}
-        />
-
-        <Animated.ScrollView
-          style={styles.scrollView}
-          onScroll={scrollHandler}
-          scrollEventThrottle={16}
-          contentContainerStyle={styles.scrollViewContent}
-          showsVerticalScrollIndicator={false}
         >
-          <FeaturedContent
-            movie={FEATURED_MOVIE}
-            imageStyle={imageStyle}
-            categoriesStyle={categoriesStyle}
-            buttonsStyle={buttonsStyle}
-            topMargin={insets.top + 90}
+          <AnimatedHeader
+            headerAnimatedProps={headerAnimatedProps}
+            title="For Saúl"
+            scrollDirection={scrollDirection}
           />
 
-          {movies.map(row => (
-            row.rowTitle === 'Mobile Games' ? <GameList key={row.rowTitle} {...row} /> : <MovieList key={row.rowTitle} {...row} />
-          ))}
-        </Animated.ScrollView>
+          <Animated.ScrollView
+            style={styles.scrollView}
+            onScroll={scrollHandler}
+            scrollEventThrottle={16}
+            contentContainerStyle={styles.scrollViewContent}
+            showsVerticalScrollIndicator={false}
+          >
+            <FeaturedContent
+              movie={FEATURED_MOVIE}
+              imageStyle={imageStyle}
+              categoriesStyle={categoriesStyle}
+              buttonsStyle={buttonsStyle}
+              topMargin={insets.top + 90}
+            />
+
+            {movies.map(row => (
+              row.rowTitle === 'Mobile Games' ? <GameList key={row.rowTitle} {...row} /> : <MovieList key={row.rowTitle} {...row} />
+            ))}
+          </Animated.ScrollView>
+        </LinearGradient>
+
       </View>
     </TabScreenWrapper>
   );
