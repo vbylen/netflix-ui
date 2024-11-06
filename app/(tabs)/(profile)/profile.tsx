@@ -120,7 +120,7 @@ export default function ProfileScreen() {
                     <View style={styles.notificationText}>
                         <Text style={styles.notificationTitle}>New Arrival</Text>
                         <Text style={styles.notificationSubtitle}>The Perfect Couple</Text>
-                        <Text style={styles.notificationDate}>Sep 05</Text>
+                        <Text style={styles.notificationDate}>Nov 05</Text>
                     </View>
                 </View>
 
