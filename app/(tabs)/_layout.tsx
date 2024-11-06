@@ -58,7 +58,11 @@ export const TAB_SCREENS = [
     name: 'new',
     title: 'New & Hot',
     icon: ({ color, focused }: { color: string; focused: boolean }) => (
-      <TabIcon ionIcon={focused ? 'play' : 'play'} color={color} />
+      // Using dummy images for now - replace with actual icons
+      <Image
+        source={focused ? require('../../assets/images/replace-these/new-netflix.png') : require('../../assets/images/replace-these/new-netflix-outline.png')}
+        style={{ width: 24, height: 24 }}
+      />
     ),
   },
   {
