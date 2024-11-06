@@ -128,6 +128,7 @@ export default function HomeScreen() {
           scrollEventThrottle={16}
           contentContainerStyle={styles.scrollViewContent}
           showsVerticalScrollIndicator={false}
+          bounces={false}
         >
           <LinearGradient
             colors={['#03341b', '#002820', '#000000']}
