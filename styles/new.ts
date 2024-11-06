@@ -8,7 +8,6 @@ export const newStyles = StyleSheet.create({
         backgroundColor: '#000',
     },
     header: {
-        // position: 'absolute',
         left: 0,
         right: 0,
         zIndex: 100,
@@ -157,8 +156,8 @@ export const newStyles = StyleSheet.create({
         marginBottom: 8,
     },
     eventDate: {
-        color: '#fff',
-        fontSize: 10,
+        color: '#ffffffa9',
+        fontSize: 15,
         marginBottom: 8,
         marginTop: 8,
     },
@@ -209,11 +208,7 @@ export const newStyles = StyleSheet.create({
         paddingHorizontal: 12,
         gap: 4
     },
-    eventDate: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: '600'
-    },
+
     netflixTag: {
         color: '#fff',
         fontSize: 12,

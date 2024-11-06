@@ -203,7 +203,7 @@ export default function NewScreen() {
                         />
                         <Text style={newStyles.netflixTag}>SPECIAL</Text>
                     </View>
-                    <Text style={newStyles.title}>{item.title}</Text>
+                    {/* <Text style={newStyles.title}>{item.title}</Text> */}
                     <Text style={newStyles.description}>{item.description}</Text>
 
                 </View>
