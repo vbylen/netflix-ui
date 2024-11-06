@@ -240,18 +240,19 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     notificationDot: {
-        width: 6,
-        height: 6,
-        borderRadius: 3,
+        width: 10,
+        height: 10,
+        borderRadius: 10,
         backgroundColor: '#E51013',
         position: 'absolute',
         left: 8,
-        top: 8,
+        top: 40,
     },
     notificationImage: {
         width: 120,
         height: 70,
         borderRadius: 4,
+        marginLeft: 12,
     },
     notificationText: {
         flex: 1,
