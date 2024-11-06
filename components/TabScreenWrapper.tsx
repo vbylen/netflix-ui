@@ -51,7 +51,9 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     }));
 
     return (
-        <Animated.View style={[{ flex: 1 }, isAnimating ? animatedStyle : null]}>
+        <Animated.View style={[{
+            flex: 1
+        }, isAnimating ? animatedStyle : null]}>
             {children}
         </Animated.View>
     );
