@@ -310,6 +310,8 @@ const styles = StyleSheet.create({
         width: 110,
         height: 150,
         borderRadius: 8,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
     },
     shareButton: {
         flexDirection: 'row',
