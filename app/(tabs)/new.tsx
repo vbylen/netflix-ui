@@ -30,6 +30,7 @@ interface ComingSoonItem {
     logo: string;
     logoWidth: number;
     logoHeight: number;
+    type: 'SERIES' | 'MOVIE' | 'LIVE'
 }
 
 const COMING_SOON_DATA: ComingSoonItem[] = [
@@ -43,18 +44,10 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         rating: 'TV-14',
         logo: 'https://i.imgur.com/T9zM4Ro.png',
         logoWidth: 155,
-        logoHeight: 80
+        logoHeight: 80,
+        type: 'LIVE'
     },
 
-    {
-        id: '0',
-        title: 'My Boo',
-        date: 'NOV 10',
-        imageUrl: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABZ7I1Otnn_uWjUs8sZ3_33Hs_S4H9f1czAgLrrIwHuiAVZtYpoGb7PuafokPbqlca23N4AW8uhBT68YCGkmdzt4Gy7L0Lco4Kzvp.jpg?r=4e5',
-        description: 'A gamer comes up with a moneymaking scheme for the haunted house his grandfather left him and soon ends up in a romance with one of the ghosts in it.',
-        rating: 'TV-14',
-        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABYQCLVhhcZ-wUcItP7QigVHhCd20AFvyssK-HBBWE4L9lSKfFfHJMA1PkRduUYlI_zLFswIDz9cPV5W9O0OXHhhhB2vSp0fKUDuTF0L8cNkjvkZouHWT5z1GaPjrK8lEjfmZ7lr3WYkp8wJ7DRftFJDYTYc68XCtomtoCUuX3KJggBDxu-XsZw.png?r=ea7'
-    },
     {
         id: '1',
         title: 'The Madness',
@@ -65,7 +58,8 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         rating: 'TV-MA',
         logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABZPHktPl9bC4Ag5omE8ZnpGG0bCUfOZDbuLZ3QfDBSlVHWNnAdvF5IHX7SYwFINJFcZgRg9DEojRH0E-mTt_zu1ddC_Oc-NZ7Ys1JJrD4VJm_WE--1AopS6Bde3Nq0YD7KADj9v0beVHuvxKH-FQ8ySCm8mtteFTsr4aVGX2UAXpz9h_2xRnTA.png?r=469',
         logoWidth: 190,
-        logoHeight: 40
+        logoHeight: 40,
+        type: 'SERIES'
     },
     {
         id: '2',
@@ -154,16 +148,21 @@ export default function NewScreen() {
                 <View style={newStyles.titleContainer}>
                     <Text style={newStyles.eventDate}>{item.subText}</Text>
 
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6, marginBottom: 2 }}>
-                        <Image
-                            source={{ uri: 'https://loodibee.com/wp-content/uploads/Netflix-N-Symbol-logo.png' }}
-                            style={{ width: 20, height: 20, top: -4, position: 'absolute', left: 0 }}
-                        />
-                        <Text style={newStyles.netflixTag}>SPECIAL</Text>
-                    </View>
-                    {/* <Text style={newStyles.title}>{item.title}</Text> */}
-                    <Text style={newStyles.description}>{item.description}</Text>
 
+                    {item.type && (<>
+                        <View
+                            style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6, marginBottom: 2 }}>
+                            <Image
+                                source={{ uri: 'https://loodibee.com/wp-content/uploads/Netflix-N-Symbol-logo.png' }}
+                                style={{ width: 20, height: 20, top: -4, position: 'absolute', left: 0 }}
+                            />
+                            {item.type && <Text style={newStyles.netflixTag}>{item.type}</Text>}
+                        </View>
+                        {/* <Text style={newStyles.title}>{item.title}</Text> */}
+
+                    </>)}
+
+                    <Text style={newStyles.description}>{item.description}</Text>
                 </View>
 
                 <View style={newStyles.actionButtons}>
