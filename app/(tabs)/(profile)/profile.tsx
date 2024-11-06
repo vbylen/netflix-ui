@@ -10,7 +10,11 @@ const exampleLikedShowsAndMovies = [
     { id: 2, imageUrl: 'https://occ-0-2348-2568.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU2Tv7ElpWoaZskSjugnCfgUyxx0k8zFkrSLnw8OByra6I4Pu0hvpNMKPqHKk0_VIq_pP47WE4eiU6bLjH30mOAHixRdrQeMX5296hvGq7hFvPhm-1kaKYp2MLO5H3oxUV1q8UEmz3NwsmrYXnnzvNJ2aXgp7drGClF671VG2U62G9s3qaes9qXaz6ChmJpD31wnaRJjsoqvybX0wzGk0Ij_wU1zH2yqI5b7fNA3D4-AsawmmgN6jCiScTDHpH-252lKjP9LJsbjwVGMht06gnyOeADlJQ.jpg' },
     { id: 3, imageUrl: 'https://i.pinimg.com/736x/71/0f/f2/710ff2d98ca34e0f4a27eb7a2d5c0598.jpg' },
     { id: 4, imageUrl: 'https://www.commonsensemedia.org/sites/default/files/styles/ratio_2_3_medium/public/product-images/csm-movie/ex-machina-poster.jpg' },
+];
 
+const exampleMyList = [
+    { id: 1, imageUrl: 'https://i.redd.it/q53e4iwud0971.jpg' },
+    { id: 2, imageUrl: 'https://images.filmibeat.com/img/popcorn/movie_posters/dopatti-20241014150658-22665.jpg' },
 ];
 
 export default function ProfileScreen() {
@@ -57,11 +61,12 @@ export default function ProfileScreen() {
     const renderMyList = () => (
         <FlatList
             horizontal
-            data={[1, 2, 3, 4]} // Replace with actual data
+            data={exampleMyList}
+            keyExtractor={item => item.id.toString()}
             renderItem={({ item }) => (
                 <Image
                     style={styles.myListImage}
-                    source={{ uri: 'https://path-to-show-image.jpg' }}
+                    source={{ uri: item.imageUrl }}
                 />
             )}
             showsHorizontalScrollIndicator={false}
