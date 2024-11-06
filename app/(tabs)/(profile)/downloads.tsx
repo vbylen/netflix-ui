@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
@@ -19,7 +20,7 @@ export default function DownloadsScreen() {
 
     return (
         <TabScreenWrapper isActive={isActive} slideDirection={slideDirection} >
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.backButton}>
                         <Ionicons name="arrow-back" size={24} color="white" />
@@ -27,7 +28,10 @@ export default function DownloadsScreen() {
                     <Text style={styles.title}>Downloads</Text>
                 </View>
 
-                <View style={styles.content}>
+                <ScrollView
+                    contentContainerStyle={styles.content}
+                    showsVerticalScrollIndicator={false}
+                >
                     <View style={styles.iconContainer}>
                         <Ionicons name="arrow-down-circle" size={80} color="#333" />
                     </View>
@@ -41,8 +45,8 @@ export default function DownloadsScreen() {
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>See What You Can Download</Text>
                     </TouchableOpacity>
-                </View>
-            </View>
+                </ScrollView>
+            </SafeAreaView>
         </TabScreenWrapper>
     );
 }
@@ -56,8 +60,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 16,
-        paddingTop: 60,
-        paddingBottom: 16,
+        paddingVertical: 16,
         gap: 16,
     },
     backButton: {
