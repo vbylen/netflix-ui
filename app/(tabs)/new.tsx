@@ -25,6 +25,7 @@ interface ComingSoonItem {
     date: string;
     imageUrl: string;
     description: string;
+    subText: string;
     rating: string;
     logo: string;
 }
@@ -34,6 +35,7 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         id: '-1',
         title: 'Jake Paul vs. Mike Tyson',
         date: 'NOV 15',
+        subText: 'Live Event Coming November 15 at 8:00 PM EST',
         imageUrl: 'https://occ-0-2430-2433.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABSWRinEsQOaPuYqcT8MP4lkknrc5czNm9qgpVzfBrl7maTIufi_VLNohrkfAyT4zPnHfos7z0-PMaq-cjPP8qI4fmsmo7F4nRO6M.jpg?r=77a',
         description: 'Jake Paul battles Mike Tyson as they headline this must-see boxing mega-event streaming live in five languages from AT&T Stadium in Arlington, Texas.',
         rating: 'TV-14',
@@ -193,7 +195,7 @@ export default function NewScreen() {
                 </View>
 
                 <View style={newStyles.titleContainer}>
-                    <Text style={newStyles.eventDate}>Live Event Coming November 15 at 8:00 PM EST</Text>
+                    <Text style={newStyles.eventDate}>{item.subText}</Text>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6, marginBottom: 2 }}>
                         <Image

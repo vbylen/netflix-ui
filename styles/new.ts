@@ -158,7 +158,7 @@ export const newStyles = StyleSheet.create({
     },
     eventDate: {
         color: '#fff',
-        fontSize: 12,
+        fontSize: 10,
         marginBottom: 8,
         marginTop: 8,
     },
@@ -192,7 +192,7 @@ export const newStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 4,
+        gap: 8,
         padding: 8,
         borderRadius: 4,
         paddingHorizontal: 16
@@ -201,7 +201,8 @@ export const newStyles = StyleSheet.create({
     actionButtonText: {
         color: '#000000',
         fontSize: 18,
-        fontWeight: '600'
+        fontWeight: '600',
+
     },
     titleContainer: {
         paddingTop: 12,
