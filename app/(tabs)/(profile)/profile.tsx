@@ -8,7 +8,9 @@ import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 
 const exampleLikedShowsAndMovies = [
     { id: 2, imageUrl: 'https://occ-0-2348-2568.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU2Tv7ElpWoaZskSjugnCfgUyxx0k8zFkrSLnw8OByra6I4Pu0hvpNMKPqHKk0_VIq_pP47WE4eiU6bLjH30mOAHixRdrQeMX5296hvGq7hFvPhm-1kaKYp2MLO5H3oxUV1q8UEmz3NwsmrYXnnzvNJ2aXgp7drGClF671VG2U62G9s3qaes9qXaz6ChmJpD31wnaRJjsoqvybX0wzGk0Ij_wU1zH2yqI5b7fNA3D4-AsawmmgN6jCiScTDHpH-252lKjP9LJsbjwVGMht06gnyOeADlJQ.jpg' },
-    { id: 3, imageUrl: 'https://occ-0-2348-2568.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU2Tv7ElpWoaZskSjugnCfgUyxx0k8zFkrSLnw8OByra6I4Pu0hvpNMKPqHKk0_VIq_pP47WE4eiU6bLjH30mOAHixRdrQeMX5296hvGq7hFvPhm-1kaKYp2MLO5H3oxUV1q8UEmz3NwsmrYXnnzvNJ2aXgp7drGClF671VG2U62G9s3qaes9qXaz6ChmJpD31wnaRJjsoqvybX0wzGk0Ij_wU1zH2yqI5b7fNA3D4-AsawmmgN6jCiScTDHpH-252lKjP9LJsbjwVGMht06gnyOeADlJQ.jpg' },
+    { id: 3, imageUrl: 'https://i.pinimg.com/736x/71/0f/f2/710ff2d98ca34e0f4a27eb7a2d5c0598.jpg' },
+    { id: 4, imageUrl: 'https://www.commonsensemedia.org/sites/default/files/styles/ratio_2_3_medium/public/product-images/csm-movie/ex-machina-poster.jpg' },
+
 ];
 
 export default function ProfileScreen() {
@@ -293,13 +295,14 @@ const styles = StyleSheet.create({
         marginTop: 12,
     },
     likedItemContainer: {
-        marginRight: 16,
-        width: 100,
+        marginRight: 10,
+        width: 110,
         backgroundColor: '#161616',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 8,
     },
     likedShowImage: {
-        width: 100,
+        width: 110,
         height: 150,
         borderRadius: 8,
     },
