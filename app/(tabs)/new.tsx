@@ -83,7 +83,20 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
         rating: 'TV-MA',
         logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABXFIPH8nosIICBR7detx3exky9ZKT6tnpL0SkJDgccILFdGcAIOHiJiwaq5ikO8h2wGzc7zMhZWQvw16fgSsyWfpmKyQffqc1E7nKq5cwhI4JukGAzcy-oAWHafPlpjJUgy7ZEXHAf1ReuI1HP_A-whren-NCAsuo4iiB3Dx32AozolwbLokTw.png?r=19d',
         logoWidth: 280,
-        logoHeight: 60
+        logoHeight: 60,
+    },
+    {
+        id: '4',
+        title: 'Focus',
+        date: 'Sunday',
+        subText: 'Coming November 22',
+        imageUrl: 'https://m.media-amazon.com/images/M/MV5BODA4MWNmMDgtNTNmNy00Y2Q2LWI0NGEtYzZmMzMwNmNmNDk1XkEyXkFqcGc@._V1_.jpg',
+        description: 'Two childhood friends decide to try one last heist — to rob millions from Sweden\'s safest cash depot.But the police are already on their heels.',
+        rating: 'TV-MA',
+        logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABSeFhAQ1wPC8dj2eIab3ayvHq9vXVk4tGGASsvof9QQo7RAICkhrTrpoUSD3Fj9mdyh9SC86xNITd38XiwRin5mxnaY1ml7xvrgtVCxsCoipDmWWMZas5KhH6OyJFtw-MGXAkaxA6uwlbFk4of3ltf2qIEqtm5Hjtff3zlWgarMdmZePdlmwIw.png?r=f71',
+        logoWidth: 280,
+        logoHeight: 60,
+        type: 'LIMITED SERIES'
     },
 ];
 
