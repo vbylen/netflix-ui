@@ -248,7 +248,11 @@ export default function NewScreen() {
                             <Text style={newStyles.headerTitle}>New & Hot</Text>
                             <View style={newStyles.headerRight}>
                                 <Pressable>
-                                    <Ionicons name="download-outline" size={24} color="#fff" />
+                                    {/* Replace this with actual Netflix download icon, I am using this placeholder for now */}
+                                    <Image
+                                        source={require('../../assets/images/replace-these/download-netflix-icon.png')}
+                                        style={{ width: 24, height: 24 }}
+                                    />
                                 </Pressable>
                                 <Pressable>
                                     <Ionicons name="search" size={24} color="#fff" />
