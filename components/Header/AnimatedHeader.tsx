@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -88,7 +88,11 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
 
                         <View style={styles.headerButtons}>
                             <Pressable style={styles.searchButton}>
-                                <Ionicons name="download-outline" size={28} color="#fff" />
+                                {/* <Ionicons name="download-outline" size={28} color="#fff" /> */}
+                                <Image
+                                    source={require('../../assets/images/replace-these/download-netflix-transparent.png')}
+                                    style={{ width: 28, height: 28 }}
+                                />
                             </Pressable>
                             <Pressable style={styles.searchButton}>
                                 <Ionicons name="search-outline" size={28} color="#fff" />
