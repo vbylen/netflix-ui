@@ -69,67 +69,16 @@ const COMING_SOON_DATA: ComingSoonItem[] = [
     },
     {
         id: '2',
-        title: 'cane',
-        date: 'NOV 9',
-        description: 'Season 2, Act I of the critically acclaimed animated series based on League of Legends returns with more action and intrigue.',
-        rating: 'TV-14',
-    },
-    {
-        id: '3',
-        title: 'The Lost City',
-        date: 'NOV 9',
-        description: 'A romantic comedy adventure starring Sandra Bullock and Channing Tatum as an unlikely duo thrust into a dangerous jungle expedition.',
-        rating: 'PG-13',
-    },
-    {
-        id: '4',
-        title: 'Emilia Pérez',
-        date: 'NOV 13',
-        description: 'A musical crime drama directed by Jacques Audiard, starring Zoe Saldaña and Selena Gomez, about a cartel leader\'s transformation.',
-        rating: 'R',
-    },
-    {
-        id: '5',
-        title: 'The Empress',
-        date: 'NOV 22',
-        description: 'Season 2 of the historical drama series continues to follow the life of Empress Elisabeth of Austria.',
+        title: 'Focus',
+        date: 'Sunday',
+        subText: 'Coming Sunday',
+        imageUrl: 'https://resizing.flixster.com/0XTf884E7bSSFQBqHaFt-9erpi0=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10939169_v_h8_aa.jpg',
+        description: 'Three years after breaking off a romance with his protégé, expert con man Nicky Spurgeon finds her on the other side of his elaborate new scam.',
         rating: 'TV-MA',
+        logo: 'https://i.imgur.com/2bRw1Nv.png',
+        logoWidth: 280,
+        logoHeight: 40
     },
-    {
-        id: '6',
-        title: 'The Madness',
-        date: 'NOV 28',
-        description: 'A thriller series starring Colman Domingo as a media pundit caught in a deadly conspiracy.',
-        rating: 'TV-MA',
-    },
-    {
-        id: '7',
-        title: 'Joy',
-        date: 'NOV 22',
-        description: 'A historical drama about the development of IVF technology in the 1960s and 1970s, starring Bill Nighy and Thomasin McKenzie.',
-        rating: 'PG-13',
-    },
-    {
-        id: '8',
-        title: 'The Piano Lesson',
-        date: 'NOV 22',
-        description: 'An adaptation of August Wilson\'s Pulitzer Prize-winning play about family legacy and the power of a piano.',
-        rating: 'PG-13',
-    },
-    {
-        id: '9',
-        title: 'Rhythm + Flow: Brazil',
-        date: 'NOV 12',
-        description: 'A new season of the hip-hop competition series, this time focusing on Brazilian talent.',
-        rating: 'TV-MA',
-    },
-    {
-        id: '10',
-        title: 'Tokyo Override',
-        date: 'NOV 21',
-        description: 'A new Japanese anime series set in a futuristic Tokyo.',
-        rating: 'TV-14',
-    }
 ];
 
 const TAB_OPTIONS = [
