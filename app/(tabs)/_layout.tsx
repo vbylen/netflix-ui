@@ -6,6 +6,8 @@ import * as Haptics from 'expo-haptics';
 import { useUser } from '@/contexts/UserContext';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { Home } from '@/icons/Home';
+import { Ionicons } from '@expo/vector-icons';
+// import DownloadsScreen from '@/(profile)/downloads';
 
 // Helper component for cross-platform icons
 function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'play-square'; color: string }) {
@@ -60,11 +62,26 @@ export const TAB_SCREENS = [
     ),
   },
   {
-    name: 'profile',
+    name: '(profile)/profile',
     title: 'My Netflix',
     icon: ({ focused }: { focused: boolean }) => (
       <ProfileImage focused={focused} />
     ),
+  },
+  {
+    name: '(profile)/downloads',
+    // component: DownloadsScreen,
+    options: {
+      title: 'Downloads',
+      href: null,
+      tabBarIcon: ({ focused }) => (
+        <Ionicons
+          name={focused ? 'arrow-down-cir cle' : 'arrow-down-circle-outline'}
+          size={24}
+          color="white"
+        />
+      ),
+    },
   },
 ];
 
