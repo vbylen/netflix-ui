@@ -88,7 +88,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: '#1f1f1f',
+          backgroundColor: '#000',
           borderTopWidth: 0,
           elevation: 0,
           height: 84,
@@ -107,6 +107,7 @@ export default function TabLayout() {
             }}
           />
         ),
+        contentStyle: { backgroundColor: '#000' },
       }}>
       {TAB_SCREENS.map((screen) => (
         <Tabs.Screen

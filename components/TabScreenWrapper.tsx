@@ -51,10 +51,15 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     }));
 
     return (
-        <Animated.View style={[{
-            flex: 1
-        }, isAnimating ? animatedStyle : null]}>
-            {children}
-        </Animated.View>
+        <View style={{ flex: 1, backgroundColor: '#000' }}>
+            <Animated.View style={[{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#000',
+            }, isAnimating ? animatedStyle : null]}>
+                {children}
+            </Animated.View>
+        </View>
     );
 } 
