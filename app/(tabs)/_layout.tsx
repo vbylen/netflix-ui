@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 // import DownloadsScreen from '@/(profile)/downloads';
 
 // Helper component for cross-platform icons
-function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'play-square'; color: string }) {
+function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'play'; color: string }) {
   return <TabBarIcon name={ionIcon} color={color} />;
 }
 
@@ -58,7 +58,7 @@ export const TAB_SCREENS = [
     name: 'new',
     title: 'New & Hot',
     icon: ({ color, focused }: { color: string; focused: boolean }) => (
-      <TabIcon ionIcon={focused ? 'compass' : 'compass-outline'} color={color} />
+      <TabIcon ionIcon={focused ? 'play' : 'play'} color={color} />
     ),
   },
   {
@@ -67,21 +67,6 @@ export const TAB_SCREENS = [
     icon: ({ focused }: { focused: boolean }) => (
       <ProfileImage focused={focused} />
     ),
-  },
-  {
-    name: '(profile)/downloads',
-    // component: DownloadsScreen,
-    options: {
-      title: 'Downloads',
-      href: null,
-      tabBarIcon: ({ focused }) => (
-        <Ionicons
-          name={focused ? 'arrow-down-cir cle' : 'arrow-down-circle-outline'}
-          size={24}
-          color="white"
-        />
-      ),
-    },
   },
 ];
 
@@ -129,6 +114,12 @@ export default function TabLayout() {
           }}
         />
       ))}
+      <Tabs.Screen
+        name="(profile)/downloads"
+        options={{
+          tabBarButton: () => null,
+        }}
+      />
     </Tabs>
   );
 }

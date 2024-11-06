@@ -117,7 +117,10 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/downloads')}>
+                <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => router.push('/(tabs)/(profile)/downloads')}
+                >
                     <View style={styles.menuIconContainer}>
                         <View style={[styles.downloadIconContainer, { backgroundColor: '#0071EB' }]}>
                             <Ionicons name="arrow-down-circle" size={24} color="#fff" />
