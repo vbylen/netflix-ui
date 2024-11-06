@@ -11,7 +11,6 @@ const exampleLikedShowsAndMovies = [
     { id: 3, imageUrl: 'https://i.pinimg.com/736x/71/0f/f2/710ff2d98ca34e0f4a27eb7a2d5c0598.jpg' },
     { id: 4, imageUrl: 'https://www.commonsensemedia.org/sites/default/files/styles/ratio_2_3_medium/public/product-images/csm-movie/ex-machina-poster.jpg' },
 ];
-
 const exampleMyList = [
     { id: 1, imageUrl: 'https://i.redd.it/q53e4iwud0971.jpg' },
     { id: 2, imageUrl: 'https://images.filmibeat.com/img/popcorn/movie_posters/dopatti-20241014150658-22665.jpg' },
