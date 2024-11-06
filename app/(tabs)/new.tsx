@@ -247,7 +247,7 @@ export default function NewScreen() {
                         <View style={newStyles.headerContent}>
                             <Text style={newStyles.headerTitle}>New & Hot</Text>
                             <View style={newStyles.headerRight}>
-                                <Pressable>
+                                <Pressable onPress={() => router.push('/downloads')}>
                                     {/* Replace this with actual Netflix download icon, I am using this placeholder for now */}
                                     <Image
                                         source={require('../../assets/images/replace-these/download-netflix-icon.png')}
