@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -29,6 +29,8 @@ const FEATURED_MOVIE = {
   thumbnail: 'https://i.redd.it/q53e4iwud0971.jpg',
   categories: ['Violent', 'Gritty', 'Thriller', 'Drug Lord']
 };
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export default function HomeScreen() {
   const { movies } = movieData as MoviesData;
@@ -114,38 +116,37 @@ export default function HomeScreen() {
     <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
       <View style={styles.container}>
         <StatusBar style="light" />
-        <LinearGradient
-          colors={['#03341b', '#002820', '#000000']}
-          locations={[0, 0.4, 0.8]}
-          style={styles.gradient}
+        <AnimatedHeader
+          headerAnimatedProps={headerAnimatedProps}
+          title="For Saúl"
+          scrollDirection={scrollDirection}
+        />
+
+        <Animated.ScrollView
+          style={styles.scrollView}
+          onScroll={scrollHandler}
+          scrollEventThrottle={16}
+          contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
         >
-          <AnimatedHeader
-            headerAnimatedProps={headerAnimatedProps}
-            title="For Saúl"
-            scrollDirection={scrollDirection}
+          <LinearGradient
+            colors={['#03341b', '#002820', '#000000']}
+            locations={[0, 0.4, 0.8]}
+            style={[styles.gradient, { height: SCREEN_HEIGHT * 0.8 }]}
           />
 
-          <Animated.ScrollView
-            style={styles.scrollView}
-            onScroll={scrollHandler}
-            scrollEventThrottle={16}
-            contentContainerStyle={styles.scrollViewContent}
-            showsVerticalScrollIndicator={false}
-          >
-            <FeaturedContent
-              movie={FEATURED_MOVIE}
-              imageStyle={imageStyle}
-              categoriesStyle={categoriesStyle}
-              buttonsStyle={buttonsStyle}
-              topMargin={insets.top + 90}
-            />
+          <FeaturedContent
+            movie={FEATURED_MOVIE}
+            imageStyle={imageStyle}
+            categoriesStyle={categoriesStyle}
+            buttonsStyle={buttonsStyle}
+            topMargin={insets.top + 90}
+          />
 
-            {movies.map(row => (
-              row.rowTitle === 'Mobile Games' ? <GameList key={row.rowTitle} {...row} /> : <MovieList key={row.rowTitle} {...row} />
-            ))}
-          </Animated.ScrollView>
-        </LinearGradient>
-
+          {movies.map(row => (
+            row.rowTitle === 'Mobile Games' ? <GameList key={row.rowTitle} {...row} /> : <MovieList key={row.rowTitle} {...row} />
+          ))}
+        </Animated.ScrollView>
       </View>
     </TabScreenWrapper>
   );
