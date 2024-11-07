@@ -103,11 +103,30 @@ export const newStyles = StyleSheet.create({
         borderRadius: 8,
         overflow: 'hidden',
         borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0
+        borderBottomRightRadius: 0,
+        position: 'relative',
+
     },
     previewImage: {
         width: '100%',
         height: '100%',
+    },
+    rated: {
+        color: '#ffffffcc',
+        fontSize: 12,
+        fontWeight: '600',
+
+
+    },
+    ratedContainer: {
+        position: 'absolute',
+        top: 12,
+        right: 12,
+        zIndex: 100,
+        backgroundColor: '#00000092',
+        paddingHorizontal: 6,
+        paddingVertical: 2,
+        borderRadius: 4,
     },
     dateText: {
         color: '#fff',

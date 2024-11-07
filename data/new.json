@@ -11,7 +11,8 @@
             "logo": "https://i.imgur.com/T9zM4Ro.png",
             "logoWidth": 155,
             "logoHeight": 80,
-            "type": "LIVE"
+            "type": "LIVE",
+            "rated": "TV-14"
         },
         {
             "id": "1",
@@ -24,7 +25,8 @@
             "logo": "https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABZPHktPl9bC4Ag5omE8ZnpGG0bCUfOZDbuLZ3QfDBSlVHWNnAdvF5IHX7SYwFINJFcZgRg9DEojRH0E-mTt_zu1ddC_Oc-NZ7Ys1JJrD4VJm_WE--1AopS6Bde3Nq0YD7KADj9v0beVHuvxKH-FQ8ySCm8mtteFTsr4aVGX2UAXpz9h_2xRnTA.png?r=469",
             "logoWidth": 190,
             "logoHeight": 40,
-            "type": "SERIES"
+            "type": "SERIES",
+            "rated": "TV-PG"
         },
         {
             "id": "2",
@@ -36,7 +38,8 @@
             "rating": "TV-MA",
             "logo": "https://i.imgur.com/2bRw1Nv.png",
             "logoWidth": 280,
-            "logoHeight": 40
+            "logoHeight": 40,
+            "rated": "TV-MA"
         },
         {
             "id": "3",
@@ -48,7 +51,8 @@
             "rating": "TV-MA",
             "logo": "https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABXFIPH8nosIICBR7detx3exky9ZKT6tnpL0SkJDgccILFdGcAIOHiJiwaq5ikO8h2wGzc7zMhZWQvw16fgSsyWfpmKyQffqc1E7nKq5cwhI4JukGAzcy-oAWHafPlpjJUgy7ZEXHAf1ReuI1HP_A-whren-NCAsuo4iiB3Dx32AozolwbLokTw.png?r=19d",
             "logoWidth": 280,
-            "logoHeight": 60
+            "logoHeight": 60,
+            "rated": "R"
         },
         {
             "id": "4",
@@ -61,7 +65,8 @@
             "logo": "https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABSeFhAQ1wPC8dj2eIab3ayvHq9vXVk4tGGASsvof9QQo7RAICkhrTrpoUSD3Fj9mdyh9SC86xNITd38XiwRin5mxnaY1ml7xvrgtVCxsCoipDmWWMZas5KhH6OyJFtw-MGXAkaxA6uwlbFk4of3ltf2qIEqtm5Hjtff3zlWgarMdmZePdlmwIw.png?r=f71",
             "logoWidth": 280,
             "logoHeight": 60,
-            "type": "LIMITED SERIES"
+            "type": "LIMITED SERIES",
+            "rated": "TV-MA"
         }
     ]
 }

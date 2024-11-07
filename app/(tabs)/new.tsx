@@ -31,13 +31,14 @@ interface ComingSoonItem {
     subText: string;
     type?: string;
     description: string;
+    rated: string;
 }
 
 const TAB_OPTIONS = [
     {
         id: 'coming-soon',
         icon: 'https://img.icons8.com/?size=96&id=97192&format=png',
-        label: 'Coming Soon'
+        label: 'Coming Soon',
     },
     {
         id: 'everyone-watching',
@@ -89,6 +90,9 @@ export default function NewScreen() {
 
             <View style={newStyles.contentContainer}>
                 <View style={newStyles.previewCard}>
+                    <View style={newStyles.ratedContainer}>
+                        <Text style={newStyles.rated}>{item.rated}</Text>
+                    </View>
                     <Image source={{ uri: item.imageUrl }} style={newStyles.previewImage} />
 
                 </View>
