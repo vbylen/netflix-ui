@@ -217,7 +217,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                 <View style={styles.moreLikeThis}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 18 }}>
                         <ThemedText style={styles.moreLikeThisTitle}>More Like This</ThemedText>
-                        <ThemedText style={[styles.moreLikeThisTitle, { opacity: 0.4 }]}>More Like This</ThemedText>
+                        <ThemedText style={[styles.moreLikeThisTitle, { opacity: 0.4 }]}>Trailers & More</ThemedText>
                     </View>
                     <View style={styles.movieGrid}>
                         {movies.movies[0].movies.slice(0, 6).map((movie, index) => (

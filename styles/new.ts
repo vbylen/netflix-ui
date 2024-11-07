@@ -213,5 +213,5 @@ export const newStyles = StyleSheet.create({
         fontSize: 17,
         color: '#fff',
         fontWeight: 'bold',
-    },
+    }
 });

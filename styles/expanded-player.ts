@@ -188,6 +188,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold',
         marginBottom: 16,
+        color: '#fff',
     },
     movieGrid: {
         flexDirection: 'row',
