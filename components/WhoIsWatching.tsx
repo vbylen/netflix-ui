@@ -198,14 +198,14 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                 // Adjust final position to account for the scaled size
                 animation.top.value = withSpring(
                     isMinimizing ?
-                        height - 80 :
+                        height - 120 :
                         CENTER_Y + (FINAL_PROFILE_SIZE - layout.height) / 2, // Adjust for scaled height
                     { damping: 12, stiffness: 100 }
                 );
 
                 animation.left.value = withSpring(
                     isMinimizing ?
-                        width - 84 :
+                        width - 123 :
                         CENTER_X + (FINAL_PROFILE_SIZE - layout.width) / 2, // Adjust for scaled width
                     { damping: 12, stiffness: 100 }
                 );

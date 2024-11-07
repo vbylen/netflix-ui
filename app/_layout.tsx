@@ -34,12 +34,12 @@ function AnimatedStack() {
     };
   });
 
-  return <WhoIsWatching onProfileSelect={selectProfile} />;
+  // return <WhoIsWatching onProfileSelect={selectProfile} />;
 
 
-  if (!selectedProfile) {
-    return <WhoIsWatching onProfileSelect={selectProfile} />;
-  }
+  // if (!selectedProfile) {
+  //   return <WhoIsWatching onProfileSelect={selectProfile} />;
+  // }
 
   return (
     <View style={{ flex: 1 }}>
@@ -129,9 +129,9 @@ function AnimatedStack() {
         </Stack>
 
       </Animated.View>
-      {/* {selectedProfile && (
+      {selectedProfile && (
         <WhoIsWatching onProfileSelect={selectProfile} />
-      )} */}
+      )}
     </View>
   );
 }
