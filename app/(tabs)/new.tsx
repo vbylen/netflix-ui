@@ -93,6 +93,17 @@ export default function NewScreen() {
                     <View style={newStyles.ratedContainer}>
                         <Text style={newStyles.rated}>{item.rated}</Text>
                     </View>
+
+                    <Pressable
+                        style={newStyles.soundButton}
+                    >
+                        <Ionicons
+                            name={"volume-mute"}
+                            size={18}
+                            color="white"
+                        />
+                    </Pressable>
+
                     <Image source={{ uri: item.imageUrl }} style={newStyles.previewImage} />
 
                 </View>

@@ -116,7 +116,18 @@ export const newStyles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '600',
 
-
+    },
+    soundButton: {
+        position: 'absolute',
+        top: 190,
+        right: 12,
+        zIndex: 100,
+        backgroundColor: '#000000b7',
+        width: 32,
+        height: 32,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     ratedContainer: {
         position: 'absolute',
