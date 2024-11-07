@@ -1,61 +1,74 @@
-# Apple Music Sheet UI Demo with Expo
+# Netflix UI Clone with Expo
 
-This project demonstrates an implementation of the Apple Music player UI in React Native using Expo, with a focus on replicating the smooth sheet transitions and scaling animations.
+A high-fidelity Netflix mobile UI clone built with React Native and Expo, featuring advanced animations and gesture interactions.
 
 ![Demo](assets/gifs/demo1.gif)
 
-## Features
+## Key Features
 
-- 🎵 Full-screen music player modal with gesture controls
-- 🔄 Smooth scaling animations of the root content
-- 👆 Interactive pan gesture handling
-- 📱 iOS-style sheet presentation
-- 🎨 Dynamic border radius animations
-- 🌟 Visual audio visualizer
-- 💫 Haptic feedback on modal interactions
-- 🖼️ Blur effects and backdrop filters
-- 📱 Sticky mini-player navigation
-- 📋 Apple Music style track listing
-- ⚡ Gesture handling with drag thresholds
-- 🔄 Horizontal swipe to dismiss
+### Profile Management
+
+- 👥 Animated profile selection screen with staggered loading
+- 🔄 Smooth profile switching transitions
+- 🎵 Sound effects and haptic feedback
+
+### Navigation & Animations
+
+- 🔄 Custom tab navigation with sliding animations
+- 💫 Gesture-based content interactions
+- 🌟 Shared element transitions between screens
+- 📱 iOS-style modal presentations
+- 🎨 Dynamic blur effects and scaling
+- 🔄 Tilt animations for featured content
+
+### Content Screens
+
+- 🏠 Animated home screen with featured content
+- 🔥 "New & Hot" section with Netflix-style layout
+- 🎮 Mobile games showcase
+- 🔍 Dynamic search with instant results
+- ⬇️ Downloads management
+- 📺 Full-screen video player
+- 📋 Expandable categories list
+- ℹ️ X-Ray style content details
+
+### Performance
+
+- ⚡ Optimized animations using Reanimated
+- 📊 Efficient list rendering
+- 🎯 Native gesture handling
+- 🔄 Smart transition management
 
 ## Tech Stack
 
 - [Expo](https://expo.dev) - React Native development platform
 - [Expo Router](https://docs.expo.dev/router/introduction) - File-based routing
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) - Smooth animations
-- [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/) - Native-driven gesture handling
-
-## Getting Started
-
-1. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-2. Start the development server:
-
-   ```bash
-   npx expo start
-   ```
-
-3. Open in iOS Simulator or Android Emulator:
-   - Press `i` for iOS
-   - Press `a` for Android
+- [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/) - Native gestures
+- [Expo Haptics](https://docs.expo.dev/versions/latest/sdk/haptics/) - Haptic feedback
+- [Expo AV](https://docs.expo.dev/versions/latest/sdk/av/) - Audio/video playback
 
 ## Implementation Details
 
-The project showcases several key features of modern React Native development:
+### Animation System
 
-- Shared element transitions between mini and full player
-- Gesture-based interactions with multi-axis support
-- Context-based animation state management
+- Custom tab screen wrapper for consistent transitions
 - Worklet-based animations for optimal performance
+- Shared element transitions for content previews
+- Gesture-based modal interactions
 
-### Known Issues
+### State Management
 
-- Horizontal drag gesture conflicts with content scrolling when the modal is partially scrolled, causing flickering. This needs to be addressed by properly managing gesture priorities and scroll state.
+- Context-based profile management
+- Animation state coordination
+- Tab navigation state handling
+
+### UI Components
+
+- Reusable animated components
+- Custom Netflix-style icons and layouts
+- Dynamic blur effects
+- Responsive grid systems
 
 ## Project Structure
 
@@ -63,42 +76,40 @@ The project showcases several key features of modern React Native development:
 project-root/
 ├── app/
 │   ├── (tabs)/
-│   │   ├── search/            # Search and library screens
-│   │   │   ├── _layout.tsx
-│   │   │   ├── library.tsx
-│   │   │   ├── new.tsx
-│   │   │   └── radio.tsx
-│   │   ├── music/             # Music player routes
-│   │   │   ├── [id].tsx
-│   │   │   └── _layout.tsx
-│   │   └── _layout.tsx        # Tab navigation layout
+│   │   ├── (profile)/        # Profile management
+│   │   ├── index.tsx         # Home screen
+│   │   ├── new.tsx          # New & Hot screen
+│   │   └── _layout.tsx      # Tab navigation
+│   ├── movie/
+│   │   └── [id].tsx         # Content details modal
+│   ├── search.tsx           # Search functionality
+│   ├── downloads.tsx        # Downloads screen
+│   └── switch-profile.tsx   # Profile switcher
 ├── components/
-│   ├── navigation/
-│   │   └── TabBarIcon.tsx     # Tab bar icons
-│   ├── Overlay/               # Sheet UI components
-│   │   ├── OverlayContext.tsx
-│   │   ├── OverlayProvider.tsx
-│   │   └── ThemedView.tsx
-│   └── ThemedText.tsx
+│   ├── MovieList/          # Content listing
+│   ├── GameList/           # Games showcase
+│   ├── TabScreenWrapper/   # Animation wrapper
+│   └── WhoIsWatching/     # Profile selection
 ├── contexts/
-│   ├── AudioContext.tsx       # Audio playback state
-│   └── RootScaleContext.tsx   # Scale animation state
-├── constants/
-│   └── Colors.ts             # Theme colors
-└── hooks/                    # Custom React hooks
-    ├── useColorScheme.ts
-    ├── useThemeColor.ts
-    └── useColorScheme.web.ts
+│   ├── UserContext.tsx     # Profile state
+│   └── RootScaleContext.tsx # Animation state
+└── hooks/                  # Custom hooks
 ```
+
+## Development Tips
+
+- Use color extraction from images for dynamic theming
+- Implement proper gesture priority management
+- Handle modal transitions separately from tab transitions
+- Optimize initial load animations
+- Manage scroll position on tab switches
 
 ## Contributing
 
-Feel free to contribute to this project by:
-
-1. Forking the repository
-2. Creating a feature branch
-3. Submitting a pull request
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
 
 ## License
 
-This project is open source and available under the MIT License.
+MIT License
