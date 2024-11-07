@@ -88,6 +88,11 @@ export default function Search() {
                         onChangeText={setSearchQuery}
                         autoCapitalize="none"
                     />
+                    {searchQuery.length > 0 && (
+                        <TouchableOpacity onPress={() => setSearchQuery('')}>
+                            <Ionicons name="close-circle" size={20} color="#666" />
+                        </TouchableOpacity>
+                    )}
                 </View>
             </View>
 
