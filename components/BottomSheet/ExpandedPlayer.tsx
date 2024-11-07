@@ -150,6 +150,15 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         <ThemedText style={styles.quality}>HD</ThemedText>
                     </View>
 
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginBottom: 18 }}>
+                        <Image
+                            source={{ uri: 'https://www.netflix.com/tudum/top10/images/top10.png' }}
+                            style={{ width: 24, height: 24, left: 0, borderRadius: 4 }}
+                        />
+                        <Text style={newStyles.trendingTag}>#5 in Movies Today</Text>
+                    </View>
+
+
                     <View style={styles.buttonContainer}>
                         <Pressable style={styles.playButton}>
                             <Ionicons name="play" size={24} color="black" />

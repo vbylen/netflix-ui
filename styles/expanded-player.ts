@@ -216,4 +216,5 @@ export const expandedPlayerStyles = StyleSheet.create({
         backgroundColor: '#ffffff4a',
         borderWidth: 0,
     },
+
 });

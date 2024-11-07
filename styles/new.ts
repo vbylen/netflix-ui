@@ -214,5 +214,10 @@ export const newStyles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '500',
         marginLeft: 24
-    }
+    },
+    trendingTag: {
+        fontSize: 17,
+        color: '#fff',
+        fontWeight: 'bold',
+    },
 });
