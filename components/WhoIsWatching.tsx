@@ -89,12 +89,12 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                     duration: 800,
                     easing: Easing.bezier(0.25, 0.1, 0.25, 1),
                 }),
-                top: withSpring(height - 70, {
+                top: withSpring(height - 80, {
                     damping: 12,
                     stiffness: 100,
                     mass: 0.5,
                 }),
-                left: withSpring(width - 80, {
+                left: withSpring(width - 84, {
                     damping: 12,
                     stiffness: 100,
                     mass: 0.5,
@@ -320,11 +320,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
+        // opacity: 0.8,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        // zIndex: 100,
     },
     content: {
         flex: 1,
         justifyContent: 'center',
         marginTop: -110,
+        // opacity: 0.1,
     },
     header: {
         flexDirection: 'row',

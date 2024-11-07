@@ -43,6 +43,9 @@ function AnimatedStack() {
 
   return (
     <View style={{ flex: 1 }}>
+
+
+
       {(isModalActive && canBlur) && (
         <BlurView
           intensity={50}
@@ -126,6 +129,9 @@ function AnimatedStack() {
         </Stack>
 
       </Animated.View>
+      {/* {selectedProfile && (
+        <WhoIsWatching onProfileSelect={selectProfile} />
+      )} */}
     </View>
   );
 }
