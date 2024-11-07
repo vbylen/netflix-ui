@@ -19,6 +19,8 @@ import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
 import COMING_SOON_DATA from '@/data/new.json';
+import { useRef } from 'react';
+import { useScrollToTop } from '@react-navigation/native';
 
 const TAB_OPTIONS = [
     {
@@ -66,6 +68,9 @@ export default function NewScreen() {
             scrollY.value = event.contentOffset.y;
         },
     });
+
+    const scrollViewRef = useRef(null);
+    useScrollToTop(scrollViewRef);
 
     const renderComingSoonItem = (item: ComingSoonItem) => (
         <View key={item.id} style={newStyles.comingSoonItem}>
@@ -172,8 +177,8 @@ export default function NewScreen() {
                     </View>
 
                     <ScrollView
+                        ref={scrollViewRef}
                         showsVerticalScrollIndicator={false}
-
                     >
                         {/* 
 

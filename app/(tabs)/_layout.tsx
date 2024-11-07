@@ -8,7 +8,6 @@ import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { Home } from '@/icons/Home';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
-// import DownloadsScreen from '@/(profile)/downloads';
 
 // Helper component for cross-platform icons
 function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'play'; color: string }) {

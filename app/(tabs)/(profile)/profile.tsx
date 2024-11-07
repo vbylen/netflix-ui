@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView, Text, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
 import { usePathname, useRouter } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
+import { useScrollToTop } from '@react-navigation/native';
 
 const exampleLikedShowsAndMovies = [
     { id: 2, imageUrl: 'https://occ-0-2348-2568.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU2Tv7ElpWoaZskSjugnCfgUyxx0k8zFkrSLnw8OByra6I4Pu0hvpNMKPqHKk0_VIq_pP47WE4eiU6bLjH30mOAHixRdrQeMX5296hvGq7hFvPhm-1kaKYp2MLO5H3oxUV1q8UEmz3NwsmrYXnnzvNJ2aXgp7drGClF671VG2U62G9s3qaes9qXaz6ChmJpD31wnaRJjsoqvybX0wzGk0Ij_wU1zH2yqI5b7fNA3D4-AsawmmgN6jCiScTDHpH-252lKjP9LJsbjwVGMht06gnyOeADlJQ.jpg' },
@@ -21,6 +22,8 @@ export default function ProfileScreen() {
     const pathname = usePathname();
     const isActive = pathname === '/profile';
     const router = useRouter();
+    const scrollViewRef = useRef(null);
+    useScrollToTop(scrollViewRef);
 
     const currentTabIndex = TAB_SCREENS.findIndex(screen =>
         screen.name === 'profile'
@@ -75,7 +78,11 @@ export default function ProfileScreen() {
 
     return (
         <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
-            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            <ScrollView
+                ref={scrollViewRef}
+                style={styles.container}
+                showsVerticalScrollIndicator={false}
+            >
                 <View style={styles.header}>
                     <Text style={styles.title}>My Netflix</Text>
                     <View style={styles.headerRight}>

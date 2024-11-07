@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -22,6 +22,7 @@ import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { GameList } from '@/components/GameList/GameList';
+import { useScrollToTop } from '@react-navigation/native';
 
 // const FEATURED_MOVIE = {
 //   id: 'dont-move',
@@ -119,6 +120,10 @@ export default function HomeScreen() {
 
   const slideDirection = activeTabIndex > currentTabIndex ? 'right' : 'left';
 
+  const scrollViewRef = useRef(null);
+
+  useScrollToTop(scrollViewRef);
+
   return (
     <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>
       <View style={styles.container}>
@@ -130,6 +135,7 @@ export default function HomeScreen() {
         />
 
         <Animated.ScrollView
+          ref={scrollViewRef}
           style={styles.scrollView}
           onScroll={scrollHandler}
           scrollEventThrottle={16}
