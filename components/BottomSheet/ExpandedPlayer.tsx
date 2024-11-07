@@ -157,7 +157,11 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         </Pressable>
 
                         <Pressable style={styles.downloadButton}>
-                            <Ionicons name="download" size={20} color="white" />
+                            {/* <Ionicons name="download" size={20} color="white" /> */}
+                            <Image
+                                source={require('../../assets/images/replace-these/download-netflix-transparent.png')}
+                                style={{ width: 28, height: 28 }}
+                            />
                             <ThemedText style={styles.downloadButtonText}>Download</ThemedText>
                         </Pressable>
                     </View>
