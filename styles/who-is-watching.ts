@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     spinnerContainer: {
         position: 'absolute',
         left: width / 2 - 50,
-        top: height / 2 + 50,
+        top: height / 2 + 100,
         width: 100,
         height: 100,
         justifyContent: 'center',

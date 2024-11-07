@@ -25,7 +25,7 @@ const { width, height } = Dimensions.get('window');
 const PROFILE_ICON_SIZE = 24; // Size of the profile icon in the top-right corner
 const PROFILE_ICON_MARGIN = 16; // Margin from the top and right edges
 const FINAL_PROFILE_SIZE = width * 0.45;
-const CENTER_Y = height / 2 - FINAL_PROFILE_SIZE / 2 - 100;
+const CENTER_Y = height / 2 - FINAL_PROFILE_SIZE / 2 - 50;
 const CENTER_X = (width - FINAL_PROFILE_SIZE) / 2;
 
 interface Profile {
@@ -173,39 +173,49 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             const animation = profileAnimations[index];
 
             if (selectedId === profile.id) {
-                // Immediately set initial position and opacity
+                // Start from exact position
                 animation.opacity.value = 1;
                 animation.top.value = layout.y;
                 animation.left.value = layout.x;
                 animation.scale.value = 1;
                 animation.borderRadius.value = 8;
 
-                // Then animate to target position
-                animation.scale.value = withSpring(
-                    isMinimizing ?
-                        PROFILE_ICON_SIZE / layout.width :
-                        FINAL_PROFILE_SIZE / layout.width,
-                    { damping: 12, stiffness: 100 }
-                );
+                // Calculate center position with offset adjustment
+                const scaleFactor = isMinimizing ?
+                    PROFILE_ICON_SIZE / layout.width :
+                    FINAL_PROFILE_SIZE / layout.width;
+
+                // Animate to center or corner
+                animation.scale.value = withSpring(scaleFactor, {
+                    damping: 12,
+                    stiffness: 100
+                });
+
+                // Adjust final position to account for the scaled size
                 animation.top.value = withSpring(
-                    isMinimizing ? height - 80 : CENTER_Y,
+                    isMinimizing ?
+                        height - 80 :
+                        CENTER_Y + (FINAL_PROFILE_SIZE - layout.height) / 2, // Adjust for scaled height
                     { damping: 12, stiffness: 100 }
                 );
+
                 animation.left.value = withSpring(
-                    isMinimizing ? width - 84 : CENTER_X,
+                    isMinimizing ?
+                        width - 84 :
+                        CENTER_X + (FINAL_PROFILE_SIZE - layout.width) / 2, // Adjust for scaled width
                     { damping: 12, stiffness: 100 }
                 );
+
                 animation.borderRadius.value = withSpring(
                     isMinimizing ? 4 : 12,
                     { damping: 12, stiffness: 100 }
                 );
             } else {
-                // Keep other profiles in their original positions but fade them out
+                // Keep rest of the code same for non-selected profiles
                 animation.opacity.value = withTiming(0, {
                     duration: 300,
                     easing: Easing.bezier(0.33, 0, 0.67, 1),
                 });
-                // Reset positions of non-selected profiles
                 animation.top.value = layout.y;
                 animation.left.value = layout.x;
                 animation.scale.value = 1;
