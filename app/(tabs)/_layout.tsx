@@ -34,7 +34,7 @@ function ProfileImage({ focused }: { focused: boolean }) {
       <View
         style={{
           position: 'absolute',
-          bottom: -16,
+          bottom: -20,
           alignSelf: 'center',
           width: 5,
           height: 5,
@@ -102,7 +102,7 @@ export default function TabLayout() {
           elevation: 0,
           height: 84,
           paddingTop: 0,
-          paddingBottom: 35,
+          paddingBottom: 30,
           backgroundColor: 'transparent',
         },
         tabBarBackground: () => (

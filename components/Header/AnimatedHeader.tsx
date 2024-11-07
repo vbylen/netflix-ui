@@ -80,7 +80,7 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
         <>
             <Animated.View style={[styles.header]}>
                 <AnimatedBlurView
-                    tint="systemUltraThinMaterialDark"
+                    tint="systemThickMaterialDark"
                     style={[styles.blurContainer, { paddingTop: insets.top }]}
                     animatedProps={headerAnimatedProps}
                 >

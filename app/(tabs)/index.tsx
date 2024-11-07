@@ -80,7 +80,7 @@ export default function HomeScreen() {
       intensity: interpolate(
         scrollY.value,
         [0, 90],
-        [0, 90],
+        [0, 85],
         'clamp'
       )
     };

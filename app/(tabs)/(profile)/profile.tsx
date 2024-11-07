@@ -136,7 +136,11 @@ export default function ProfileScreen() {
                 >
                     <View style={styles.menuIconContainer}>
                         <View style={[styles.downloadIconContainer, { backgroundColor: '#0071EB' }]}>
-                            <Ionicons name="arrow-down-circle" size={24} color="#fff" />
+                            {/* <Ionicons name="arrow-down-circle" size={24} color="#fff" /> */}
+                            <Image
+                                source={require('../../../assets/images/replace-these/download-netflix-transparent.png')}
+                                style={{ width: 24, height: 24 }}
+                            />
                         </View>
                     </View>
                     <View style={styles.menuContent}>
