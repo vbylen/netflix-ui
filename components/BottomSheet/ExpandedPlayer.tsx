@@ -208,7 +208,10 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                             <ThemedText style={styles.actionButtonText}>Rate</ThemedText>
                         </Pressable>
                         <Pressable style={styles.actionButton}>
-                            <Ionicons name="share-social" size={24} color="white" />
+                            <Ionicons name="send-outline" size={20} color="white" style={{
+                                marginBottom: 4,
+                                transform: [{ rotate: '320deg' }]
+                            }} />
                             <ThemedText style={styles.actionButtonText}>Share</ThemedText>
                         </Pressable>
                     </View>
