@@ -52,7 +52,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         top: 10
     },
     soundButton: {
-        backgroundColoxr: '#000000bb',
+        backgroundColor: '#000000bb',
         width: 28,
         height: 28,
         borderRadius: 20,
