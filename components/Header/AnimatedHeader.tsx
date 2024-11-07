@@ -70,7 +70,7 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
             height: interpolate(
                 scrollDirection.value,
                 [0, 1],
-                [40, 0],
+                [47, 0],
                 'clamp'
             ),
         };
