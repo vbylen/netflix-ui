@@ -20,7 +20,7 @@ import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
 import COMING_SOON_DATA from '@/data/new.json';
 import { useRef } from 'react';
-import { useScrollToTop } from '@react-navigation/native';
+import { useConditionalScrollToTop } from '@/hooks/useConditionalScrollToTop';
 import { Image as ExpoImage } from 'expo-image';
 
 interface ComingSoonItem {
@@ -83,7 +83,7 @@ export default function NewScreen() {
     });
 
     const scrollViewRef = useRef(null);
-    useScrollToTop(scrollViewRef);
+    useConditionalScrollToTop(scrollViewRef);
 
     const renderComingSoonItem = (item: ComingSoonItem) => (
         <View key={item.id} style={newStyles.comingSoonItem}>
