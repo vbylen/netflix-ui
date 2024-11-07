@@ -141,11 +141,11 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         />
                         <Text style={newStyles.netflixTag}>FILM</Text>
                     </View>
-                    <ThemedText style={styles.title}>{movieData?.title || "Expo Documentary"}</ThemedText>
+                    <ThemedText style={styles.title}>{movieData?.title || "Don't Move"}</ThemedText>
 
                     <View style={styles.metaInfo}>
                         <ThemedText style={styles.year}>{movieData?.year || "2024"}</ThemedText>
-                        <ThemedText style={styles.duration}>{movieData?.duration || "2h 7m"}</ThemedText>
+                        <ThemedText style={styles.duration}>{movieData?.duration || "1h 32m"}</ThemedText>
                         <ThemedText style={styles.rating}>{movieData?.rating || "TV-MA"}</ThemedText>
                         <ThemedText style={styles.quality}>HD</ThemedText>
                     </View>
