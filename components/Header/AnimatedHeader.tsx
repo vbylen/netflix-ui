@@ -88,7 +88,7 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
                         <Text style={styles.headerTitle}>{title}</Text>
 
                         <View style={styles.headerButtons}>
-                            <Pressable style={styles.searchButton}>
+                            <Pressable style={styles.searchButton} onPress={() => router.push('/downloads')}>
                                 {/* <Ionicons name="download-outline" size={28} color="#fff" /> */}
                                 <Image
                                     source={require('../../assets/images/replace-these/download-netflix-transparent.png')}
