@@ -33,7 +33,7 @@ export default function Search() {
 
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-                    <Ionicons name="arrow-back" size={24} color="white" />
+                    <Ionicons name="chevron-back" size={24} color="white" />
                 </TouchableOpacity>
                 <View style={styles.searchInputContainer}>
                     <Ionicons name="search" size={20} color="#666" style={styles.searchIcon} />
@@ -41,7 +41,7 @@ export default function Search() {
                         ref={inputRef}
                         style={styles.searchInput}
                         placeholder="Search games, shows, movies..."
-                        placeholderTextColor="#666"
+                        placeholderTextColor="#6b6b6b"
                         value={searchQuery}
                         onChangeText={setSearchQuery}
                         autoCapitalize="none"
@@ -125,12 +125,12 @@ const styles = StyleSheet.create({
     },
     searchInputContainer: {
         flex: 1,
-        height: 36,
-        backgroundColor: '#333',
+        height: 32,
+        backgroundColor: '#323232',
         borderRadius: 4,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 12,
+        paddingHorizontal: 10,
     },
     searchIcon: {
         marginRight: 8,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 16,
         paddingHorizontal: 16,
@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 14,
         marginTop: 8,
+        fontWeight: 'bold',
     },
     gameType: {
         color: '#666',
@@ -185,8 +186,8 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     showImage: {
-        width: 120,
-        height: 70,
+        width: 150,
+        height: 80,
         borderRadius: 4,
         backgroundColor: '#333',
     },
