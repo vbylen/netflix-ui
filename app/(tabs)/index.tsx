@@ -23,11 +23,18 @@ import { usePathname } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { GameList } from '@/components/GameList/GameList';
 
+// const FEATURED_MOVIE = {
+//   id: 'dont-move',
+//   title: "Don't Move",
+//   thumbnail: 'https://i.redd.it/q53e4iwud0971.jpg',
+//   categories: ['Violent', 'Gritty', 'Thriller', 'Drug Lord']
+// };
 const FEATURED_MOVIE = {
   id: 'dont-move',
   title: "Don't Move",
-  thumbnail: 'https://i.redd.it/q53e4iwud0971.jpg',
-  categories: ['Violent', 'Gritty', 'Thriller', 'Drug Lord']
+  thumbnail: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABWsjI5VID3ChnY1bGlkeXfdS0qY19EszZmC9vOQjb72s7hyKAfD-5Yy1OAceR9CfLqyxRMWPu15X6_zAf5ELM4gLbXcJL_2B2e8E.jpg?r=bb0',
+  categories: ['Soapy', 'Suspensful', 'Sci-Fi Mystery'],
+  logo: 'https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABeTZx41tm9x0TT2G_c3gmJOoK_1n9hhvRhzE76D5f3vwwNaWOEBJDLRl5mU1R3BVXhYYU_okqrGzn_qM-3nUJNqUK8QAETNIh4RZy2M7V7726S4tlW3gvd6KtIF_utcjO714L4rQ7ib3sM2ZhnDLF111_nkdewygq9av5vHduwqf1MgPoP5NIQ.png?r=867'
 };
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -131,7 +138,7 @@ export default function HomeScreen() {
           bounces={false}
         >
           <LinearGradient
-            colors={['#03341b', '#002820', '#000000']}
+            colors={['#202036', '#11111d', '#07070c']}
             locations={[0, 0.4, 0.8]}
             style={[styles.gradient, { height: SCREEN_HEIGHT * 0.8 }]}
           />

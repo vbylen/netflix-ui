@@ -107,6 +107,16 @@ export const styles = StyleSheet.create({
         overflow: 'hidden',
         borderRadius: 8,
     },
+    featuredLogo: {
+        width: 250,
+        height: 80,
+        resizeMode: 'contain',
+        position: 'absolute',
+        bottom: 90,
+        // left: 0,
+        zIndex: 2,
+        alignSelf: 'center',
+    },
     featuredImage: {
         width: '100%',
         height: '100%',
@@ -133,7 +143,7 @@ export const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: '200%',
+        height: '200%', e
         zIndex: -1,
     },
     featuredCategories: {
@@ -143,7 +153,7 @@ export const styles = StyleSheet.create({
     categoriesText: {
         color: '#fff',
         fontSize: 14,
-        opacity: 0.9,
+        opacity: 0.98,
         textAlign: 'center',
     },
     featuredButtons: {
