@@ -75,6 +75,7 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         flexDirection: 'row',
         alignItems: 'center',
+        fontWeight: '600',
     },
     featuredContent: {
         width: '100%',
