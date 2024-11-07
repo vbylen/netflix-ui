@@ -227,7 +227,7 @@ export const styles = StyleSheet.create({
     thumbnail: {
         width: '100%',
         aspectRatio: 2 / 3,
-        borderRadius: 6,
+        borderRadius: 14,
     },
     movieRow: {
         marginBottom: 24,
