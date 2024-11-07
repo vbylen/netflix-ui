@@ -11,59 +11,32 @@ import {
 } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
 import { StatusBar } from 'expo-status-bar';
 import moviesData from '../data/movies.json';
 
 const { width } = Dimensions.get('window');
-const ITEM_WIDTH = width / 3 - 16;
+const GAME_CARD_WIDTH = width / 3 - 16;
 
 export default function Search() {
     const [searchQuery, setSearchQuery] = useState('');
-    const [filteredMovies, setFilteredMovies] = useState<any[]>([]);
     const inputRef = useRef<TextInput>(null);
     const router = useRouter();
 
-    useEffect(() => {
-        // Focus input on mount
-        setTimeout(() => {
-            inputRef.current?.focus();
-        }, 100);
-    }, []);
-
-    useEffect(() => {
-        if (searchQuery.length > 0) {
-            // Flatten all movies from different categories
-            const allMovies = moviesData.movies.reduce((acc, category) => {
-                return [...acc, ...category.movies];
-            }, [] as any[]);
-
-            // Filter movies based on search query
-            const filtered = allMovies.filter(
-                (movie) =>
-                    movie.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    movie.type?.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-
-            setFilteredMovies(filtered);
-        } else {
-            setFilteredMovies([]);
-        }
-    }, [searchQuery]);
+    // Get mobile games and TV shows/movies
+    const mobileGames = moviesData.movies[0].movies;
+    const tvAndMovies = moviesData.movies[1].movies;
 
     return (
         <View style={styles.container}>
             <StatusBar style="light" />
-            <Stack.Screen
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <BlurView intensity={100} tint="dark" style={styles.header}>
-                <View style={styles.searchContainer}>
-                    <TouchableOpacity onPress={() => router.back()}>
-                        <Ionicons name="arrow-back" size={24} color="white" />
-                    </TouchableOpacity>
+            <Stack.Screen options={{ headerShown: false }} />
+
+            <View style={styles.header}>
+                <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                    <Ionicons name="arrow-back" size={24} color="white" />
+                </TouchableOpacity>
+                <View style={styles.searchInputContainer}>
+                    <Ionicons name="search" size={20} color="#666" style={styles.searchIcon} />
                     <TextInput
                         ref={inputRef}
                         style={styles.searchInput}
@@ -73,61 +46,63 @@ export default function Search() {
                         onChangeText={setSearchQuery}
                         autoCapitalize="none"
                     />
-                    {searchQuery.length > 0 && (
-                        <TouchableOpacity onPress={() => setSearchQuery('')}>
-                            <Ionicons name="close-circle" size={24} color="#666" />
-                        </TouchableOpacity>
-                    )}
                 </View>
-            </BlurView>
+            </View>
 
             <ScrollView style={styles.content}>
-                {searchQuery.length === 0 ? (
-                    <View style={styles.topSearchesContainer}>
-                        <Text style={styles.sectionTitle}>Popular Searches</Text>
-                        <View style={styles.grid}>
-                            {moviesData.movies[0].movies.slice(0, 12).map((item, index) => (
-                                <TouchableOpacity
-                                    key={index}
-                                    style={styles.gridItem}
-                                    onPress={() => router.push(`/movie/${item.id}`)}
-                                >
-                                    <Image
-                                        source={{ uri: item.imageUrl }}
-                                        style={styles.gridImage}
-                                    />
-                                    <Text style={styles.itemTitle} numberOfLines={2}>
-                                        {item.title || `Item ${item.id}`}
-                                    </Text>
-                                    {item.type && (
-                                        <Text style={styles.itemType}>{item.type}</Text>
-                                    )}
-                                </TouchableOpacity>
-                            ))}
-                        </View>
-                    </View>
-                ) : (
-                    <View style={styles.searchResults}>
-                        {filteredMovies.map((item, index) => (
+                {/* Mobile Games Section */}
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Recommended Mobile Games</Text>
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={styles.gamesRow}
+                    >
+                        {mobileGames.map((game, index) => (
                             <TouchableOpacity
                                 key={index}
-                                style={styles.searchResultItem}
+                                style={styles.gameCard}
+                                onPress={() => router.push(`/movie/${game.id}`)}
+                            >
+                                <Image
+                                    source={{ uri: game.imageUrl }}
+                                    style={styles.gameImage}
+                                />
+                                <Text style={styles.gameTitle} numberOfLines={2}>
+                                    {game.title}
+                                </Text>
+                                <Text style={styles.gameType}>
+                                    {game.type}
+                                </Text>
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
+                </View>
+
+                {/* TV Shows & Movies Section */}
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Recommended TV Shows & Movies</Text>
+                    <View style={styles.showsList}>
+                        {tvAndMovies.map((item, index) => (
+                            <TouchableOpacity
+                                key={index}
+                                style={styles.showItem}
                                 onPress={() => router.push(`/movie/${item.id}`)}
                             >
                                 <Image
                                     source={{ uri: item.imageUrl }}
-                                    style={styles.searchResultImage}
+                                    style={styles.showImage}
                                 />
-                                <View style={styles.searchResultInfo}>
-                                    <Text style={styles.itemTitle} numberOfLines={2}>
-                                        {item.title || `Item ${item.id}`}
-                                    </Text>
-                                    {item.type && <Text style={styles.itemType}>{item.type}</Text>}
+                                <View style={styles.showInfo}>
+                                    <Text style={styles.showTitle}>{item.title}</Text>
                                 </View>
+                                <TouchableOpacity style={styles.playButton}>
+                                    <Ionicons name="play-circle-outline" size={32} color="white" />
+                                </TouchableOpacity>
                             </TouchableOpacity>
                         ))}
                     </View>
-                )}
+                </View>
             </ScrollView>
         </View>
     );
@@ -139,73 +114,91 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
     },
     header: {
+        flexDirection: 'row',
+        alignItems: 'center',
         paddingTop: 50,
         paddingHorizontal: 16,
         paddingBottom: 16,
-        borderBottomColor: '#222',
-        borderBottomWidth: 1,
     },
-    searchContainer: {
+    backButton: {
+        marginRight: 12,
+    },
+    searchInputContainer: {
+        flex: 1,
+        height: 36,
+        backgroundColor: '#333',
+        borderRadius: 4,
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 12,
+        paddingHorizontal: 12,
+    },
+    searchIcon: {
+        marginRight: 8,
     },
     searchInput: {
         flex: 1,
-        height: 40,
         color: 'white',
         fontSize: 16,
     },
     content: {
         flex: 1,
     },
-    topSearchesContainer: {
-        padding: 16,
+    section: {
+        paddingVertical: 16,
     },
     sectionTitle: {
         color: 'white',
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 16,
+        paddingHorizontal: 16,
     },
-    grid: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+    gamesRow: {
+        paddingHorizontal: 16,
         gap: 12,
     },
-    gridItem: {
-        width: ITEM_WIDTH,
+    gameCard: {
+        width: GAME_CARD_WIDTH,
     },
-    gridImage: {
-        width: ITEM_WIDTH,
-        height: ITEM_WIDTH * 1.5,
-        borderRadius: 4,
-        marginBottom: 8,
+    gameImage: {
+        width: GAME_CARD_WIDTH,
+        height: GAME_CARD_WIDTH,
+        borderRadius: 8,
+        backgroundColor: '#333',
     },
-    itemTitle: {
+    gameTitle: {
         color: 'white',
         fontSize: 14,
+        marginTop: 8,
     },
-    itemType: {
+    gameType: {
         color: '#666',
         fontSize: 12,
         marginTop: 4,
     },
-    searchResults: {
-        padding: 16,
+    showsList: {
+        paddingHorizontal: 16,
     },
-    searchResultItem: {
+    showItem: {
         flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: 16,
-        gap: 12,
     },
-    searchResultImage: {
-        width: 100,
-        height: 150,
+    showImage: {
+        width: 120,
+        height: 70,
         borderRadius: 4,
+        backgroundColor: '#333',
     },
-    searchResultInfo: {
+    showInfo: {
         flex: 1,
-        justifyContent: 'center',
+        marginLeft: 12,
+    },
+    showTitle: {
+        color: 'white',
+        fontSize: 16,
+    },
+    playButton: {
+        padding: 8,
     },
 });
