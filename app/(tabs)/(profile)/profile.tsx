@@ -207,6 +207,9 @@ export default function ProfileScreen() {
                         </View>
                         {renderMyList()}
                     </View>
+
+
+
                 </Animated.ScrollView>
             </View>
         </TabScreenWrapper>

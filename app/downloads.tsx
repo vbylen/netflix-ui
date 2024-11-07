@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
-import { usePathname } from 'expo-router';
+import { usePathname, useRouter } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function DownloadsScreen() {
     const pathname = usePathname();
+    const router = useRouter();
     const currentTabIndex = TAB_SCREENS.findIndex(screen =>
         screen.name === '(profile)/profile'
     );
@@ -22,10 +23,12 @@ export default function DownloadsScreen() {
         <TabScreenWrapper isActive={isActive} slideDirection={slideDirection} >
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.backButton}>
+                    <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
                         <Ionicons name="arrow-back" size={24} color="white" />
                     </TouchableOpacity>
-                    <Text style={styles.title}>Downloads</Text>
+                    <View style={styles.headerTitleContainer}>
+                        <Text style={styles.title}>Downloads</Text>
+                    </View>
                 </View>
 
                 <ScrollView
@@ -33,7 +36,7 @@ export default function DownloadsScreen() {
                     showsVerticalScrollIndicator={false}
                 >
                     <View style={styles.iconContainer}>
-                        <Ionicons name="arrow-down-circle" size={80} color="#333" />
+                        <Ionicons name="arrow-down" size={70} color="#6e6e6e" />
                     </View>
 
                     <Text style={styles.heading}>Never be without Netflix</Text>
@@ -65,11 +68,19 @@ const styles = StyleSheet.create({
     },
     backButton: {
         padding: 8,
+        position: 'absolute',
+        left: 0,
+        zIndex: 100,
     },
     title: {
         fontSize: 24,
         fontWeight: '700',
         color: '#fff',
+    },
+    headerTitleContainer: {
+        flex: 1,
+        alignItems: 'center',
+
     },
     content: {
         flex: 1,
