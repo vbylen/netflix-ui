@@ -26,14 +26,14 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
         return <>{children}</>;
     }
 
-    const translateX = useSharedValue(isActive ? 0 : (slideDirection === 'left' ? -500 : 500));
+    const translateX = useSharedValue(isActive ? 0 : (slideDirection === 'left' ? -200 : 200));
     const opacity = useSharedValue(isActive ? 1 : 0);
     const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
         // Trigger initial animation
         if (!hasInitialized && isActive) {
-            translateX.value = slideDirection === 'left' ? -500 : 500;
+            translateX.value = slideDirection === 'left' ? -200 : 200;
             opacity.value = 0;
             setHasInitialized(true);
         }
@@ -41,20 +41,20 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
         setIsAnimating(true);
         if (isActive) {
             translateX.value = withSpring(0, {
-                damping: 20,
-                stiffness: 90,
-                mass: 0.5
+                damping: 25,
+                stiffness: 120,
+                mass: 0.4
             }, () => {
                 runOnJS(setIsAnimating)(false);
             });
-            opacity.value = withTiming(1, { duration: 150 });
+            opacity.value = withTiming(1, { duration: 100 });
         } else {
             translateX.value = withSpring(slideDirection === 'left' ? -25 : 25, {
-                damping: 20,
-                stiffness: 90,
-                mass: 0.5
+                damping: 25,
+                stiffness: 120,
+                mass: 0.4
             });
-            opacity.value = withTiming(0, { duration: 150 }, () => {
+            opacity.value = withTiming(0, { duration: 100 }, () => {
                 runOnJS(setIsAnimating)(false);
             });
         }
