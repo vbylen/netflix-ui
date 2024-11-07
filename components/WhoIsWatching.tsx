@@ -11,6 +11,7 @@ import Animated, {
     withSequence,
     withDelay,
     withRepeat,
+    withSpring,
 } from 'react-native-reanimated';
 import { ThemedText } from './ThemedText';
 import { Ionicons } from '@expo/vector-icons';
@@ -81,25 +82,63 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             return {
                 position: 'absolute',
                 width: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 500,
-                    easing: Easing.ease,
+                    duration: 800,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
                 }),
                 height: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 500,
-                    easing: Easing.ease,
+                    duration: 800,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
                 }),
-                top: withTiming(height - 70, { duration: 500, easing: Easing.ease }),
-                left: withTiming(width - 80, { duration: 500, easing: Easing.ease }),
+                top: withSpring(height - 70, {
+                    damping: 12,
+                    stiffness: 100,
+                    mass: 0.5,
+                }),
+                left: withSpring(width - 80, {
+                    damping: 12,
+                    stiffness: 100,
+                    mass: 0.5,
+                }),
                 borderRadius: withTiming(4, {
-                    duration: 500,
-                    easing: Easing.ease,
+                    duration: 800,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
                 }),
                 transform: [
                     {
-                        scale: withTiming(1, { duration: 500, easing: Easing.ease }),
+                        translateY: withSequence(
+                            withSpring(-200, {
+                                damping: 12,
+                                stiffness: 100,
+                            }),
+                            withSpring(0, {
+                                damping: 12,
+                                stiffness: 100,
+                            })
+                        ),
+                    },
+                    {
+                        translateX: withSequence(
+                            withSpring(150, {
+                                damping: 12,
+                                stiffness: 100,
+                            }),
+                            withSpring(0, {
+                                damping: 12,
+                                stiffness: 100,
+                            })
+                        ),
+                    },
+                    {
+                        scale: withSpring(1, {
+                            damping: 12,
+                            stiffness: 100,
+                        }),
                     },
                 ],
-                opacity: withTiming(0.8, { duration: 500, easing: Easing.ease }),
+                opacity: withTiming(0.8, {
+                    duration: 800,
+                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+                }),
             };
         }
 
