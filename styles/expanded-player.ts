@@ -9,6 +9,8 @@ export const expandedPlayerStyles = StyleSheet.create({
         width: '100%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        overflow: 'hidden',
+
     },
     scrollView: {
         flex: 1,
@@ -20,6 +22,7 @@ export const expandedPlayerStyles = StyleSheet.create({
         height: 238, // 16:9 aspect ratio
         position: 'relative',
         zIndex: 1,
+
     },
     video: {
         width: '100%',
