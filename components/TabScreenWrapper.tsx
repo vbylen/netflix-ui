@@ -7,6 +7,7 @@ import Animated, {
     withSpring,
     runOnJS
 } from 'react-native-reanimated';
+import { usePathname, useNavigation } from 'expo-router';
 
 interface Props {
     children: React.ReactNode;
@@ -15,6 +16,15 @@ interface Props {
 }
 
 export function TabScreenWrapper({ children, isActive, slideDirection }: Props) {
+    const navigation = useNavigation();
+
+    // Only animate if it's a tab navigation
+    const shouldAnimate = navigation.getState().type === 'tab';
+
+    if (!shouldAnimate) {
+        return <>{children}</>;
+    }
+
     const translateX = useSharedValue(isActive ? 0 : (slideDirection === 'left' ? -500 : 500));
     const opacity = useSharedValue(isActive ? 1 : 0);
     const [isAnimating, setIsAnimating] = useState(false);
