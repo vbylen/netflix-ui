@@ -22,6 +22,8 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     // Only animate if it's a tab navigation
     const shouldAnimate = navigation.getState().type === 'tab';
 
+    return <>{children}</>
+
     if (!shouldAnimate) {
         return <>{children}</>;
     }
