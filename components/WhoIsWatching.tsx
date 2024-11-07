@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { TouchableOpacity, StyleSheet, Dimensions, Image, StatusBar, LayoutRectangle } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { TouchableOpacity, StyleSheet, Dimensions, Image, StatusBar, LayoutRectangle, LayoutChangeEvent } from 'react-native';
 import { SafeAreaView, View } from 'react-native';
 import Animated, {
     useAnimatedStyle,
@@ -24,6 +24,9 @@ import { styles } from '@/styles/who-is-watching';
 const { width, height } = Dimensions.get('window');
 const PROFILE_ICON_SIZE = 24; // Size of the profile icon in the top-right corner
 const PROFILE_ICON_MARGIN = 16; // Margin from the top and right edges
+const FINAL_PROFILE_SIZE = width * 0.45;
+const CENTER_Y = height / 2 - FINAL_PROFILE_SIZE / 2 - 100;
+const CENTER_X = (width - FINAL_PROFILE_SIZE) / 2;
 
 interface Profile {
     id: string;
@@ -38,14 +41,14 @@ interface Props {
 export function WhoIsWatching({ onProfileSelect }: Props) {
     const { profiles } = useUser();
     const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
-    // const [selectedProfile, setSelectedProfile] = useState<Profile | null>(profiles[0]);
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const [initialLayout, setInitialLayout] = useState<LayoutRectangle | null>(null);
     const [isAnimating, setIsAnimating] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
     const [isMinimizing, setIsMinimizing] = useState(false);
     const profileRefs = useRef<{ [key: string]: LayoutRectangle | null }>({});
     const spinnerRotation = useSharedValue(0);
-
-    const selectedProfilePosition = useSharedValue({ x: 0, y: 0, width: 0, height: 0 });
+    const [profileLayouts, setProfileLayouts] = useState<{ [key: string]: LayoutRectangle }>({});
 
     const containerStyle = useAnimatedStyle(() => ({
         transform: [
@@ -72,115 +75,6 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
         };
     });
 
-    const selectedProfileStyle = useAnimatedStyle(() => {
-        if (!selectedProfile) return {};
-
-        const finalSize = width * 0.45;
-        const centerY = height / 2;
-        const targetY = centerY - finalSize / 2 - 100;
-
-        if (isMinimizing) {
-            return {
-                position: 'absolute',
-                width: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 800,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-                }),
-                height: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 800,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-                }),
-                top: withSpring(height - 80, {
-                    damping: 12,
-                    stiffness: 100,
-                    mass: 0.5,
-                }),
-                left: withSpring(width - 84, {
-                    damping: 12,
-                    stiffness: 100,
-                    mass: 0.5,
-                }),
-                borderRadius: withTiming(4, {
-                    duration: 800,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-                }),
-                transform: [
-                    {
-                        translateY: withSequence(
-                            withSpring(-200, {
-                                damping: 12,
-                                stiffness: 100,
-                            }),
-                            withSpring(0, {
-                                damping: 12,
-                                stiffness: 100,
-                            })
-                        ),
-                    },
-                    {
-                        translateX: withSequence(
-                            withSpring(150, {
-                                damping: 12,
-                                stiffness: 100,
-                            }),
-                            withSpring(0, {
-                                damping: 12,
-                                stiffness: 100,
-                            })
-                        ),
-                    },
-                    {
-                        scale: withSpring(1, {
-                            damping: 12,
-                            stiffness: 100,
-                        }),
-                    },
-                ],
-                opacity: withTiming(0.8, {
-                    duration: 800,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-                }),
-            };
-        }
-
-        return {
-            position: 'absolute',
-            width: withTiming(finalSize, {
-                duration: 700,
-                easing: Easing.bezier(0.33, 0, 0.67, 1),
-            }),
-            height: withTiming(finalSize, {
-                duration: 700,
-                easing: Easing.bezier(0.33, 0, 0.67, 1),
-            }),
-            top: withTiming(targetY - selectedProfilePosition.value.y, {
-                duration: 700,
-                easing: Easing.bezier(0.33, 0, 0.67, 1),
-            }),
-            left: withTiming((width - finalSize) / 2 - selectedProfilePosition.value.x, {
-                duration: 700,
-                easing: Easing.bezier(0.33, 0, 0.67, 1),
-            }),
-            transform: [
-                {
-                    scale: withSequence(
-                        withTiming(1, { duration: 50 }),
-                        withTiming(1.1, {
-                            duration: 700,
-                            easing: Easing.bezier(0.33, 0, 0.67, 1),
-                        })
-                    ),
-                },
-            ],
-            borderRadius: withTiming(12, {
-                duration: 700,
-                easing: Easing.bezier(0.33, 0, 0.67, 1),
-            }),
-            opacity: 1,
-        };
-    });
-
-
     const handleProfileSelect = async (profile: Profile) => {
         try {
             const { sound } = await Audio.Sound.createAsync(
@@ -188,20 +82,13 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             );
             await sound.playAsync();
 
-            const layout = profileRefs.current[profile.id];
+            const layout = profileLayouts[profile.id];
             if (layout) {
-                selectedProfilePosition.value = {
-                    x: layout.x,
-                    y: layout.y,
-                    width: layout.width,
-                    height: layout.height,
-                };
+                setSelectedId(profile.id);
+                setSelectedProfile(profile);
+                setIsAnimating(true);
             }
 
-            setSelectedProfile(profile);
-            setIsAnimating(true);
-
-            // Start spinner animation after profile is centered
             setTimeout(() => {
                 setShowSpinner(true);
                 spinnerRotation.value = withRepeat(
@@ -214,10 +101,8 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                 );
             }, 800);
 
-            // Start minimizing animation after 2 seconds
             setTimeout(() => {
                 setIsMinimizing(true);
-                // Call onProfileSelect after minimizing animation
                 setTimeout(() => {
                     runOnJS(onProfileSelect)(profile.id);
                 }, 500);
@@ -226,6 +111,108 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             console.log('Error playing sound:', error);
         }
     };
+
+    const handleProfileLayout = (profile: Profile, event: LayoutChangeEvent) => {
+        event.target.measure((x, y, width, height, pageX, pageY) => {
+            const imageSize = width * 0.8;
+            setProfileLayouts(prev => ({
+                ...prev,
+                [profile.id]: {
+                    x: pageX + (width - imageSize) / 2,
+                    y: pageY + (width - imageSize) / 2,
+                    width: imageSize,
+                    height: imageSize,
+                    originalX: pageX,
+                    originalY: pageY,
+                    originalWidth: width,
+                    originalHeight: height
+                }
+            }));
+        });
+    };
+
+    // Create a shared value for each profile's animation state
+    const profileAnimations = useRef(
+        profiles.map((profile) => ({
+            scale: useSharedValue(1),
+            opacity: useSharedValue(0),
+            top: useSharedValue(0),
+            left: useSharedValue(0),
+            borderRadius: useSharedValue(8),
+        }))
+    ).current;
+
+    // Create animated styles outside the render loop
+    const profileAnimatedStyles = profileAnimations.map((animation, index) =>
+        useAnimatedStyle(() => {
+            const layout = profileLayouts[profiles[index].id];
+            if (!layout) return {};
+
+            return {
+                opacity: animation.opacity.value,
+                transform: [{
+                    scale: animation.scale.value
+                }],
+                position: 'absolute',
+                width: layout.width,
+                height: layout.height,
+                top: animation.top.value,
+                left: animation.left.value,
+                borderRadius: animation.borderRadius.value,
+                zIndex: selectedId === profiles[index].id ? 100 : 1,
+            };
+        })
+    );
+
+    // Update animations when selection changes
+    useEffect(() => {
+        profiles.forEach((profile, index) => {
+            const layout = profileLayouts[profile.id];
+            if (!layout) return;
+
+            const animation = profileAnimations[index];
+
+            if (selectedId === profile.id) {
+                // Immediately set initial position and opacity
+                animation.opacity.value = 1;
+                animation.top.value = layout.y;
+                animation.left.value = layout.x;
+                animation.scale.value = 1;
+                animation.borderRadius.value = 8;
+
+                // Then animate to target position
+                animation.scale.value = withSpring(
+                    isMinimizing ?
+                        PROFILE_ICON_SIZE / layout.width :
+                        FINAL_PROFILE_SIZE / layout.width,
+                    { damping: 12, stiffness: 100 }
+                );
+                animation.top.value = withSpring(
+                    isMinimizing ? height - 80 : CENTER_Y,
+                    { damping: 12, stiffness: 100 }
+                );
+                animation.left.value = withSpring(
+                    isMinimizing ? width - 84 : CENTER_X,
+                    { damping: 12, stiffness: 100 }
+                );
+                animation.borderRadius.value = withSpring(
+                    isMinimizing ? 4 : 12,
+                    { damping: 12, stiffness: 100 }
+                );
+            } else {
+                // Keep other profiles in their original positions but fade them out
+                animation.opacity.value = withTiming(0, {
+                    duration: 300,
+                    easing: Easing.bezier(0.33, 0, 0.67, 1),
+                });
+                // Reset positions of non-selected profiles
+                animation.top.value = layout.y;
+                animation.left.value = layout.x;
+                animation.scale.value = 1;
+                animation.borderRadius.value = 8;
+            }
+        });
+    }, [selectedId, isMinimizing, profileLayouts]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -249,9 +236,7 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                             <TouchableOpacity
                                 onPress={() => handleProfileSelect(profile)}
                                 style={styles.profileButton}
-                                onLayout={(event) => {
-                                    profileRefs.current[profile.id] = event.nativeEvent.layout;
-                                }}
+                                onLayout={(event) => handleProfileLayout(profile, event)}
                             >
                                 <Animated.View style={styles.profileContainer}>
                                     <Animated.Image
@@ -273,12 +258,25 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                 </Animated.View>
             </View>
 
-            {selectedProfile && (
-                <Animated.Image
-                    source={{ uri: selectedProfile.avatar }}
-                    style={[styles.selectedAvatar, selectedProfileStyle]}
-                />
-            )}
+            {profiles.map((profile, index) => {
+                const layout = profileLayouts[profile.id];
+                if (!layout) return null;
+
+                return (
+                    <Animated.Image
+                        key={`floating-${profile.id}`}
+                        source={{ uri: profile.avatar }}
+                        style={[
+                            styles.floatingAvatar,
+                            {
+                                width: layout.width,
+                                height: layout.height,
+                            },
+                            profileAnimatedStyles[index]
+                        ]}
+                    />
+                );
+            })}
 
             {showSpinner && (
                 <Animated.View style={[styles.spinnerContainer, spinnerStyle]}>
