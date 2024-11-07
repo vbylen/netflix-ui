@@ -156,7 +156,7 @@ export default function NewScreen() {
                                         style={{ width: 24, height: 24 }}
                                     />
                                 </Pressable>
-                                <Pressable>
+                                <Pressable onPress={() => router.push('/search')}>
                                     <Ionicons name="search" size={24} color="#fff" />
                                 </Pressable>
                             </View>

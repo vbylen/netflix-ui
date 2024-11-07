@@ -79,7 +79,7 @@ export default function ProfileScreen() {
                 <View style={styles.header}>
                     <Text style={styles.title}>My Netflix</Text>
                     <View style={styles.headerRight}>
-                        <TouchableOpacity style={styles.searchButton}>
+                        <TouchableOpacity style={styles.searchButton} onPress={() => router.push('/search')}>
                             <Ionicons name="search" size={24} color="white" />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.menuButton}>

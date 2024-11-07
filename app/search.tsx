@@ -24,7 +24,7 @@ export default function Search() {
 
     // Get mobile games and TV shows/movies
     const mobileGames = moviesData.movies[0].movies;
-    const tvAndMovies = moviesData.movies[1].movies;
+    const tvAndMovies = moviesData.movies[4].movies;
 
     return (
         <View style={styles.container}>
