@@ -176,20 +176,20 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     </View>
 
                     <ThemedText style={styles.description}>
-                        {movieData?.description || "In this suspenseful drama, a police officer investigates a challenging case involving twin sisters."}
+                        {movieData?.description || "How do you escape a twisted killer when you suddenly can't run or scream? Kelsey Asbille (\"Yellowstone\") and Finn Wittrock star in this chilling thriller."}
                     </ThemedText>
 
                     <View style={styles.castInfo}>
                         <ThemedText style={styles.castLabel}>Cast: </ThemedText>
                         <ThemedText style={styles.castText}>
-                            {movieData?.cast?.join(', ') || "Kajol, Kriti Sanon, Shaheer Sheikh"}
+                            {movieData?.cast?.join(', ') || "Finn Wittrock, Kelsey Asbille, Moray Treadwell"}
                         </ThemedText>
                     </View>
 
                     <View style={styles.directorInfo}>
                         <ThemedText style={styles.directorLabel}>Director: </ThemedText>
                         <ThemedText style={styles.directorText}>
-                            {movieData?.director || "Shashanka Chaturvedi"}
+                            {movieData?.director || "Adam Schindler, Brian Netto"}
                         </ThemedText>
                     </View>
 

@@ -141,14 +141,7 @@ export const newStyles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    netflixTag: {
-        color: '#ffffffa9',
-        fontSize: 8,
-        letterSpacing: 1.5,
-        fontWeight: 'bold',
-        marginBottom: 4,
-        paddingLeft: 20
-    },
+
     title: {
         color: '#fff',
         fontSize: 20,
@@ -210,10 +203,11 @@ export const newStyles = StyleSheet.create({
     },
 
     netflixTag: {
-        color: '#fff',
+        color: '#ffffffcf',
         fontSize: 12,
         fontWeight: '500',
-        marginLeft: 24
+        marginLeft: 24,
+        letterSpacing: 2.5,
     },
     trendingTag: {
         fontSize: 17,
