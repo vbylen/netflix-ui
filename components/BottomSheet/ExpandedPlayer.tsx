@@ -223,7 +223,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         <ThemedText style={[styles.moreLikeThisTitle, { opacity: 0.4 }]}>Trailers & More</ThemedText>
                     </View>
                     <View style={styles.movieGrid}>
-                        {movies.movies[0].movies.slice(0, 6).map((movie, index) => (
+                        {movies.movies[3].movies.slice(0, 6).map((movie, index) => (
                             <View key={movie.id} style={styles.moviePoster}>
                                 <Image
                                     source={{ uri: movie.imageUrl }}
