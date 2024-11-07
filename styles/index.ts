@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 16,
         height: 50,
+
     },
     headerTitle: {
         color: '#fff',
@@ -47,9 +48,10 @@ export const styles = StyleSheet.create({
     categoryTabs: {
         flexDirection: 'row',
         paddingHorizontal: 16,
-        paddingBottom: 6,
         gap: 12,
-        marginTop: 4
+        marginTop: 4,
+        paddingBottom: 6,
+
     },
     categoryTab: {
         // paddingVertical: 7,
@@ -60,7 +62,8 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5
+        gap: 5,
+
     },
     categoryTabText: {
         color: '#fff',
