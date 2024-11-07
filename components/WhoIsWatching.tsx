@@ -83,37 +83,25 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             return {
                 position: 'absolute',
                 width: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 600,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+                    duration: 500,
+                    easing: Easing.ease,
                 }),
                 height: withTiming(PROFILE_ICON_SIZE, {
-                    duration: 600,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+                    duration: 500,
+                    easing: Easing.ease,
                 }),
-                top: withSequence(
-                    withTiming(finalTop - 20, { duration: 400, easing: Easing.out(Easing.quad) }),
-                    withTiming(finalTop, { duration: 200, easing: Easing.bounce })
-                ),
-                left: withSequence(
-                    withTiming(finalLeft, { duration: 400, easing: Easing.out(Easing.quad) }),
-                    withTiming(finalLeft, { duration: 200, easing: Easing.bounce })
-                ),
-                borderRadius: withTiming(4, {
-                    duration: 600,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+                top: withTiming(finalTop, { duration: 500, easing: Easing.ease }),
+                left: withTiming(finalLeft, { duration: 500, easing: Easing.ease }),
+                borderRadius: withTiming(PROFILE_ICON_SIZE / 2, {
+                    duration: 500,
+                    easing: Easing.ease,
                 }),
                 transform: [
                     {
-                        scale: withSequence(
-                            withTiming(0.8, { duration: 400, easing: Easing.out(Easing.quad) }),
-                            withTiming(1, { duration: 200, easing: Easing.bounce })
-                        ),
+                        scale: withTiming(1, { duration: 500, easing: Easing.ease }),
                     },
                 ],
-                opacity: withTiming(0.8, {
-                    duration: 600,
-                    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-                }),
+                opacity: withTiming(0.8, { duration: 500, easing: Easing.ease }),
             };
         }
 
