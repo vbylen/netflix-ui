@@ -8,7 +8,6 @@ import { useRootScale } from '@/contexts/RootScaleContext';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { OverlayProvider } from '@/components/Overlay/OverlayProvider';
-import { MiniPlayer } from '@/components/BottomSheet/MiniPlayer';
 import { useRouter } from 'expo-router';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
