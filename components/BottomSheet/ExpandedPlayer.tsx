@@ -11,6 +11,7 @@ import movies from '@/data/movies.json';
 import { Slider } from 'react-native-awesome-slider';
 import { useSharedValue } from 'react-native-reanimated';
 import { newStyles } from '@/styles/new';
+import { Image as ExpoImage } from 'expo-image';
 
 interface MovieData {
     id?: string;
@@ -136,9 +137,10 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
             >
                 <View style={styles.contentContainer}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: -4, marginBottom: 8 }}>
-                        <Image
+                        <ExpoImage
                             source={{ uri: 'https://loodibee.com/wp-content/uploads/Netflix-N-Symbol-logo.png' }}
                             style={{ width: 20, height: 20, top: -4, position: 'absolute', left: 0 }}
+                            cachePolicy="memory-disk"
                         />
                         <Text style={newStyles.netflixTag}>FILM</Text>
                     </View>
@@ -152,9 +154,10 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     </View>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginBottom: 18 }}>
-                        <Image
+                        <ExpoImage
                             source={{ uri: 'https://www.netflix.com/tudum/top10/images/top10.png' }}
                             style={{ width: 24, height: 24, left: 0, borderRadius: 4 }}
+                            cachePolicy="memory-disk"
                         />
                         <Text style={newStyles.trendingTag}>#5 in Movies Today</Text>
                     </View>
@@ -168,9 +171,11 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
 
                         <Pressable style={styles.downloadButton}>
                             {/* <Ionicons name="download" size={20} color="white" /> */}
-                            <Image
+                            <ExpoImage
                                 source={require('../../assets/images/replace-these/download-netflix-transparent.png')}
                                 style={{ width: 28, height: 28 }}
+                                cachePolicy="memory-disk"
+                                contentFit="contain"
                             />
                             <ThemedText style={styles.downloadButtonText}>Download</ThemedText>
                         </Pressable>
@@ -226,9 +231,11 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     <View style={styles.movieGrid}>
                         {movies.movies[3].movies.slice(0, 6).map((movie, index) => (
                             <View key={movie.id} style={styles.moviePoster}>
-                                <Image
+                                <ExpoImage
                                     source={{ uri: movie.imageUrl }}
                                     style={{ width: '100%', height: '100%', borderRadius: 4 }}
+                                    cachePolicy="memory-disk"
+                                    transition={200}
                                 />
                             </View>
                         ))}

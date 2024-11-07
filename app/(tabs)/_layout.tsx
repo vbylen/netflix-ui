@@ -8,6 +8,7 @@ import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { Home } from '@/icons/Home';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import { Image as ExpoImage } from 'expo-image';
 
 // Helper component for cross-platform icons
 function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'home-sharp' | 'play-square'; color: string }) {
@@ -20,7 +21,7 @@ function ProfileImage({ focused }: { focused: boolean }) {
 
   return (
     <React.Fragment>
-      <Image
+      <ExpoImage
         source={{ uri: selectedProfile?.avatar }}
         style={{
           width: 24,
@@ -30,6 +31,8 @@ function ProfileImage({ focused }: { focused: boolean }) {
           borderWidth: 2,
           borderColor: focused ? 'white' : 'transparent',
         }}
+        cachePolicy="memory-disk"
+        transition={200}
       />
       <View
         style={{
@@ -58,10 +61,11 @@ export const TAB_SCREENS = [
     name: 'new',
     title: 'New & Hot',
     icon: ({ color, focused }: { color: string; focused: boolean }) => (
-      // Using dummy images for now - replace with actual icons
-      <Image
+      <ExpoImage
         source={focused ? require('../../assets/images/replace-these/new-netflix.png') : require('../../assets/images/replace-these/new-netflix-outline.png')}
         style={{ width: 24, height: 24 }}
+        cachePolicy="memory-disk"
+        contentFit="contain"
       />
     ),
   },

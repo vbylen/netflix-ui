@@ -15,6 +15,7 @@ import { BlurView } from 'expo-blur';
 import { WhoIsWatching } from '../components/WhoIsWatching';
 import { UserProvider } from '@/contexts/UserContext';
 import { useUser } from '@/contexts/UserContext';
+import { Image } from 'expo-image';
 
 function AnimatedStack() {
   const { scale } = useRootScale();
@@ -144,6 +145,15 @@ export default function RootLayout() {
 
   useEffect(() => {
     SplashScreen.hideAsync();
+  }, []);
+
+  useEffect(() => {
+    Image.prefetch([
+      // Add your common image URLs here
+      'path-to-netflix-icon.png',
+      'path-to-netflix-outline.png',
+      // Add profile avatar URLs if you have them statically
+    ]);
   }, []);
 
   return (

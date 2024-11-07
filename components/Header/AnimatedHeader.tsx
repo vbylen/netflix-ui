@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,6 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
+import { Image as ExpoImage } from 'expo-image';
 
 import { styles } from '@/styles';
 import { CategoriesListModal } from '../CategoriesListModal/CategoriesListModal';
@@ -89,10 +90,11 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
 
                         <View style={styles.headerButtons}>
                             <Pressable style={styles.searchButton} onPress={() => router.push('/downloads')}>
-                                {/* <Ionicons name="download-outline" size={28} color="#fff" /> */}
-                                <Image
+                                <ExpoImage
                                     source={require('../../assets/images/replace-these/download-netflix-transparent.png')}
                                     style={{ width: 28, height: 28 }}
+                                    cachePolicy="memory-disk"
+                                    contentFit="contain"
                                 />
                             </Pressable>
                             <Pressable style={styles.searchButton} onPress={() => router.push('/search')}>

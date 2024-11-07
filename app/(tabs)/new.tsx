@@ -21,6 +21,7 @@ import { usePathname } from 'expo-router';
 import COMING_SOON_DATA from '@/data/new.json';
 import { useRef } from 'react';
 import { useScrollToTop } from '@react-navigation/native';
+import { Image as ExpoImage } from 'expo-image';
 
 interface ComingSoonItem {
     id: string;
@@ -104,7 +105,12 @@ export default function NewScreen() {
                         />
                     </Pressable>
 
-                    <Image source={{ uri: item.imageUrl }} style={newStyles.previewImage} />
+                    <ExpoImage
+                        source={{ uri: item.imageUrl }}
+                        style={newStyles.previewImage}
+                        cachePolicy="memory-disk"
+                        transition={200}
+                    />
 
                 </View>
 
@@ -112,9 +118,11 @@ export default function NewScreen() {
                 <View style={newStyles.featuredContainer}>
 
                     <View style={{ gap: 6, }}>
-                        <Image
+                        <ExpoImage
                             source={{ uri: item.logo }}
                             style={{ width: item.logoWidth, height: item.logoHeight, marginRight: 4, marginLeft: 12 }}
+                            cachePolicy="memory-disk"
+                            transition={200}
                         />
 
                     </View>
@@ -128,9 +136,11 @@ export default function NewScreen() {
                     {item.type && (<>
                         <View
                             style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6, marginBottom: 2 }}>
-                            <Image
+                            <ExpoImage
                                 source={{ uri: 'https://loodibee.com/wp-content/uploads/Netflix-N-Symbol-logo.png' }}
                                 style={{ width: 20, height: 20, top: -4, position: 'absolute', left: 0 }}
+                                cachePolicy="memory-disk"
+                                transition={200}
                             />
                             {item.type && <Text style={newStyles.netflixTag}>{item.type}</Text>}
                         </View>
@@ -158,9 +168,10 @@ export default function NewScreen() {
             style={[newStyles.categoryTab, activeTab === tab.id && newStyles.activeTab]}
             onPress={() => setActiveTab(tab.id)}
         >
-            <Image
+            <ExpoImage
                 source={{ uri: tab.icon }}
                 style={[newStyles.tabIcon]}
+                cachePolicy="memory-disk"
             />
             <Text style={[
                 newStyles.categoryTabText,
@@ -182,9 +193,11 @@ export default function NewScreen() {
                             <View style={newStyles.headerRight}>
                                 <Pressable onPress={() => router.push('/downloads')}>
                                     {/* Replace this with actual Netflix download icon, I am using this placeholder for now */}
-                                    <Image
+                                    <ExpoImage
                                         source={require('../../assets/images/replace-these/download-netflix-icon.png')}
                                         style={{ width: 24, height: 24 }}
+                                        cachePolicy="memory-disk"
+                                        contentFit="contain"
                                     />
                                 </Pressable>
                                 <Pressable onPress={() => router.push('/search')}>
