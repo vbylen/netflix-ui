@@ -32,7 +32,7 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     }
 
 
-    // return <>{children}</>
+    return <>{children}</>
 
     if (!shouldAnimate) {
         return <>{children}</>;
