@@ -143,14 +143,16 @@ export const expandedPlayerStyles = StyleSheet.create({
     },
     castInfo: {
         flexDirection: 'row',
-        marginBottom: 8,
+        marginBottom: 0,
     },
     castLabel: {
         color: '#999',
+        fontSize: 14,
     },
     castText: {
         flex: 1,
-        color: '#fff',
+        color: '#999',
+        fontSize: 14,
     },
     directorInfo: {
         flexDirection: 'row',
@@ -158,10 +160,12 @@ export const expandedPlayerStyles = StyleSheet.create({
     },
     directorLabel: {
         color: '#999',
+        fontSize: 14,
     },
     directorText: {
         flex: 1,
-        color: '#fff',
+        color: '#999',
+        fontSize: 14,
     },
     actionButtons: {
         flexDirection: 'row',
