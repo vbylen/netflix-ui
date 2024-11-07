@@ -242,6 +242,7 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                         <Animated.View
                             key={profile.id}
                             entering={FadeIn.delay(index * 100)}
+                            style={styles.profileWrapper}
                         >
                             <TouchableOpacity
                                 onPress={() => handleProfileSelect(profile)}
