@@ -20,9 +20,19 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     const [hasInitialized, setHasInitialized] = useState(false);
 
     // Only animate if it's a tab navigation
-    const shouldAnimate = navigation.getState().type === 'tab';
+    var shouldAnimate = false;
+    const state = navigation.getState();
+    const currentRoute = state.routes[state.index].name;
+    const previousRoute = state.index > 0 ? state.routes[state.index - 1].name : null;
+    // console.log('Current route:', currentRoute);
+    // console.log('Previous route:', previousRoute);
+    const possibleRoutes = ['new', 'index', '(profile)/profile', null];
+    if (possibleRoutes.includes(currentRoute) && possibleRoutes.includes(previousRoute)) {
+        shouldAnimate = true;
+    }
 
-    return <>{children}</>
+
+    // return <>{children}</>
 
     if (!shouldAnimate) {
         return <>{children}</>;
