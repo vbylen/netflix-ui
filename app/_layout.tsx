@@ -96,6 +96,17 @@ function AnimatedStack() {
               },
             }}
           />
+          <Stack.Screen
+            name="search"
+            options={{
+              // presentation: '',
+              headerShown: false,
+              contentStyle: {
+                backgroundColor: 'transparent',
+              },
+            }}
+
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
 

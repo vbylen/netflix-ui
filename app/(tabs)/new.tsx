@@ -20,7 +20,6 @@ import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
 import COMING_SOON_DATA from '@/data/new.json';
 
-
 const TAB_OPTIONS = [
     {
         id: 'coming-soon',

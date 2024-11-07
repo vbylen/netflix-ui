@@ -9,6 +9,7 @@ import Animated, {
     interpolate
 } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
 
 import { styles } from '@/styles';
 import { CategoriesListModal } from '../CategoriesListModal/CategoriesListModal';
@@ -24,7 +25,7 @@ interface AnimatedHeaderProps {
 export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: AnimatedHeaderProps) {
     const [showCategories, setShowCategories] = useState(false);
     const insets = useSafeAreaInsets();
-
+    const router = useRouter();
 
     const onCategoryPress = () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -94,7 +95,7 @@ export function AnimatedHeader({ headerAnimatedProps, title, scrollDirection }: 
                                     style={{ width: 28, height: 28 }}
                                 />
                             </Pressable>
-                            <Pressable style={styles.searchButton}>
+                            <Pressable style={styles.searchButton} onPress={() => router.push('/search')}>
                                 <Ionicons name="search-outline" size={28} color="#fff" />
                             </Pressable>
                         </View>
