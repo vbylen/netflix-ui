@@ -26,14 +26,14 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
         return <>{children}</>;
     }
 
-    const translateX = useSharedValue(isActive ? 0 : (slideDirection === 'left' ? -200 : 200));
+    const translateX = useSharedValue(isActive ? 0 : (slideDirection === 'left' ? -25 : 25));
     const opacity = useSharedValue(isActive ? 1 : 0);
     const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
         // Trigger initial animation
         if (!hasInitialized && isActive) {
-            translateX.value = slideDirection === 'left' ? -200 : 200;
+            translateX.value = slideDirection === 'left' ? -25 : 25;
             opacity.value = 0;
             setHasInitialized(true);
         }
