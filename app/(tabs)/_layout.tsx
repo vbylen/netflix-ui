@@ -119,12 +119,7 @@ export default function TabLayout() {
           }}
         />
       ))}
-      <Tabs.Screen
-        name="(profile)/downloads"
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
+
     </Tabs>
   );
 }

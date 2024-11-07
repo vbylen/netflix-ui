@@ -108,6 +108,20 @@ function AnimatedStack() {
             }}
 
           />
+
+          <Stack.Screen
+            name="downloads"
+            options={{
+              // presentation: 'card',
+              // animation: 'none',
+              headerShown: false,
+              contentStyle: {
+                backgroundColor: 'transparent',
+              },
+            }}
+
+          />
+
           <Stack.Screen name="+not-found" />
         </Stack>
 
