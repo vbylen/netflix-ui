@@ -214,6 +214,14 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                     isMinimizing ? 4 : 12,
                     { damping: 12, stiffness: 100 }
                 );
+
+                //add opacity to 0 wwith animation after animation ends in 500ms
+                // setTimeout(() => {
+                //     animation.opacity.value = withTiming(0, {
+                //         duration: 300,
+                //         easing: Easing.bezier(0.33, 0, 0.67, 1),
+                //     });
+                // }, 500);
             } else {
                 // Keep rest of the code same for non-selected profiles
                 animation.opacity.value = withTiming(0, {

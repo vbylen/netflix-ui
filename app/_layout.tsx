@@ -129,9 +129,12 @@ function AnimatedStack() {
         </Stack>
 
       </Animated.View>
-      {selectedProfile && (
+
+      {!selectedProfile && (
         <WhoIsWatching onProfileSelect={selectProfile} />
       )}
+
+
     </View>
   );
 }
