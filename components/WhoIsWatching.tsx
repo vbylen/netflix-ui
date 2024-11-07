@@ -63,6 +63,10 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
             duration: 500,
             easing: Easing.bezier(0.33, 0, 0.67, 1),
         }),
+        backgroundColor: withTiming(selectedId ? 'transparent' : '#000', {
+            duration: 300,
+            easing: Easing.bezier(0.33, 0, 0.67, 1),
+        }),
     }));
 
     const spinnerStyle = useAnimatedStyle(() => {
@@ -224,17 +228,28 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
         });
     }, [selectedId, isMinimizing, profileLayouts]);
 
+    // Add this near other animated styles
+    const headerStyle = useAnimatedStyle(() => ({
+        opacity: withTiming(isMinimizing ? 0 : 1, {
+            duration: 300,
+            easing: Easing.bezier(0.33, 0, 0.67, 1),
+        }),
+    }));
+
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[
+            styles.container,
+            { backgroundColor: isMinimizing ? 'transparent' : '#000' }
+        ]}>
             <StatusBar barStyle="light-content" />
-            <View style={styles.header}>
+            <Animated.View style={[styles.header, headerStyle]}>
                 <View style={styles.headerTitle}>
                     <ThemedText style={styles.title}>Who's Watching?</ThemedText>
                 </View>
                 <TouchableOpacity>
                     <ThemedText style={styles.editButton}>Edit</ThemedText>
                 </TouchableOpacity>
-            </View>
+            </Animated.View>
 
             <View style={styles.content}>
                 <Animated.View style={[styles.gridContainer, containerStyle]}>
