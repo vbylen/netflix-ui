@@ -17,6 +17,7 @@ interface Props {
 
 export function TabScreenWrapper({ children, isActive, slideDirection }: Props) {
     const navigation = useNavigation();
+    const [hasInitialized, setHasInitialized] = useState(false);
 
     // Only animate if it's a tab navigation
     const shouldAnimate = navigation.getState().type === 'tab';
@@ -30,6 +31,13 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
+        // Trigger initial animation
+        if (!hasInitialized && isActive) {
+            translateX.value = slideDirection === 'left' ? -500 : 500;
+            opacity.value = 0;
+            setHasInitialized(true);
+        }
+
         setIsAnimating(true);
         if (isActive) {
             translateX.value = withSpring(0, {

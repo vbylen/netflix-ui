@@ -22,6 +22,17 @@ import COMING_SOON_DATA from '@/data/new.json';
 import { useRef } from 'react';
 import { useScrollToTop } from '@react-navigation/native';
 
+interface ComingSoonItem {
+    id: string;
+    imageUrl: string;
+    logo: string;
+    logoWidth: number;
+    logoHeight: number;
+    subText: string;
+    type?: string;
+    description: string;
+}
+
 const TAB_OPTIONS = [
     {
         id: 'coming-soon',

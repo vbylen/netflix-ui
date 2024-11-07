@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 
 // Helper component for cross-platform icons
-function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'play'; color: string }) {
+function TabIcon({ ionIcon, color }: { ionIcon: 'person' | 'home-sharp' | 'play-square'; color: string }) {
   return <TabBarIcon name={ionIcon} color={color} />;
 }
 
@@ -124,7 +124,6 @@ export default function TabLayout() {
             }}
           />
         ),
-        contentStyle: { backgroundColor: '#000' },
       }}>
       {TAB_SCREENS.map((screen) => (
         <Tabs.Screen
