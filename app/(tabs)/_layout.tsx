@@ -7,6 +7,7 @@ import { useUser } from '@/contexts/UserContext';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { Home } from '@/icons/Home';
 import { Ionicons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
 // import DownloadsScreen from '@/(profile)/downloads';
 
 // Helper component for cross-platform icons
@@ -74,6 +75,16 @@ export const TAB_SCREENS = [
   },
 ];
 
+const styles = StyleSheet.create({
+  blurView: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 84,
+  }
+});
+
 export default function TabLayout() {
   const pathname = usePathname();
   const handleTabPress = () => {
@@ -88,13 +99,20 @@ export default function TabLayout() {
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: '#1e1e1e',
           borderTopWidth: 0,
           elevation: 0,
           height: 84,
           paddingTop: 0,
           paddingBottom: 35,
+          backgroundColor: 'transparent',
         },
+        tabBarBackground: () => (
+          <BlurView
+            tint="dark"
+            intensity={99}
+            style={styles.blurView}
+          />
+        ),
         tabBarLabelStyle: {
           marginBottom: 10,
         },

@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         paddingHorizontal: 16,
         paddingBottom: 16,
+        marginTop: 10,
     },
     backButton: {
         marginRight: 12,
@@ -189,6 +190,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,
+
     },
     searchIcon: {
         marginRight: 8,
@@ -270,17 +272,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         paddingHorizontal: 20,
-        paddingTop: 40,
+        paddingTop: 80,
     },
     noResultsTitle: {
         color: 'white',
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 28,
+        fontWeight: '700',
         marginBottom: 8,
     },
     noResultsSubtitle: {
         color: '#6b6b6b',
-        fontSize: 16,
+        fontSize: 18,
         textAlign: 'center',
+        letterSpacing: 0.5,
     },
 });

@@ -143,7 +143,7 @@ export const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: '200%', e
+        height: '200%',
         zIndex: -1,
     },
     featuredCategories: {
