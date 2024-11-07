@@ -99,7 +99,8 @@ function AnimatedStack() {
           <Stack.Screen
             name="search"
             options={{
-              // presentation: '',
+              // presentation: 'card',
+              // animation: 'none',
               headerShown: false,
               contentStyle: {
                 backgroundColor: 'transparent',
