@@ -36,6 +36,7 @@ interface Props {
 export function WhoIsWatching({ onProfileSelect }: Props) {
     const { profiles } = useUser();
     const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
+    // const [selectedProfile, setSelectedProfile] = useState<Profile | null>(profiles[0]);
     const [isAnimating, setIsAnimating] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
     const [isMinimizing, setIsMinimizing] = useState(false);
@@ -77,9 +78,6 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
         const targetY = centerY - finalSize / 2 - 100;
 
         if (isMinimizing) {
-            const finalTop = height - 70;
-            const finalLeft = width - 80;
-
             return {
                 position: 'absolute',
                 width: withTiming(PROFILE_ICON_SIZE, {
@@ -90,9 +88,9 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                     duration: 500,
                     easing: Easing.ease,
                 }),
-                top: withTiming(finalTop, { duration: 500, easing: Easing.ease }),
-                left: withTiming(finalLeft, { duration: 500, easing: Easing.ease }),
-                borderRadius: withTiming(PROFILE_ICON_SIZE / 2, {
+                top: withTiming(height - 70, { duration: 500, easing: Easing.ease }),
+                left: withTiming(width - 80, { duration: 500, easing: Easing.ease }),
+                borderRadius: withTiming(4, {
                     duration: 500,
                     easing: Easing.ease,
                 }),
@@ -115,26 +113,23 @@ export function WhoIsWatching({ onProfileSelect }: Props) {
                 duration: 700,
                 easing: Easing.bezier(0.33, 0, 0.67, 1),
             }),
-            top: selectedProfilePosition.value.y,
-            left: selectedProfilePosition.value.x,
+            top: withTiming(targetY - selectedProfilePosition.value.y, {
+                duration: 700,
+                easing: Easing.bezier(0.33, 0, 0.67, 1),
+            }),
+            left: withTiming((width - finalSize) / 2 - selectedProfilePosition.value.x, {
+                duration: 700,
+                easing: Easing.bezier(0.33, 0, 0.67, 1),
+            }),
             transform: [
                 {
-                    translateX: withTiming((width - finalSize) / 2 - selectedProfilePosition.value.x, {
-                        duration: 700,
-                        easing: Easing.bezier(0.33, 0, 0.67, 1),
-                    }),
-                },
-                {
-                    translateY: withTiming(targetY - selectedProfilePosition.value.y, {
-                        duration: 700,
-                        easing: Easing.bezier(0.33, 0, 0.67, 1),
-                    }),
-                },
-                {
-                    scale: withTiming(1.1, {
-                        duration: 700,
-                        easing: Easing.bezier(0.33, 0, 0.67, 1),
-                    }),
+                    scale: withSequence(
+                        withTiming(1, { duration: 50 }),
+                        withTiming(1.1, {
+                            duration: 700,
+                            easing: Easing.bezier(0.33, 0, 0.67, 1),
+                        })
+                    ),
                 },
             ],
             borderRadius: withTiming(12, {
