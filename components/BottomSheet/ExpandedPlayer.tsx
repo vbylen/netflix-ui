@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, Image, Pressable, Dimensions, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemedText } from '@/components/ThemedText';
-import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
 import { Video, ResizeMode } from 'expo-av';
 import { useEffect, useState, useRef } from 'react';
@@ -69,8 +69,9 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
     }, []);
 
     return (
-        <LinearGradient
-            colors={['#1f1f1f', '#121212']}
+        <BlurView
+            intensity={85}
+            tint="systemThickMaterialDark"
             style={[styles.rootContainer, { marginTop: insets.top }]}
         >
             <View style={styles.videoContainer}>
@@ -234,7 +235,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     </View>
                 </View>
             </ScrollComponentToUse>
-        </LinearGradient>
+        </BlurView>
     );
 }
 
