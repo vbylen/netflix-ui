@@ -44,7 +44,7 @@ export default function MovieScreen() {
     const numericId = typeof id === 'string' ? parseInt(id, 10) : Array.isArray(id) ? parseInt(id[0], 10) : 0;
     const movie = movies.flatMap(row => row.movies).find(m => m.id === numericId.toString()) || movies[0].movies[0];
 
-    alert(JSON.stringify(movie))
+    // alert(JSON.stringify(movie))
     const handleHapticFeedback = useCallback(() => {
         try {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
