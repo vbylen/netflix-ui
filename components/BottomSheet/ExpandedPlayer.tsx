@@ -45,80 +45,7 @@ interface VideoRef {
     setPositionAsync: (position: number) => void;
 }
 
-const dummyMoviesDataWithFullInfo = [
-    {
-        id: 122,
-        video_url: 'https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4',
-        title: 'Don\'t Move',
-        year: '2024',
-        duration: '1h 32m',
-        rating: 'TV-MA',
-        description: 'How do you escape a twisted killer when you suddenly can\'t run or scream? Kelsey Asbille (\"Yellowstone\") and Finn Wittrock star in this chilling thriller.',
-        cast: ['Finn Wittrock', 'Kelsey Asbille', 'Moray Treadwell'],
-        director: 'Adam Schindler, Brian Netto',
-        ranking_text: "#5 in Movies Today"
-    },
-    {
-        id: 123,
-        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-        title: 'Oppenheimer',
-        year: '2023',
-        duration: '3h 0m',
-        rating: 'R',
-        description: 'The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb. Based on the Pulitzer Prize-winning book "American Prometheus".',
-        cast: ['Cillian Murphy', 'Emily Blunt', 'Matt Damon', 'Robert Downey Jr.'],
-        director: 'Christopher Nolan',
-        ranking_text: "#1 in Movies Today"
-    },
-    {
-        id: 124,
-        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-        title: 'Poor Things',
-        year: '2023',
-        duration: '2h 21m',
-        rating: 'R',
-        description: 'The incredible tale of Bella Baxter, a young woman brought back to life by the brilliant and unorthodox scientist Dr. Godwin Baxter.',
-        cast: ['Emma Stone', 'Mark Ruffalo', 'Willem Dafoe', 'Ramy Youssef'],
-        director: 'Yorgos Lanthimos',
-        ranking_text: "#2 in Movies Today"
-    },
-    {
-        id: 125,
-        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-        title: 'Anyone But You',
-        year: '2023',
-        duration: '1h 43m',
-        rating: 'R',
-        description: 'After a amazing first date, Bea and Ben\'s fiery attraction turns ice cold - until they find themselves unexpectedly reunited at a destination wedding in Australia.',
-        cast: ['Sydney Sweeney', 'Glen Powell', 'Alexandra Shipp', 'GaTa'],
-        director: 'Will Gluck',
-        ranking_text: "#3 in Movies Today"
-    },
-    {
-        id: 126,
-        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-        title: 'The Zone of Interest',
-        year: '2023',
-        duration: '1h 45m',
-        rating: 'R',
-        description: 'The commandant of Auschwitz, Rudolf Höss, and his wife Hedwig, strive to build a dream life for their family in a house and garden next to the camp.',
-        cast: ['Christian Friedel', 'Sandra Hüller', 'Johann Karthaus', 'Luis Noah Witte'],
-        director: 'Jonathan Glazer',
-        ranking_text: "#4 in Movies Today"
-    },
-    {
-        id: 127,
-        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-        title: 'Killers of the Flower Moon',
-        year: '2023',
-        duration: '3h 26m',
-        rating: 'R',
-        description: 'Members of the Osage tribe in northeastern Oklahoma are murdered under mysterious circumstances in the 1920s, sparking a major FBI investigation.',
-        cast: ['Leonardo DiCaprio', 'Robert De Niro', 'Lily Gladstone', 'Jesse Plemons'],
-        director: 'Martin Scorsese',
-        ranking_text: "#5 in Movies Today"
-    }
-]
+
 
 
 export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerProps) {
@@ -131,7 +58,12 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
     const max = useSharedValue(100);
     const [duration, setDuration] = useState(0);
 
-    const randomMovie = dummyMoviesDataWithFullInfo[Math.floor(Math.random() * dummyMoviesDataWithFullInfo.length)];
+    // Use ref to ensure the selection persists across re-renders and remounts
+    const selectedMovieRef = useRef<MovieData | null>(null);
+    if (selectedMovieRef.current === null) {
+        selectedMovieRef.current = dummyMoviesDataWithFullInfo[Math.floor(Math.random() * dummyMoviesDataWithFullInfo.length)];
+    }
+    const selectedMovie = selectedMovieRef.current;
 
     const onPlaybackStatusUpdate = (status: PlaybackStatus) => {
         if (status.isLoaded) {
@@ -157,7 +89,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                 <Video
                     ref={videoRef}
                     style={styles.video}
-                    source={{ uri: randomMovie.video_url }}
+                    source={{ uri: selectedMovie.video_url }}
                     useNativeControls={false}
                     resizeMode={ResizeMode.COVER}
                     isLooping
@@ -222,12 +154,12 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         />
                         <Text style={newStyles.netflixTag}>FILM</Text>
                     </View>
-                    <ThemedText style={styles.title}>{randomMovie.title}</ThemedText>
+                    <ThemedText style={styles.title}>{selectedMovie.title}</ThemedText>
 
                     <View style={styles.metaInfo}>
-                        <ThemedText style={styles.year}>{randomMovie.year}</ThemedText>
-                        <ThemedText style={styles.duration}>{randomMovie.duration}</ThemedText>
-                        <ThemedText style={styles.rating}>{randomMovie.rating}</ThemedText>
+                        <ThemedText style={styles.year}>{selectedMovie.year}</ThemedText>
+                        <ThemedText style={styles.duration}>{selectedMovie.duration}</ThemedText>
+                        <ThemedText style={styles.rating}>{selectedMovie.rating}</ThemedText>
                         <ThemedText style={styles.quality}>HD</ThemedText>
                     </View>
 
@@ -237,7 +169,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                             style={{ width: 24, height: 24, left: 0, borderRadius: 4 }}
                             cachePolicy="memory-disk"
                         />
-                        <Text style={newStyles.trendingTag}>{randomMovie.ranking_text}</Text>
+                        <Text style={newStyles.trendingTag}>{selectedMovie.ranking_text}</Text>
                     </View>
 
                     <View style={styles.buttonContainer}>
@@ -259,20 +191,20 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     </View>
 
                     <ThemedText style={styles.description}>
-                        {randomMovie.description}
+                        {selectedMovie.description}
                     </ThemedText>
 
                     <View style={styles.castInfo}>
                         <ThemedText style={styles.castLabel}>Cast: </ThemedText>
                         <ThemedText style={styles.castText}>
-                            {randomMovie.cast.join(', ')}
+                            {selectedMovie.cast.join(', ')}
                         </ThemedText>
                     </View>
 
                     <View style={styles.directorInfo}>
                         <ThemedText style={styles.directorLabel}>Director: </ThemedText>
                         <ThemedText style={styles.directorText}>
-                            {randomMovie.director}
+                            {selectedMovie.director}
                         </ThemedText>
                     </View>
 

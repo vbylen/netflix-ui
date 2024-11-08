@@ -50,6 +50,24 @@
                     "title": "Thriller"
                 },
                 {
+                    "id": "123",
+                    "imageUrl": "https://m.media-amazon.com/images/I/61y3DfBfGdL._AC_UF894,1000_QL80_.jpg",
+                    "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                    "title": "Oppenheimer",
+                    "year": "2023",
+                    "duration": "3h 0m",
+                    "rating": "R",
+                    "description": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb. Based on the Pulitzer Prize-winning book \"American Prometheus\".",
+                    "cast": [
+                        "Cillian Murphy",
+                        "Emily Blunt",
+                        "Matt Damon",
+                        "Robert Downey Jr."
+                    ],
+                    "director": "Christopher Nolan",
+                    "ranking_text": "#1 in Movies Today"
+                },
+                {
                     "id": "81631010",
                     "imageUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2518eb113535837.602a4c183dd5d.jpg",
                     "title": "The Old Guard"
@@ -215,7 +233,19 @@
                 {
                     "id": "81767564",
                     "imageUrl": "https://digitalt.tv/wp-content/uploads/imports/Dont-Move.jpg",
-                    "title": "Don't Move"
+                    "title": "Don't Move",
+                    "video_url": "https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4",
+                    "year": "2024",
+                    "duration": "1h 32m",
+                    "rating": "TV-MA",
+                    "description": "How do you escape a twisted killer when you suddenly can't run or scream? Kelsey Asbille (\"Yellowstone\") and Finn Wittrock star in this chilling thriller.",
+                    "cast": [
+                        "Finn Wittrock",
+                        "Kelsey Asbille",
+                        "Moray Treadwell"
+                    ],
+                    "director": "Adam Schindler, Brian Netto",
+                    "ranking_text": "#5 in Movies Today"
                 },
                 {
                     "id": "81681817",
