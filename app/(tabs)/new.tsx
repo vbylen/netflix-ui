@@ -38,22 +38,22 @@ interface ComingSoonItem {
 const TAB_OPTIONS = [
     {
         id: 'coming-soon',
-        icon: 'https://img.icons8.com/?size=96&id=97192&format=png',
+        icon: require('../../assets/images/replace-these/coming-soon.png'),
         label: 'Coming Soon',
     },
     {
         id: 'everyone-watching',
-        icon: 'https://i.imgur.com/VrFDja2.png',
+        icon: require('../../assets/images/replace-these/everyone-watching.webp'),
         label: "Everyone's Watching"
     },
     {
         id: 'top-10-shows',
-        icon: 'https://www.netflix.com/tudum/top10/images/top10.png',
+        icon: require('../../assets/images/replace-these/top10.png'),
         label: 'Top 10 TV Shows'
     },
     {
         id: 'top-10-movies',
-        icon: 'https://www.netflix.com/tudum/top10/images/top10.png',
+        icon: require('../../assets/images/replace-these/top10.png'),
         label: 'Top 10 Movies'
     }
 ];
@@ -61,6 +61,8 @@ const TAB_OPTIONS = [
 export default function NewScreen() {
     const pathname = usePathname();
     const isActive = pathname === '/new';
+
+
 
     const currentTabIndex = TAB_SCREENS.findIndex(screen =>
         screen.name === 'new'
@@ -169,7 +171,7 @@ export default function NewScreen() {
             onPress={() => setActiveTab(tab.id)}
         >
             <ExpoImage
-                source={{ uri: tab.icon }}
+                source={tab.icon}
                 style={[newStyles.tabIcon]}
                 cachePolicy="memory-disk"
             />
