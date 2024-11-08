@@ -101,8 +101,11 @@ project-root/
 - Use color extraction from images for dynamic theming
 - Implement proper gesture priority management
 - Handle modal transitions separately from tab transitions
-- Optimize initial load animations
-- Manage scroll position on tab switches
+
+## TODO
+
+- [ ] Shared transition on modal navigation
+- [ ] Bug: Disable shift animation on back (fixed on branch router-4)
 
 ## Contributing
 
