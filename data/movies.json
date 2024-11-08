@@ -228,6 +228,28 @@
             ]
         },
         {
+            "rowTitle": "Top 10 Movies in the U.S. Today",
+            "type": "top_10",
+            "movies": [
+                {
+                    "id": "10-1",
+                    "imageUrl": "https://flixpatrol.com/runtime/cache/files/posters/g/w350/gzmfmmpjhomofksahsdac62dyg2.webp"
+                },
+                {
+                    "id": "10-4",
+                    "imageUrl": "https://flixpatrol.com/runtime/cache/files/posters/c/w350/cqsthxrvutfnannjtiehexiackv.webp",
+                },
+                {
+                    "id": "10-2",
+                    "imageUrl": "https://flixpatrol.com/runtime/cache/files/posters/t/w350/tprh0rm00esnefni1zxqqttipzj.webp"
+                },
+                {
+                    "id": "10-3",
+                    "imageUrl": "https://flixpatrol.com/runtime/cache/files/posters/h/w350/hruo0cxc5xinxvnmia2r5fjzqvd.webp"
+                }
+            ]
+        },
+        {
             "rowTitle": "New on Netflix",
             "movies": [
                 {
