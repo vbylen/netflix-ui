@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "apple-music-sheet-ui",
-    "slug": "apple-music-sheet-ui",
+    "name": "netflix-ui",
+    "slug": "netflix-ui",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
