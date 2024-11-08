@@ -24,7 +24,7 @@ const HORIZONTAL_DRAG_THRESHOLD = Math.min(Dimensions.get('window').width * 0.51
 const DIRECTION_LOCK_ANGLE = 45; // Angle in degrees to determine horizontal vs vertical movement
 const ENABLE_HORIZONTAL_DRAG_CLOSE = true;
 
-export default function MusicScreen() {
+export default function MovieScreen() {
     const { id } = useLocalSearchParams();
     const router = useRouter();
     const { setScale } = useRootScale();
@@ -42,7 +42,7 @@ export default function MusicScreen() {
     const blurIntensity = useSharedValue(20);
 
     const numericId = typeof id === 'string' ? parseInt(id, 10) : Array.isArray(id) ? parseInt(id[0], 10) : 0;
-    const movie = movies.find(s => s.id === numericId) || movies[0];
+    // const movie = movies.find(s => s.id === numericId) || movies[0];
 
     const handleHapticFeedback = useCallback(() => {
         try {

@@ -14,7 +14,8 @@ import { newStyles } from '@/styles/new';
 import { Image as ExpoImage } from 'expo-image';
 
 interface MovieData {
-    id?: string;
+    id: number;
+    video_url: string;
     title: string;
     year: string;
     duration: string;
@@ -22,7 +23,6 @@ interface MovieData {
     description: string;
     cast: string[];
     director: string;
-    videoUrl: string;
 }
 
 interface ExpandedPlayerProps {
@@ -45,6 +45,19 @@ interface VideoRef {
     setPositionAsync: (position: number) => void;
 }
 
+const dummyMoviesDataWithFullInfo = [{
+    id: 123,
+    video_url: 'https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4',
+    title: 'Don\'t Move',
+    year: '2024',
+    duration: '1h 32m',
+    rating: 'TV-MA',
+    description: 'How do you escape a twisted killer when you suddenly can\'t run or scream? Kelsey Asbille (\"Yellowstone\") and Finn Wittrock star in this chilling thriller.',
+    cast: ['Finn Wittrock', 'Kelsey Asbille', 'Moray Treadwell'],
+    director: 'Adam Schindler, Brian Netto',
+    ranking_text: "#5 in Movies Today"
+}]
+
 export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerProps) {
     const ScrollComponentToUse = scrollComponent || ScrollView;
     const insets = useSafeAreaInsets();
@@ -54,6 +67,8 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
     const min = useSharedValue(0);
     const max = useSharedValue(100);
     const [duration, setDuration] = useState(0);
+
+    const randomMovie = dummyMoviesDataWithFullInfo[Math.floor(Math.random() * dummyMoviesDataWithFullInfo.length)];
 
     const onPlaybackStatusUpdate = (status: PlaybackStatus) => {
         if (status.isLoaded) {
@@ -79,7 +94,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                 <Video
                     ref={videoRef}
                     style={styles.video}
-                    source={{ uri: movieData?.videoUrl ?? 'https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4' }}
+                    source={{ uri: randomMovie.video_url }}
                     useNativeControls={false}
                     resizeMode={ResizeMode.COVER}
                     isLooping
@@ -144,12 +159,12 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         />
                         <Text style={newStyles.netflixTag}>FILM</Text>
                     </View>
-                    <ThemedText style={styles.title}>{movieData?.title || "Don't Move"}</ThemedText>
+                    <ThemedText style={styles.title}>{randomMovie.title}</ThemedText>
 
                     <View style={styles.metaInfo}>
-                        <ThemedText style={styles.year}>{movieData?.year || "2024"}</ThemedText>
-                        <ThemedText style={styles.duration}>{movieData?.duration || "1h 32m"}</ThemedText>
-                        <ThemedText style={styles.rating}>{movieData?.rating || "TV-MA"}</ThemedText>
+                        <ThemedText style={styles.year}>{randomMovie.year}</ThemedText>
+                        <ThemedText style={styles.duration}>{randomMovie.duration}</ThemedText>
+                        <ThemedText style={styles.rating}>{randomMovie.rating}</ThemedText>
                         <ThemedText style={styles.quality}>HD</ThemedText>
                     </View>
 
@@ -159,9 +174,8 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                             style={{ width: 24, height: 24, left: 0, borderRadius: 4 }}
                             cachePolicy="memory-disk"
                         />
-                        <Text style={newStyles.trendingTag}>#5 in Movies Today</Text>
+                        <Text style={newStyles.trendingTag}>{randomMovie.ranking_text}</Text>
                     </View>
-
 
                     <View style={styles.buttonContainer}>
                         <Pressable style={styles.playButton}>
@@ -182,20 +196,20 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     </View>
 
                     <ThemedText style={styles.description}>
-                        {movieData?.description || "How do you escape a twisted killer when you suddenly can't run or scream? Kelsey Asbille (\"Yellowstone\") and Finn Wittrock star in this chilling thriller."}
+                        {randomMovie.description}
                     </ThemedText>
 
                     <View style={styles.castInfo}>
                         <ThemedText style={styles.castLabel}>Cast: </ThemedText>
                         <ThemedText style={styles.castText}>
-                            {movieData?.cast?.join(', ') || "Finn Wittrock, Kelsey Asbille, Moray Treadwell"}
+                            {randomMovie.cast.join(', ')}
                         </ThemedText>
                     </View>
 
                     <View style={styles.directorInfo}>
                         <ThemedText style={styles.directorLabel}>Director: </ThemedText>
                         <ThemedText style={styles.directorText}>
-                            {movieData?.director || "Adam Schindler, Brian Netto"}
+                            {randomMovie.director}
                         </ThemedText>
                     </View>
 
