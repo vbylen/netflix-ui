@@ -99,20 +99,13 @@ project-root/
 └── contexts/               # App-wide state management
 ```
 
-## Development Tips
-
-- Use color extraction from images for dynamic theming
-- Implement proper gesture priority management
-- Handle modal transitions separately from tab transitions
-
 ## TODO
 
 - [ ] Shared transition on modal navigation
-- [ ] Bug: Disable shift animation on back (fixed on branch router-4)
+- [ ] Bug: Disable shift animation on back (fixed on branch router-4 (React Navigation 7))
 - [ ] X-Ray style content details
 - [ ] Full screen video player
-
-For a working example shift animation issue fix, check out branch `router-4`
+- [ ] Color extraction from images for dynamic theming
 
 ## Contributing
 
