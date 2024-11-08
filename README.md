@@ -113,3 +113,9 @@ project-root/
 ## License
 
 MIT License
+
+## Expo Router 4 fixes needed
+
+[] scroll to top issue
+[] blurview fixes
+[] update assets as needed
