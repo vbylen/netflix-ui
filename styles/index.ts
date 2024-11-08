@@ -230,7 +230,7 @@ export const styles = StyleSheet.create({
         borderRadius: 14,
     },
     movieRow: {
-        marginBottom: 24,
+        marginBottom: 30,
     },
     blurContainer: {
         width: '100%',
