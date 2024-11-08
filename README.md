@@ -74,24 +74,29 @@ A high-fidelity Netflix mobile UI clone built with React Native and Expo, featur
 project-root/
 ├── app/
 │   ├── (tabs)/
-│   │   ├── (profile)/        # Profile management
+│   │   ├── (profile)/        # Profile section
 │   │   ├── index.tsx         # Home screen
-│   │   ├── new.tsx          # New & Hot screen
-│   │   └── _layout.tsx      # Tab navigation
+│   │   └── new.tsx          # New & Hot screen
 │   ├── movie/
-│   │   └── [id].tsx         # Content details modal
-│   ├── search.tsx           # Search functionality
-│   ├── downloads.tsx        # Downloads screen
-│   └── switch-profile.tsx   # Profile switcher
+│   ├── _layout.tsx          # Root layout
+│   └── search.tsx           # Search functionality
 ├── components/
-│   ├── MovieList/          # Content listing
-│   ├── GameList/           # Games showcase
-│   ├── TabScreenWrapper/   # Animation wrapper
-│   └── WhoIsWatching/     # Profile selection
-├── contexts/
-│   ├── UserContext.tsx     # Profile state
-│   └── RootScaleContext.tsx # Animation state
-└── hooks/                  # Custom hooks
+│   ├── MovieList/           # Movie listings
+│   ├── GameList/            # Games section
+│   ├── FeaturedContent/     # Featured content
+│   ├── BottomSheet/         # Bottom sheets
+│   ├── navigation/          # Navigation components
+│   └── WhoIsWatching/       # Profile selection
+├── hooks/
+│   ├── useCachedResources.ts
+│   ├── useColorScheme.ts
+│   ├── useDeviceMotion.ts
+│   └── useOverlayView.ts
+├── data/
+│   ├── movies.json          # Movie data
+│   ├── new.json            # New content data
+│   └── users.json          # User profiles
+└── contexts/               # App-wide state management
 ```
 
 ## Development Tips
