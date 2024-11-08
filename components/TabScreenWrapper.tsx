@@ -31,7 +31,7 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
         shouldAnimate = true;
     }
 
-    //no longger needed because of the expo-router 4
+    //no longer needed because of the expo-router 4
     return <>{children}</>
 
     if (!shouldAnimate) {
