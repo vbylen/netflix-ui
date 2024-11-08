@@ -322,8 +322,8 @@ export const styles = StyleSheet.create({
         fontSize: 12,
     },
     top10Item: {
-        marginRight: 24,
-        marginLeft: 60,
+        marginRight: 20,
+        marginLeft: 50,
         width: 140,
     },
     top10Thumbnail: {

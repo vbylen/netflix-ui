@@ -16,6 +16,7 @@ import { WhoIsWatching } from '../components/WhoIsWatching';
 import { UserProvider } from '@/contexts/UserContext';
 import { useUser } from '@/contexts/UserContext';
 import { Image } from 'expo-image';
+import useCachedResources from '@/hooks/useCachedResources';
 
 function AnimatedStack() {
   const { scale } = useRootScale();
@@ -142,6 +143,7 @@ function AnimatedStack() {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const isLoaded = useCachedResources();
 
   useEffect(() => {
     SplashScreen.hideAsync();
@@ -152,9 +154,13 @@ export default function RootLayout() {
       // Add your common image URLs here
       'path-to-netflix-icon.png',
       'path-to-netflix-outline.png',
-      // Add profile avatar URLs if you have them statically
     ]);
   }, []);
+
+  if (!isLoaded) {
+    return null; // Early return after all hooks are called
+  }
+
 
   return (
     <GestureHandlerRootView style={styles.container}>
