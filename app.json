@@ -29,12 +29,6 @@
     "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
-    },
-    "fonts": [
-      {
-        "asset": "assets/fonts/arialic.ttf",
-        "family": "arialic"
-      }
-    ]
+    }
   }
 }
