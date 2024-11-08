@@ -6,12 +6,16 @@ import { Movie, MovieRow } from '@/types/movie';
 import Svg, { Path } from 'react-native-svg';
 
 const NumberBackground = ({ number }: { number: number }) => {
-    // Convert number to string and pad with zero if needed
     const num = (number).toString().padStart(2, '0');
 
     return (
         <View style={styles.numberContainer}>
-            <Text style={styles.numberText}>{num}</Text>
+            <Text style={[styles.numberText, {
+                color: 'white',
+                opacity: 0.15,
+                fontSize: 200,
+                fontFamily: 'arialic',
+            }]}>{num}</Text>
         </View>
     );
 };
