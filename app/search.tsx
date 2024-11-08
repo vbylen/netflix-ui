@@ -22,7 +22,7 @@ const GAME_CARD_WIDTH = width / 3 - 16;
 export default function Search() {
     // Get mobile games and TV shows/movies
     const mobileGames = moviesData.movies[0].movies;
-    const tvAndMovies = moviesData.movies[4].movies;
+    const tvAndMovies = moviesData.movies[5].movies;
 
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
