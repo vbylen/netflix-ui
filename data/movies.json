@@ -106,7 +106,7 @@
                     "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABYYnyzMK4S_mFvUdUSBp6yoPsLM5NrHBgjoy_9TukJS5IUnBt-CzRTOAVSkEpqRy23pomK60O3-8NlNgKtSyJxrDelq2Nyr56jI.jpg?r=5ea"
                 },
                 {
-                    "id": "81767564",
+                    "id": "8176827564",
                     "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABdDJ60KMfiEgvOBOODjZiu3rcYDlTJMda5WjSY5RRq_WnNqQovtIphdk_g5MS517lmyFMs4oMhX4ZbGUtwOblidyGp-ZG8P62c6GJ4u9_fwldir4B2c3NSqUFt8xvdjRk3RJJBQlcR9wrCAQbuXk1JLGnth-9N-BKsobGH3MDQqLr4jEF6n5MGXuyXYrSnlNA742HdneEJIOT-hKqF62Oa9Sc5uGkFYRkyVfxqok5Pv1J7ql7pD-BiFd6VsnPE-mzilDrOcmFuv6Mj4254YrhMnZZFwpale6CWFButfrwaJ2BX85eKgAoecA.jpg?r=1e8"
                 },
                 {
@@ -222,7 +222,7 @@
                     "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABew0ZNQKT8CCaiRRdG7jyMnbJphhGEAwCzaKB5fsslG1jE9_xnY8WkBKpL0OHHEy2xhWcpNxlqSFYf-OYBzGTECg78wzm6AEByAdWej0RLf1dvfjtqipkSzEp15frlQWxoWd.jpg?r=78e"
                 },
                 {
-                    "id": "80192612",
+                    "id": "8019726122",
                     "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABTQNS1iBZYCkgcpBGyIKp2t3_M1ZIDW8eJ4Ilw7VJxENo8J5HPrzxJMjpyq_6BgUSvUTHwk6Q_CcBITIl0meM2MxxKnM4SLrKOc.jpg?r=5cd"
                 }
             ]
@@ -230,23 +230,6 @@
         {
             "rowTitle": "New on Netflix",
             "movies": [
-                {
-                    "id": "81767564",
-                    "imageUrl": "https://digitalt.tv/wp-content/uploads/imports/Dont-Move.jpg",
-                    "title": "Don't Move",
-                    "video_url": "https://videos.pexels.com/video-files/4865386/4865386-uhd_2732_1440_25fps.mp4",
-                    "year": "2024",
-                    "duration": "1h 32m",
-                    "rating": "TV-MA",
-                    "description": "How do you escape a twisted killer when you suddenly can't run or scream? Kelsey Asbille (\"Yellowstone\") and Finn Wittrock star in this chilling thriller.",
-                    "cast": [
-                        "Finn Wittrock",
-                        "Kelsey Asbille",
-                        "Moray Treadwell"
-                    ],
-                    "director": "Adam Schindler, Brian Netto",
-                    "ranking_text": "#5 in Movies Today"
-                },
                 {
                     "id": "81681817",
                     "imageUrl": "https://dnm.nflximg.net/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABVKA0u-N0ygB-RJjaICEHfq35IHNNvwQixGxkznVyHovZyHwmBDof11LD3b0JRTPoDC_ugmP_4HO9ZuBBStJOuY4FHIQf5nhrRoscwa-KEWvRf5hZfJ9_kFsK6iG6LILMhMv4Q.jpg?r=ee0",
@@ -484,7 +467,7 @@
                     "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABRWpEIxie8Ugy9Ip4FTjEM2RMQ8AT70NDccCcoJO5Sme_HYg-iOptG3fcLLs1NmK0Jc63byQ_0FyTH9tDiI7EEpB88GQLXYToSoMibwhUPZ9bfw8ediiw2FnQQs6wOrhr2ExZxPiIo7VO8gtohTDQ6Sm4oeIB3P0RzX-_E1AvH6Q8Q9o40G1WFq7CX1QdYdwgg2LXVDOXslhWW78dPNwnm_4VVE9bOcmwtX3PWKxkCCGvG1drN2ULeY3ExzefX2yHb75AGXzfE2lR8zI7nytXz9cukZ6MdHvMIISxG3Oi7OkppsJtrY.jpg?r=266"
                 },
                 {
-                    "id": "80192612",
+                    "id": "801292612",
                     "imageUrl": "https://occ-0-7-6.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABTQNS1iBZYCkgcpBGyIKp2t3_M1ZIDW8eJ4Ilw7VJxENo8J5HPrzxJMjpyq_6BgUSvUTHwk6Q_CcBITIl0meM2MxxKnM4SLrKOc.jpg?r=5cd"
                 },
                 {
@@ -624,6 +607,23 @@
         {
             "rowTitle": "Suspenseful Movies",
             "movies": [
+                {
+                    "id": "81767564",
+                    "imageUrl": "https://digitalt.tv/wp-content/uploads/imports/Dont-Move.jpg",
+                    "title": "Don't Move",
+                    "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+                    "year": "2024",
+                    "duration": "1h 32m",
+                    "rating": "TV-MA",
+                    "description": "How do you escape a twisted killer when you suddenly can't run or scream? Kelsey Asbille (\"Yellowstone\") and Finn Wittrock star in this chilling thriller.",
+                    "cast": [
+                        "Finn Wittrock",
+                        "Kelsey Asbille",
+                        "Moray Treadwell"
+                    ],
+                    "director": "Adam Schindler, Brian Netto",
+                    "ranking_text": "#4 in Movies Today"
+                },
                 {
                     "id": "81157729",
                     "imageUrl": "https://www.whats-on-netflix.com/wp-content/uploads/covers-2024/dontcomehome.jpeg",

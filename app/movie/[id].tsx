@@ -42,8 +42,9 @@ export default function MovieScreen() {
     const blurIntensity = useSharedValue(20);
 
     const numericId = typeof id === 'string' ? parseInt(id, 10) : Array.isArray(id) ? parseInt(id[0], 10) : 0;
-    // const movie = movies.find(s => s.id === numericId) || movies[0];
+    const movie = movies.flatMap(row => row.movies).find(m => m.id === numericId.toString()) || movies[0].movies[0];
 
+    alert(JSON.stringify(movie))
     const handleHapticFeedback = useCallback(() => {
         try {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -253,7 +254,22 @@ export default function MovieScreen() {
         <ThemedView style={styles.container}>
             <StatusBar animated={true} style={statusBarStyle.value} />
             <Animated.View style={[styles.modalContent, animatedStyle]}>
-                <ExpandedPlayer scrollComponent={ScrollComponent} />
+                <ExpandedPlayer
+                    scrollComponent={ScrollComponent}
+                    movie={{
+                        id: numericId,
+                        title: movie.title || '',
+                        imageUrl: movie.imageUrl || '',
+                        video_url: movie.videoUrl || 'https://example.com/default-video.mp4',
+                        year: movie.year || '2024',
+                        duration: movie.duration || '2h 30m',
+                        rating: movie.rating || 'PG-13',
+                        description: movie.description || 'No description available',
+                        cast: movie.cast || ['Cast not available'],
+                        director: movie.director || 'Unknown Director',
+                        ranking_text: movie.ranking_text || '#1 in Movies Today'
+                    }}
+                />
             </Animated.View>
         </ThemedView>
     );

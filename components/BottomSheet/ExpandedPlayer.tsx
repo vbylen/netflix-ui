@@ -14,24 +14,22 @@ import { newStyles } from '@/styles/new';
 import { Image as ExpoImage } from 'expo-image';
 
 interface MovieData {
-    id: number;
-    video_url: string;
+    id: string | number;
     title: string;
-    year: string;
-    duration: string;
-    rating: string;
-    description: string;
-    cast: string[];
-    director: string;
+    imageUrl: string;
+    video_url?: string;
+    year?: string;
+    duration?: string;
+    rating?: string;
+    description?: string;
+    cast?: string[];
+    director?: string;
+    ranking_text?: string;
 }
 
 interface ExpandedPlayerProps {
     scrollComponent: (props: any) => React.ReactElement;
-    movieData: {
-        id: number;
-        imageUrl: string;
-        // other movie properties
-    };
+    movie: MovieData;
 }
 
 interface PlaybackStatus {
@@ -48,7 +46,7 @@ interface VideoRef {
 
 
 
-export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerProps) {
+export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) {
     const ScrollComponentToUse = scrollComponent || ScrollView;
     const insets = useSafeAreaInsets();
     const videoRef = useRef<Video | null>(null);
@@ -58,12 +56,17 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
     const max = useSharedValue(100);
     const [duration, setDuration] = useState(0);
 
-    // Use ref to ensure the selection persists across re-renders and remounts
-    const selectedMovieRef = useRef<MovieData | null>(null);
-    if (selectedMovieRef.current === null) {
-        selectedMovieRef.current = dummyMoviesDataWithFullInfo[Math.floor(Math.random() * dummyMoviesDataWithFullInfo.length)];
-    }
-    const selectedMovie = selectedMovieRef.current;
+    const movieData = {
+        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+        year: '2024',
+        duration: '2h 30m',
+        rating: 'PG-13',
+        description: 'No description available',
+        cast: ['Cast not available'],
+        director: 'Unknown Director',
+        ranking_text: '#1 in Movies Today',
+        ...movie // Spread the provided movie data to override defaults
+    };
 
     const onPlaybackStatusUpdate = (status: PlaybackStatus) => {
         if (status.isLoaded) {
@@ -89,7 +92,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                 <Video
                     ref={videoRef}
                     style={styles.video}
-                    source={{ uri: selectedMovie.video_url }}
+                    source={{ uri: movieData.video_url }}
                     useNativeControls={false}
                     resizeMode={ResizeMode.COVER}
                     isLooping
@@ -154,12 +157,12 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                         />
                         <Text style={newStyles.netflixTag}>FILM</Text>
                     </View>
-                    <ThemedText style={styles.title}>{selectedMovie.title}</ThemedText>
+                    <ThemedText style={styles.title}>{movieData.title}</ThemedText>
 
                     <View style={styles.metaInfo}>
-                        <ThemedText style={styles.year}>{selectedMovie.year}</ThemedText>
-                        <ThemedText style={styles.duration}>{selectedMovie.duration}</ThemedText>
-                        <ThemedText style={styles.rating}>{selectedMovie.rating}</ThemedText>
+                        <ThemedText style={styles.year}>{movieData.year}</ThemedText>
+                        <ThemedText style={styles.duration}>{movieData.duration}</ThemedText>
+                        <ThemedText style={styles.rating}>{movieData.rating}</ThemedText>
                         <ThemedText style={styles.quality}>HD</ThemedText>
                     </View>
 
@@ -169,7 +172,7 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                             style={{ width: 24, height: 24, left: 0, borderRadius: 4 }}
                             cachePolicy="memory-disk"
                         />
-                        <Text style={newStyles.trendingTag}>{selectedMovie.ranking_text}</Text>
+                        <Text style={newStyles.trendingTag}>{movieData.ranking_text}</Text>
                     </View>
 
                     <View style={styles.buttonContainer}>
@@ -191,20 +194,20 @@ export function ExpandedPlayer({ scrollComponent, movieData }: ExpandedPlayerPro
                     </View>
 
                     <ThemedText style={styles.description}>
-                        {selectedMovie.description}
+                        {movieData.description}
                     </ThemedText>
 
                     <View style={styles.castInfo}>
                         <ThemedText style={styles.castLabel}>Cast: </ThemedText>
                         <ThemedText style={styles.castText}>
-                            {selectedMovie.cast.join(', ')}
+                            {movieData.cast?.join(', ')}
                         </ThemedText>
                     </View>
 
                     <View style={styles.directorInfo}>
                         <ThemedText style={styles.directorLabel}>Director: </ThemedText>
                         <ThemedText style={styles.directorText}>
-                            {selectedMovie.director}
+                            {movieData.director}
                         </ThemedText>
                     </View>
 
