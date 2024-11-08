@@ -2,7 +2,7 @@
 
 A high-fidelity Netflix mobile UI clone built with React Native and Expo, featuring advanced animations and gesture interactions.
 
-![Demo](assets/gifs/demo1.gif)
+https://github.com/saulamsal/netflix-ui/assets/video/demo.mov
 
 ## Key Features
 
