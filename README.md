@@ -30,11 +30,12 @@ A high-fidelity Netflix mobile UI clone built with React Native and Expo, featur
 - ⬇️ Downloads management
 - 📺 Teaser Video player
 - 📋 Expandable categories list
+- 🔤 Custom font
 
 ### Performance
 
 - ⚡ Optimized animations using Reanimated
-- 📊 Efficient list rendering
+- 📊 Efficient list rendering [wip]
 - 🎯 Native gesture handling
 - 🔄 Smart transition management
 
