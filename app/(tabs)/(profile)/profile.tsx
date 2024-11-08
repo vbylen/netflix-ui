@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView, Text, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUser } from '@/contexts/UserContext';
@@ -70,22 +70,18 @@ export default function ProfileScreen() {
                 horizontal
                 data={exampleLikedShowsAndMovies}
                 keyExtractor={item => item.id.toString()}
-                renderItem={({ item }) => (
+                renderItem={useCallback(({ item }) => (
                     <View style={styles.likedItemContainer}>
                         <Image
                             source={{ uri: item.imageUrl }}
                             style={styles.likedShowImage}
                         />
-                        {/* <TouchableOpacity style={styles.shareButton}>
-                            <Ionicons name="send" size={18} color="white" style={{
-                                marginRight: 4,
-                                transform: [{ rotate: '320deg' }]
-                            }} />
-                            <Text style={styles.shareText}>Share</Text>
-                        </TouchableOpacity> */}
                     </View>
-                )}
+                ), [])}
                 showsHorizontalScrollIndicator={false}
+                maxToRenderPerBatch={5}
+                windowSize={3}
+                removeClippedSubviews={true}
             />
         </View>
     );
@@ -95,14 +91,17 @@ export default function ProfileScreen() {
             horizontal
             data={exampleMyList}
             keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => (
+            renderItem={useCallback(({ item }) => (
                 <Image
                     style={styles.myListImage}
                     source={{ uri: item.imageUrl }}
                 />
-            )}
+            ), [])}
             showsHorizontalScrollIndicator={false}
             style={styles.myList}
+            maxToRenderPerBatch={5}
+            windowSize={3}
+            removeClippedSubviews={true}
         />
     );
 
@@ -180,7 +179,6 @@ export default function ProfileScreen() {
                     >
                         <View style={styles.menuIconContainer}>
                             <View style={[styles.downloadIconContainer, { backgroundColor: '#0071EB' }]}>
-                                {/* <Ionicons name="arrow-down-circle" size={24} color="#fff" /> */}
                                 <Image
                                     source={require('../../../assets/images/replace-these/download-netflix-transparent.png')}
                                     style={{ width: 24, height: 24 }}
