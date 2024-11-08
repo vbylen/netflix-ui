@@ -321,5 +321,38 @@ export const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 12,
     },
+    top10Item: {
+        marginRight: 24,
+        marginLeft: 40,
+        // width: 160,
+    },
+    top10Thumbnail: {
+        // width: 160,
+        // height: 240,
+        borderRadius: 4,
+    },
+    numberContainer: {
+        position: 'absolute',
+        left: -45,
+        bottom: 0,
+        width: 120,
+        height: 240,
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: -1,
+    },
+    numberText: {
+        color: 'white',
+        fontSize: 200,
+        fontWeight: '800',
+        opacity: 0.2,
+        position: 'absolute',
+        bottom: -40,
+        left: -20,
+    },
+    top10List: {
+        paddingLeft: 8,
+        paddingRight: 16,
+    },
 }
 );

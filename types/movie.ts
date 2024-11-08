@@ -6,6 +6,7 @@ export interface Movie {
 export interface MovieRow {
     rowTitle: string;
     movies: Movie[];
+    type?: 'normal' | 'top_10' | 'games';
 }
 
 export interface MoviesData {
