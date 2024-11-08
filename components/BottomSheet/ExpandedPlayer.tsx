@@ -56,8 +56,8 @@ export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) 
     const max = useSharedValue(100);
     const [duration, setDuration] = useState(0);
 
-    const movieData = {
-        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+    const defaultMovieData = {
+        video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
         year: '2024',
         duration: '2h 30m',
         rating: 'PG-13',
@@ -65,7 +65,17 @@ export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) 
         cast: ['Cast not available'],
         director: 'Unknown Director',
         ranking_text: '#1 in Movies Today',
-        ...movie // Spread the provided movie data to override defaults
+        title: 'Untitled',
+        imageUrl: '',
+    };
+
+    const movieData = {
+        ...defaultMovieData,
+        ...Object.fromEntries(
+            Object.entries(movie).filter(([_, value]) =>
+                value !== null && value !== undefined && value !== ''
+            )
+        )
     };
 
     const onPlaybackStatusUpdate = (status: PlaybackStatus) => {

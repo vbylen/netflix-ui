@@ -28,9 +28,8 @@ A high-fidelity Netflix mobile UI clone built with React Native and Expo, featur
 - 🎮 Mobile games showcase
 - 🔍 Dynamic search with instant results
 - ⬇️ Downloads management
-- 📺 Full-screen video player
+- 📺 Teaser Video player
 - 📋 Expandable categories list
-- ℹ️ X-Ray style content details
 
 ### Performance
 
@@ -67,8 +66,6 @@ A high-fidelity Netflix mobile UI clone built with React Native and Expo, featur
 
 - Reusable animated components
 - Custom Netflix-style icons and layouts
-- Dynamic blur effects
-- Responsive grid systems
 
 ## Project Structure
 
@@ -106,6 +103,10 @@ project-root/
 
 - [ ] Shared transition on modal navigation
 - [ ] Bug: Disable shift animation on back (fixed on branch router-4)
+- [ ] X-Ray style content details
+- [ ] Full screen video player
+
+For a working example shift animation issue fix, check out branch `router-4`
 
 ## Contributing
 
