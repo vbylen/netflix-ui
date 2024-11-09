@@ -22,7 +22,7 @@ import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { usePathname } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { GameList } from '@/components/GameList/GameList';
-import { useScrollToTop } from '@react-navigation/native';
+import { useConditionalScrollToTop } from '@/hooks/useConditionalScrollToTop';
 
 // const FEATURED_MOVIE = {
 //   id: 'dont-move',
@@ -121,8 +121,7 @@ export default function HomeScreen() {
   const slideDirection = activeTabIndex > currentTabIndex ? 'right' : 'left';
 
   const scrollViewRef = useRef(null);
-
-  useScrollToTop(scrollViewRef);
+  useConditionalScrollToTop(scrollViewRef);
 
   return (
     <TabScreenWrapper isActive={isActive} slideDirection={slideDirection}>

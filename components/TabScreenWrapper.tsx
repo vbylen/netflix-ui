@@ -35,7 +35,7 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
     // return <>{children}</>
 
 
-    //This is no longer needed because of the expo-router 4, so return just children for upcoming react navigation 
+    //This is no longer needed because of the expo-router 4, so return just children for upcoming react navigation
 
     if (!shouldAnimate) {
         return <>{children}</>;
@@ -95,4 +95,4 @@ export function TabScreenWrapper({ children, isActive, slideDirection }: Props) 
             </Animated.View>
         </View>
     );
-} 
+}

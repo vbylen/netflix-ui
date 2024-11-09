@@ -5,7 +5,7 @@ import { useUser } from '@/contexts/UserContext';
 import { usePathname, useRouter } from 'expo-router';
 import { TAB_SCREENS } from '@/app/(tabs)/_layout';
 import { TabScreenWrapper } from '@/components/TabScreenWrapper';
-import { useScrollToTop } from '@react-navigation/native';
+import { useConditionalScrollToTop } from '@/hooks/useConditionalScrollToTop';
 import { BlurView } from 'expo-blur';
 import Animated, {
     useAnimatedScrollHandler,
@@ -33,7 +33,7 @@ export default function ProfileScreen() {
     const isActive = pathname === '/profile';
     const router = useRouter();
     const scrollViewRef = useRef(null);
-    useScrollToTop(scrollViewRef);
+    useConditionalScrollToTop(scrollViewRef);
     const insets = useSafeAreaInsets();
 
     const currentTabIndex = TAB_SCREENS.findIndex(screen =>
