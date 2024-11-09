@@ -1,12 +1,10 @@
-import { Tabs, useRouter, usePathname } from 'expo-router';
+import { Tabs, usePathname } from 'expo-router';
 import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Platform, StyleSheet, Image, View, Pressable } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useUser } from '@/contexts/UserContext';
-import { TabScreenWrapper } from '@/components/TabScreenWrapper';
 import { Home } from '@/icons/Home';
-import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { Image as ExpoImage } from 'expo-image';
 
@@ -89,7 +87,6 @@ const styles = StyleSheet.create({
 });
 
 export default function TabLayout() {
-  const pathname = usePathname();
   const handleTabPress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };

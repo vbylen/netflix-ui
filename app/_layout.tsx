@@ -8,9 +8,6 @@ import { useRootScale } from '@/contexts/RootScaleContext';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { OverlayProvider } from '@/components/Overlay/OverlayProvider';
-import { useRouter } from 'expo-router';
-import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { WhoIsWatching } from '../components/WhoIsWatching';
 import { UserProvider } from '@/contexts/UserContext';
@@ -20,7 +17,6 @@ import useCachedResources from '@/hooks/useCachedResources';
 
 function AnimatedStack() {
   const { scale } = useRootScale();
-  const router = useRouter();
   const [isModalActive, setIsModalActive] = useState(false);
   const [canBlur, setCanBlur] = useState(false);
   const { selectedProfile, selectProfile } = useUser();

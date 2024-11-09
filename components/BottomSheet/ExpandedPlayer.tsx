@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemedText } from '@/components/ThemedText';
 import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
-import { Video, ResizeMode } from 'expo-av';
+import { VideoView, useVideoPlayer } from 'expo-video';
 import { useEffect, useState, useRef } from 'react';
 import { expandedPlayerStyles as styles } from '@/styles/expanded-player';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -49,12 +49,12 @@ interface VideoRef {
 export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) {
     const ScrollComponentToUse = scrollComponent || ScrollView;
     const insets = useSafeAreaInsets();
-    const videoRef = useRef<Video | null>(null);
+    const videoRef = useRef<VideoView | null>(null);
     const [isMuted, setIsMuted] = useState(true);
     const progress = useSharedValue(0);
     const min = useSharedValue(0);
     const max = useSharedValue(100);
-    const [duration, setDuration] = useState(0);
+    // const [duration, setDuration] = useState(0);
 
     const defaultMovieData = {
         video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
@@ -78,19 +78,27 @@ export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) 
         )
     };
 
-    const onPlaybackStatusUpdate = (status: PlaybackStatus) => {
-        if (status.isLoaded) {
-            progress.value = status.positionMillis;
-            setDuration(status.durationMillis);
-            max.value = status.durationMillis;
-        }
-    };
+    // const onPlaybackStatusUpdate = (status: PlaybackStatus) => {
+    //     if (status.isLoaded) {
+    //         progress.value = status.positionMillis;
+    //         setDuration(status.durationMillis);
+    //         max.value = status.durationMillis;
+    //     }
+    // };
 
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (videoRef.current) {
+    //         videoRef.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+    //     }
+    // }, []);
+
+    const player = useVideoPlayer(movieData.video_url, player => {
+        player.loop = true;
+        player.play();
+        // progress.value = player.currentTime;
+        // setDuration(player.duration);
+        // max.value = player.duration;
+      });
 
     return (
         <BlurView
@@ -99,15 +107,12 @@ export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) 
             style={[styles.rootContainer, { marginTop: insets.top }]}
         >
             <View style={styles.videoContainer}>
-                <Video
+                <VideoView
                     ref={videoRef}
                     style={styles.video}
-                    source={{ uri: movieData.video_url }}
-                    useNativeControls={false}
-                    resizeMode={ResizeMode.COVER}
-                    isLooping
-                    isMuted={isMuted}
-                    shouldPlay
+                    player={player}
+                    // useNativeControls={false}
+                    contentFit={'cover'}
                 />
                 <View style={styles.videoOverlay}>
                     <Pressable
@@ -120,7 +125,10 @@ export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) 
                 <View style={styles.muteOverlay}>
                     <Pressable
                         style={styles.soundButton}
-                        onPress={() => setIsMuted(!isMuted)}
+                        onPress={() => {
+                            player.muted = !player.muted
+                            setIsMuted(player.muted)
+                        }}
                     >
                         <Ionicons
                             name={isMuted ? "volume-mute" : "volume-medium"}
@@ -129,15 +137,15 @@ export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) 
                         />
                     </Pressable>
                 </View>
-                <View style={styles.sliderContainer}>
+                {/* <View style={styles.sliderContainer}>
                     <Slider
                         style={styles.slider}
                         progress={progress}
                         minimumValue={min}
                         maximumValue={max}
                         onValueChange={(value) => {
-                            if (videoRef.current) {
-                                videoRef.current.setPositionAsync(value);
+                            if (player) {
+                                player.seekBy(value);
                             }
                         }}
                         theme={{
@@ -151,7 +159,7 @@ export function ExpandedPlayer({ scrollComponent, movie }: ExpandedPlayerProps) 
                         disableTrackFollow={false}
                         disableTapEvent={false}
                     />
-                </View>
+                </View> */}
             </View>
 
             <ScrollComponentToUse
